@@ -116,7 +116,7 @@ if (!$_SESSION['User']) {
                         </div>
 
                         <div class="container">
-                            <h2>Change Details</h2>
+                            <h5 class="text-center">Account Details </h5>
 
                             <form id="myform" action="edit/editdetails.php" method="post" enctype="multipart/form-data">
 
@@ -133,8 +133,16 @@ if (!$_SESSION['User']) {
                                     <label>User Name :</label>
                                     <input type="text" class="form-control" value="" name="uname">
                                 </div>
+                                <div class="form-group">
+                                    <label>Email :</label>
+                                    <input type="email" class="form-control" value="" name="uname">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password :</label>
+                                    <input type="password" class="form-control" value="" name="uname">
+                                </div>
 
-                                <button id="saveForm" type="button" class="btn btn-success">Update</button>
+                                <button id="saveForm" type="button" class="btn btn-success btn-block">Update</button>
                             </form>
                             <span id="result"></span>
                         </div>
