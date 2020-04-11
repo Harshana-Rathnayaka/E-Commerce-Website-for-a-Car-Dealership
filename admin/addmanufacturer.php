@@ -12,7 +12,7 @@ if (!$_SESSION['User']) {
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Add a Vehicle</title>
+    <title>Add a Manufacturer</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -42,7 +42,7 @@ if (!$_SESSION['User']) {
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Admin Dashboard</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Username : <?php echo $_SESSION['User'] ?></a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a class="nav-link" href="../logout.php?logout">Sign out</a>
@@ -113,7 +113,7 @@ if (!$_SESSION['User']) {
                 </div>
 
 
-                <form id="addManufacturerForm" action="" method="POST" enctype="multipart/form-data">
+                <form id="addManufacturerForm" action="../api/addNewManufacturer.php" method="POST">
 
                     <div class="form-group">
 
@@ -137,10 +137,23 @@ if (!$_SESSION['User']) {
                             <input type="tel" name="contact" class="form-control" id="inputContact" placeholder="0751245252" required>
                         </div>
 
+                        <?php
+                        if (@$_GET['Invalid'] == true) {
+                            ?>
+                            <div class="alert-light text-danger text-center py-1">
+                                <h6> <?php echo $_GET['Invalid']; ?> </h6>
+                            </div>
+                        <?php
+                        }
+                        ?>
+
+                        <div class="form-group">
+                            <input type="submit" value="Add" class="btn btn-success btn-block" id="btnAddManufacturer">
+                            <input type="reset" value="Cancel" class="btn btn-danger btn-block" id="btnCancel">
+                        </div>
+
                     </div>
 
-                    <button id="addManufacturerButton" type="button" class="btn btn-success btn-block">Add</button>
-                    <button id="cancelButton" type="button" class="btn btn-danger btn-block">Cancel</button>
                 </form>
 
                 <span id="result"></span>

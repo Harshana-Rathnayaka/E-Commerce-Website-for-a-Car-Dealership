@@ -117,17 +117,31 @@ if (!$_SESSION['User']) {
               </nav>
             </div>
             <div class="table-responsive">
-              <table class="table table-bordered table-striped table-sm table-dark">
+              <table class="table table-striped table-hover table-dark">
                 <thead>
                   <tr >
-                    <th width="5%">ID</th>
+                    <th width="5%">#</th>
                     <th width="15%">Name</th>
                     <th width="15%">Username</th>
                     <th width="25%">Email</th>
-                    <th width="20%">Company Name</th>
                   </tr>
                 </thead>
                 <tbody>
+                <?php
+              include '../api/getUsers.php';
+              if ($result) {
+                while ($row = mysqli_fetch_array($result)) {
+                  ?>
+                  <tr>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo $row['name']; ?></td>
+                    <td><?php echo $row['username']; ?></td>
+                    <td><?php echo $row['email']; ?></td>
+                  </tr>
+              <?php
+                }
+              }
+              ?>
                 </tbody>
               </table>
             </div>

@@ -118,28 +118,31 @@ if (!$_SESSION['User']) {
                         <div class="container">
                             <h5 class="text-center">Account Details </h5>
 
+                            <?php
+                            include 'C:xampp/htdocs/ds/admin/edit/viewAccountDetails.php';
+                            ?>
                             <form id="myform" action="edit/editdetails.php" method="post" enctype="multipart/form-data">
 
 
                                 <div class="form-group">
                                     <label>First Name :</label>
-                                    <input type="text" class="form-control" value="" name="fname">
+                                    <input type="text" class="form-control" value="<?php echo $result['first_name'] ?>" name="fname">
                                 </div>
                                 <div class="form-group">
                                     <label>Last Name :</label>
-                                    <input type="text" class="form-control" value="" name="lname">
+                                    <input type="text" class="form-control" value="<?php echo $result['last_name'] ?>" name="lname">
                                 </div>
                                 <div class="form-group">
-                                    <label>User Name :</label>
-                                    <input type="text" class="form-control" value="" name="uname">
+                                    <label>Username :</label>
+                                    <input type="text" class="form-control" value="<?php echo $result['username'] ?>" name="uname">
                                 </div>
                                 <div class="form-group">
                                     <label>Email :</label>
-                                    <input type="email" class="form-control" value="" name="uname">
+                                    <input type="email" class="form-control" value="<?php echo $result['email'] ?>" name="email">
                                 </div>
                                 <div class="form-group">
                                     <label>Password :</label>
-                                    <input type="password" class="form-control" value="" name="uname">
+                                    <input type="password" class="form-control" value="<?php echo $result['password'] ?>" name="password">
                                 </div>
 
                                 <button id="saveForm" type="button" class="btn btn-success btn-block">Update</button>

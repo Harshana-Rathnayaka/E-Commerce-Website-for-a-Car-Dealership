@@ -119,7 +119,19 @@ if (!$_SESSION['User']) {
 
             <div class="form-group col-md-3">
               <label for="inputMake">Make :</label>
-              <input type="text" name="make" class="form-control" id="inputMake" placeholder="ex: Toyota" required>
+              <select class="form-control" id="inputMake" name="make" required>
+                <option value="0">Select the make</option>
+                <?php
+                include '../api/getManufacturers.php';
+                if ($result) {
+                  while ($row = mysqli_fetch_array($result)) {
+                    ?>
+                    <option value="<?php echo $row['make_id']; ?>"><?php echo $row['name']; ?></option>
+                <?php
+                  }
+                }
+                ?>
+              </select>
             </div>
 
             <div class="form-group col-md-3">
@@ -179,18 +191,18 @@ if (!$_SESSION['User']) {
 
             <div class="form-group col-md-4">
               <label for="inputImage">Image :</label>
-              <input type="file" name="price" class="form-control btn btn-sm btn-outline-info" id="inputImage" placeholder="Price of the vehicle" required>
+              <input type="file" name="image" class="form-control btn btn-sm btn-outline-info" id="inputImage" placeholder="Price of the vehicle" required>
             </div>
 
             <div class="form-group col-3">
               <label>Convertible :</label>
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="yesRadio" name="convertible" class="custom-control-input">
+                <input type="radio" id="yesRadio" name="convertible" class="custom-control-input" value="1" required>
                 <label class="custom-control-label" for="yesRadio">Yes</label>
               </div>
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="noRadio" name="convertible" class="custom-control-input">
-                <label class="custom-control-label" for="noRadio">No</label>  
+                <input type="radio" id="noRadio" name="convertible" class="custom-control-input" value="0" required>
+                <label class="custom-control-label" for="noRadio">No</label>
               </div>
             </div>
 

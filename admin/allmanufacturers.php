@@ -54,7 +54,7 @@ if (!$_SESSION['User']) {
             <li class="nav-item">
               <a class="nav-link " href="index.php">
                 <span data-feather="list"></span>
-                 Vehicles <span class="sr-only">(current)</span>
+                Vehicles <span class="sr-only">(current)</span>
               </a>
             </li>
 
@@ -68,14 +68,14 @@ if (!$_SESSION['User']) {
             <li class="nav-item">
               <a class="nav-link" href="allusers.php">
                 <span data-feather="users"></span>
-                 Users
+                Users
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link active" href="allmanufacturers.php">
                 <span data-feather="file-text"></span>
-                 Manufacturers
+                Manufacturers
               </a>
             </li>
 
@@ -99,7 +99,7 @@ if (!$_SESSION['User']) {
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <nav aria-label="breadcrumb">
+          <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
               <li class="breadcrumb-item active" aria-current="page">Manufacturers</li>
@@ -107,32 +107,44 @@ if (!$_SESSION['User']) {
           </nav>
         </div>
 
+        <?php
+        if (@$_GET['Valid'] == true) {
+          ?>
+          <div class="alert-light text-success text-center py-2">
+            <h5> <?php echo $_GET['Valid']; ?> </h5>
+          </div>
+        <?php
+        }
+        ?>
 
         <div class="table-responsive">
-          <table class="table table-bordered table-striped table-sm table-dark">
+          <table class="table table-striped table-dark table-hover">
             <thead>
               <tr>
-                <th width="3%">ID</th>
-                <th width="15%">Company</th>
-                <th width="15%">Category</th>
-                <th width="10%">Area</th>
-                <th width="13%">Job Type</th>
-                <th width="10%">Basic Salary</th>
-                <th width="13%">Deadline</th>
-                <th width="10%">Posted by</th>
+                <th width="3%">#</th>
+                <th width="10%">Name</th>
+                <th width="15%">Address</th>
+                <th width="15%">Email</th>
+                <th width="10%">Contact</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
+              <?php
+              include '../api/getManufacturers.php';
+              if ($result) {
+                while ($row = mysqli_fetch_array($result)) {
+                  ?>
+                  <tr>
+                    <td><?php echo $row['make_id']; ?></td>
+                    <td><?php echo $row['name']; ?></td>
+                    <td><?php echo $row['address']; ?></td>
+                    <td><?php echo $row['email']; ?></td>
+                    <td><?php echo $row['contact']; ?></td>
+                  </tr>
+              <?php
+                }
+              }
+              ?>
             </tbody>
           </table>
         </div>

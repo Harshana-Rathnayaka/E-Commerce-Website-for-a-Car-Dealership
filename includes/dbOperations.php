@@ -46,8 +46,31 @@ class DbOperations
 		$stmt->bind_param("ss", $username, $password);
 		$stmt->execute();
 		$stmt->store_result();
-		return $stmt->num_rows() > 0;
+		return $stmt->num_rows > 0;
 	}
+
+	// adding new manufacturer
+	public function createManufacturer($name, $address, $email, $contact)
+	{
+		if ($this->isManufacturerExist($name)) {
+			// manufacturer exists
+			return 0;
+		} else {
+			$stmt = $this->con->prepare("INSERT INTO `manufacturers` (`make_id`, `name`, `address`, `email`, `contact`) VALUES (NULL, ?, ?, ?, ?);");
+			$stmt->bind_param("ssss", $name, $address, $email, $contact);
+
+			if ($stmt->execute()) {
+				// manufacturer created
+				return 1;
+			} else {
+				// some error 
+				return 2;
+			}
+		}
+	}
+
+
+		/* CRUD  -> r -> RETRIEVE */
 
 	// retreiving user data
 	public function getUserByUsername($username)
@@ -68,18 +91,28 @@ class DbOperations
 		return $stmt->num_rows > 0;
 	}
 
-	// retrieving pending requests
-	public function getPendingRequests()
+	// checking if the manufacturer exists
+	private function isManufacturerExist($name)
 	{
-		$stmt = $this->con->prepare("SELECT `id`, CONCAT( `first_name`, ' ', `last_name`) AS 'name', `username`, `user_status` FROM `users` WHERE `user_status` = 0 ");
+		$stmt = $this->con->prepare("SELECT `make_id` FROM `manufacturers` WHERE `name` = ?");
+		$stmt->bind_param("s", $name);
+		$stmt->execute();
+		$stmt->store_result();
+		return $stmt->num_rows > 0;
+	}
+
+	// retrieving manufacturers table 
+	public function getManufacturers()
+	{
+		$stmt = $this->con->prepare("SELECT * FROM `manufacturers`");
 		$stmt->execute();
 		return $stmt->get_result();
 	}
 
-	// retrieving approved students
-	public function getApprovedStudents()
+	// retrieving users table 
+	public function getUsers()
 	{
-		$stmt = $this->con->prepare("SELECT `id`, CONCAT( `first_name`, ' ', `last_name`) AS 'name', `username`, `email` FROM `users` WHERE `user_status` = 1 AND `user_type` = 1 ");
+		$stmt = $this->con->prepare("SELECT `id`, CONCAT( `first_name`, ' ', `last_name`) AS 'name', `username`, `email` FROM `users`");
 		$stmt->execute();
 		return $stmt->get_result();
 	}
