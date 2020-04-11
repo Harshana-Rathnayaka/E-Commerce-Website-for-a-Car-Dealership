@@ -32,7 +32,7 @@ if (isset($_SESSION['User'])) {
                 // successfully uploaded to the db
                 $response['error'] = false;
                 $response['message'] = "Successfully uploaded to the DB";
-                header("location:../admin/allmanufacturers.php?Valid= Manufacturer added successfully");
+                header("location:../admin/allmanufacturers.php?Valid= Manufacturer added successfully!");
             } elseif ($result == 2) {
                 // could't upload to the db
                 $response['error'] = true;
@@ -47,7 +47,7 @@ if (isset($_SESSION['User'])) {
         } else {
             // some fields are missing
             $response['error'] = true;
-            $response['message'] = "Please fill all the details";
+            $response['message'] = "Please fill in all the details";
             header("location:../admin/addmanufacturer.php?Invalid= Please fill all the details");
         }
     } else {

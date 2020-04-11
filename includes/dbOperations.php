@@ -69,8 +69,24 @@ class DbOperations
 		}
 	}
 
+	// adding new vehicle
+	public function createVehicle($make, $model, $year, $engine_capacity, $transmission, $horsepower, $condition, $colour, $convertible, $seats, $price, $img_link)
+	{
 
-		/* CRUD  -> r -> RETRIEVE */
+		$stmt = $this->con->prepare("INSERT INTO `vehicles`(`make`, `model`, `year`, `engine_capacity`, `transmission`, `horsepower`, `vehicle_condition`, `colour`, `convertible`, `seats`, `price`, `image_link`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+		$stmt->bind_param("ssssssssssss", $make, $model, $year, $engine_capacity, $transmission, $horsepower, $condition, $colour, $convertible, $seats, $price, $img_link);
+
+		if ($stmt->execute()) {
+			// vehicle created
+			return 1;
+		} else {
+			// some error 
+			return 2;
+		}
+	}
+
+
+	/* CRUD  -> r -> RETRIEVE */
 
 	// retreiving user data
 	public function getUserByUsername($username)
@@ -136,5 +152,20 @@ class DbOperations
 		$stmt->bind_param("s", $username);
 		$stmt->execute();
 		return $stmt->get_result();
+	}
+
+	public function upateUserDetails($user, $firstname, $lastname, $username, $email, $password)
+	{
+		$pass = md5($password); // password encrypting
+		$stmt = $this->con->prepare("UPDATE `users` SET `first_name` = ?, `last_name` = ?, `username` = ?, `email` = ?, `password` = ? WHERE `username` = ?");
+		$stmt->bind_param("ssssss", $firstname, $lastname, $username, $email, $pass, $user);
+
+		if ($stmt->execute()) {
+			// manufacturer created
+			return 0;
+		} else {
+			// some error 
+			return 1;
+		}
 	}
 }

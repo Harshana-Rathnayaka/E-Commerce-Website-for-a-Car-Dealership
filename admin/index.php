@@ -40,7 +40,7 @@ if (!$_SESSION['User']) {
 
 <body>
   <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"> <?php echo $_SESSION['User']; ?> </a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-center text-info" href="#">Welcome <?php echo $_SESSION['User']; ?>! </a>
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
         <a class="nav-link" href="../logout.php?logout">Sign out</a>
@@ -112,6 +112,17 @@ if (!$_SESSION['User']) {
           </nav>
         </div>
 
+        <?php
+        if (@$_GET['Valid'] == true) {
+          ?>
+          <div class=" alert alert-success fade show">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <h5> <?php echo $_GET['Valid']; ?> </h5>
+          </div>
+        <?php
+        }
+        ?>
+
         <div class="table-responsive">
           <table class="table table-bordered table-striped table-hover table-sm table-dark">
             <thead>
@@ -132,17 +143,39 @@ if (!$_SESSION['User']) {
               </tr>
             </thead>
             <tbody>
-              <tr><td></td></tr>
-              <tr><td></td></tr>
-              <tr><td></td></tr>
-              <tr><td></td></tr>
-              <tr><td></td></tr>
-              <tr><td></td></tr>
-              <tr><td></td></tr>
-              <tr><td></td></tr>
-              <tr><td></td></tr>
-              <tr><td></td></tr>
-              <tr><td></td></tr>
+              <tr>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+              </tr>
 
             </tbody>
           </table>

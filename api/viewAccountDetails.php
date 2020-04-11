@@ -17,7 +17,7 @@ if (isset($_SESSION['User'])) {
     // session not started
     $response['error'] = true;
     $response['message'] = "Session not started";
-    header("location:../../login/login-page.php?Invalid= Session Expired. Please login to continue");
+    header("location:../login/login-page.php?Invalid= Session Expired. Please login to continue");
 }
 
-echo json_encode($response);
+// echo json_encode($response);

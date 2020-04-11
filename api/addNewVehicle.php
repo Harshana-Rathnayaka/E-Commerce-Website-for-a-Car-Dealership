@@ -8,7 +8,7 @@ $response = array();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
-    echo $username = $_REQUEST['User'];
+    // echo $username = $_REQUEST['User'];
 
     // getting the values from the form
     $make = $_POST['make'];
@@ -37,49 +37,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $img_link = $img_no . "." . $extension;
 
     // checking if the fields are empty
-    if ((!empty($make)) && (!empty($model)) && (!empty($year)) && (!empty($engine)) && (!empty($horsepower)) && (!empty($condition)) && (!empty($transmission)) && (!empty($colour)) && (!empty($seats)) && (!empty($price))(!empty($convertible))
-    ) {
+    if ((!empty($make)) && (!empty($model)) && (!empty($year)) && (!empty($engine)) && (!empty($horsepower)) && (!empty($condition)) && (!empty($transmission)) && (!empty($colour)) && (!empty($seats)) && (!empty($price))) {
         // checking if the image is of a valid type
         if (($extension == 'png') || ($extension == 'jpg') || ($extension == 'jpeg') || ($extension == 'JPG')) {
 
             // uploading the image to the local folder
-            if (move_uploaded_file($temp, '../vehicleimages' . $img_link)) {
+            if (move_uploaded_file($temp, '../vehicleimages/' . $img_link)) {
 
                 // db object
                 $db = new DbOperations();
 
                 // inserting to the vehicles table
-                $insert = $db->query("INSERT INTO `vehicles`(`id`, `make`, `model`, `year`, `engine_capacity`, `transmission`, `horsepower`, `vehicle_condition`, `colour`, `convertible`, `seats`, `price`)
-                 VALUES ('', '$make', '$model', '$year', '$engine, '$transmission', '$horsepower', '$condition', '$colour', '$convertible', '$seats', '$price')");
+                $result = $db->createVehicle($make, $model, $year, $engine, $transmission, $horsepower, $condition, $colour, $convertible, $seats, $price, $img_link);
 
-                if ($insert) {
+                if ($result == 1) {
                     // successfully uploaded to the db
                     $response['error'] = false;
-                    $response['message'] = "Successfully uploaded to the DB";
-                    header("location:../admin/index.php?Invalid= Successfully uploaded to the DB");
-                } else {
+                    $response['message'] = "New vehicle added successfully!";
+                    header("location:../admin/index.php?Valid= New vehicle added successfully!");
+                } elseif ($result == 2) {
                     // could't upload to the db
                     $response['error'] = true;
                     $response['message'] = "Something went wrong. Couldn't upload to the DB";
-                    header("location:../admin/index.php?Invalid= Something went wrong. Couldn't upload to the DB");
+                    header("location:../admin/addvehicle.php?Invalid= Something went wrong. Couldn't upload to the DB");
                 }
             } else {
                 // the image could not be uploaded
                 $response['error'] = true;
                 $response['message'] = "Some error occured. The image could not be uploaded";
-                header("location:../admin/index.php?Invalid= Some error occured. The image could not be uploaded");
+                header("location:../admin/addvehicle.php?Invalid= Some error occured. The image could not be uploaded");
             }
         } else {
             // a valid image type is not selected
             $response['error'] = true;
             $response['message'] = "The selected file is not a valid image";
-            header("location:../admin/index.php?Invalid= The selected file is not a valid image");
+            header("location:../admin/addvehicle.php?Invalid= The selected file is not a valid image. Please select a valid image.");
         }
     } else {
         // some fields are missing
         $response['error'] = true;
         $response['message'] = "Please fill all the details";
-        header("location:../admin/index.php?Invalid= Please fill all the details");
+        header("location:../admin/addvehicle.php?Invalid= Please fill all the details.");
     }
 } else {
     // wrong method

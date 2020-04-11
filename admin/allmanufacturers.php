@@ -15,6 +15,7 @@ if (!$_SESSION['User']) {
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" />
 
   <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
 
@@ -37,7 +38,7 @@ if (!$_SESSION['User']) {
 
 <body>
   <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Admin Dashboard</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-center text-info" href="#">Welcome <?php echo $_SESSION['User']; ?>!</a>
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
         <a class="nav-link" href="../logout.php?logout">Sign out</a>
@@ -110,7 +111,8 @@ if (!$_SESSION['User']) {
         <?php
         if (@$_GET['Valid'] == true) {
           ?>
-          <div class="alert-light text-success text-center py-2">
+          <div class=" alert alert-success fade show">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <h5> <?php echo $_GET['Valid']; ?> </h5>
           </div>
         <?php
@@ -118,7 +120,7 @@ if (!$_SESSION['User']) {
         ?>
 
         <div class="table-responsive">
-          <table class="table table-striped table-dark table-hover">
+          <table id="manufacturerTable" class="table table-striped table-dark table-hover">
             <thead>
               <tr>
                 <th width="3%">#</th>
@@ -151,7 +153,22 @@ if (!$_SESSION['User']) {
       </main>
     </div>
   </div>
+
   <script src="js/jquery-3.3.1.slim.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('#manufacturerTable').DataTable({
+        "lengthMenu": [5, 10],
+        "language": {
+            "decimal": ".",
+            "thousands": ",",
+        }
+      });
+    });
+  </script>
   <!-- <script>
     window.jQuery || document.write('<script src="js/jquery-slim.min.js">
   </script>') -->

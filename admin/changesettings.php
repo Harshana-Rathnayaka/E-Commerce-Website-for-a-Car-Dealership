@@ -38,7 +38,7 @@ if (!$_SESSION['User']) {
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Admin Dashboard</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-center text-info" href="#">Welcome <?php echo $_SESSION['User']; ?>!</a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a class="nav-link" href="../logout.php?logout">Sign out</a>
@@ -119,10 +119,9 @@ if (!$_SESSION['User']) {
                             <h5 class="text-center">Account Details </h5>
 
                             <?php
-                            include 'C:xampp/htdocs/ds/admin/edit/viewAccountDetails.php';
+                            include '../api/viewAccountDetails.php';
                             ?>
-                            <form id="myform" action="edit/editdetails.php" method="post" enctype="multipart/form-data">
-
+                            <form id="myform" action="../api/updateAccountDetails.php?user=<?php echo $_SESSION['User']; ?>" method="post" enctype="multipart/form-data">
 
                                 <div class="form-group">
                                     <label>First Name :</label>
@@ -144,6 +143,29 @@ if (!$_SESSION['User']) {
                                     <label>Password :</label>
                                     <input type="password" class="form-control" value="<?php echo $result['password'] ?>" name="password">
                                 </div>
+
+                                <div class="form-group">
+                                    <input type="submit" value="Add" class="btn btn-success btn-block" id="btnAddManufacturer">
+                                </div>
+
+                                <?php
+                                if (@$_GET['Invalid'] == true) {
+                                    ?>
+                                    <div class="alert-light text-danger text-center py-1">
+                                        <h6> <?php echo $_GET['Invalid']; ?> </h6>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                                <?php
+                                if (@$_GET['Valid'] == true) {
+                                    ?>
+                                    <div class="alert-light text-danger text-center py-1">
+                                        <h6> <?php echo $_GET['Valid']; ?> </h6>
+                                    </div>
+                                <?php
+                                }
+                                ?>
 
                                 <button id="saveForm" type="button" class="btn btn-success btn-block">Update</button>
                             </form>
