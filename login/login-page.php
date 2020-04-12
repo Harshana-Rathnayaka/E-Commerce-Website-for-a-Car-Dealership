@@ -75,11 +75,15 @@ if (isset($_SESSION['User'])) {
                         </button>
                     </div>
 
-
-                    <div class="alert-light text-danger text-center py-3" id="msg"></div>
-
-
-
+                    <?php
+                    if (@$_GET['Invalid'] == true) {
+                        ?>
+                        <div class=" text-danger alert text-center py-3">
+                            <?php echo $_GET['Invalid']; ?>
+                        </div>
+                    <?php
+                    }
+                    ?>
                     <div class="text-center w-full p-t-115">
                         <span class="txt1">
                             Not a member?
@@ -105,7 +109,7 @@ if (isset($_SESSION['User'])) {
     <!--===============================================================================================-->
     <script src="js/main.js"></script>
 
-   
+
 
 </body>
 

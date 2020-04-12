@@ -16,6 +16,7 @@ if (!$_SESSION['User']) {
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" />
 
   <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
 
@@ -112,6 +113,7 @@ if (!$_SESSION['User']) {
           </nav>
         </div>
 
+
         <?php
         if (@$_GET['Valid'] == true) {
           ?>
@@ -124,58 +126,68 @@ if (!$_SESSION['User']) {
         ?>
 
         <div class="table-responsive">
-          <table class="table table-bordered table-striped table-hover table-sm table-dark">
+          <table id="vehiclesTable" class="table table-striped table-hover table-dark text-center">
             <thead>
               <tr>
                 <th width="3%">#</th>
-                <th width="13%">Make</th>
-                <th width="10%">Model</th>
-                <th width="6%">Year</th>
-                <th width="7%">Capacity</th>
-                <th width="10%">Transmission</th>
-                <th width="5%">Horsepower</th>
-                <th width="10%">Condition</th>
-                <th width="4%">Colour</th>
-                <th width="5%">Convertible</th>
-                <th width="6.5%">In Stock</th>
-                <th width="20%">Action</th>
+                <th width="3%">Make</th>
+                <th width="3%">Model</th>
+                <th width="3%">Transmission</th>
+                <th width="3%">Condition</th>
+                <th width="3%">Colour</th>
+                <th>Convertible</th>
+                <th>In Stock</th>
+                <th>Price</th>
+                <th>Action</th>
 
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-              </tr>
+              <?php
+              include '../api/getVehicles.php';
+              if ($result) {
+                while ($row = mysqli_fetch_array($result)) {
+                  ?>
+                  <tr>
+                    <td><?php echo $row['vehicle_id']; ?></td>
+                    <td><?php echo $row['name']; ?></td>
+                    <td><?php echo $row['model']; ?></td>
+                    <td><?php echo $row['transmission_type']; ?></td>
+                    <td><?php echo $row['vehicle_condition']; ?></td>
+                    <td><?php echo $row['colour']; ?></td>
+                    <td><?php $convertible = $row['convertible'];
+                            if ($convertible == "0") {
+                              ?>
+                        <span class="text-danger">&times;</span>
+                      <?php
+                          } elseif ($convertible == "1") {
+                            ?>
+                        <span class="text-success">&radic;</span>
+                      <?php
+                          }
+                          ?></td>
+                    <td><?php $in_stock = $row['in_stock'];
+                            if ($in_stock == "0") {
+                              ?>
+                        <span class="text-danger">&times;</span>
+                      <?php
+                          } elseif ($in_stock == "1") {
+                            ?>
+                        <span class="text-success">&radic;</span>
+                      <?php
+                          }
+                          ?></td>
+                    <td><?php echo $row['price']; ?></td>
+                    <td>
+                      <form action="viewVehicleDetails.php?vehicle_id=<?php echo $row['vehicle_id']; ?>" method="POST">
+                        <input type="submit" value="View" class="btn btn-success btn-sm"></input>
+                      </form>
+                    </td>
+                  </tr>
+              <?php
+                }
+              }
+              ?>
 
             </tbody>
           </table>
@@ -184,12 +196,23 @@ if (!$_SESSION['User']) {
     </div>
   </div>
 
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('#vehiclesTable').DataTable({
+        "lengthMenu": [5, 10],
+      });
+    });
+  </script>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/feather.min.js"></script>
   <script src="js/dashboard.js"></script>
 
 
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 </body>
 

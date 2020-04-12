@@ -7,10 +7,19 @@ $response = array();
 // check if the session is started
 if (isset($_SESSION['User'])) {
 
-    // db object
-    $db = new DbOperations();
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $result = $db->getManufacturers();
+        $vehicle_id = $_REQUEST['vehicle_id'];
+
+        // db object
+        $db = new DbOperations();
+
+        $result = $db->getUserByUsername($username);
+    } else {
+        // wrong method
+        $response['error'] = true;
+        $response['message'] = "Invalid Request";
+    }
 } else {
     // session not started
     $response['error'] = true;
@@ -18,5 +27,4 @@ if (isset($_SESSION['User'])) {
     header("location:../login/login-page.php?Invalid= Session Expired. Please login to continue");
 }
 
-// echo json_encode($response);
-
+echo json_encode($response);

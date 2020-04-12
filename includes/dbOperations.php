@@ -97,6 +97,15 @@ class DbOperations
 		return $stmt->get_result()->fetch_assoc();
 	}
 
+	// retreiving vehicle data
+	public function getVehicleByID($vehicle_id)
+	{
+		$stmt = $this->con->prepare("SELECT * FROM `vehicles` INNER JOIN `manufacturers` ON manufacturers.make_id = vehicles.make INNER JOIN `colours` ON colours.id = vehicles.colour INNER JOIN `transmissions` ON transmissions.id = vehicles.transmission WHERE `vehicle_id` = ?");
+		$stmt->bind_param("i", $vehicle_id);
+		$stmt->execute();
+		return $stmt->get_result()->fetch_assoc();
+	}
+
 	// checking if the user exists
 	private function isUserExist($username, $email)
 	{
@@ -121,6 +130,14 @@ class DbOperations
 	public function getManufacturers()
 	{
 		$stmt = $this->con->prepare("SELECT * FROM `manufacturers`");
+		$stmt->execute();
+		return $stmt->get_result();
+	}
+
+	// retrieving vehicles table 
+	public function getVehicles()
+	{
+		$stmt = $this->con->prepare("SELECT * FROM `vehicles` INNER JOIN `manufacturers` ON manufacturers.make_id = vehicles.make INNER JOIN `colours` ON colours.id = vehicles.colour INNER JOIN `transmissions` ON transmissions.id = vehicles.transmission");
 		$stmt->execute();
 		return $stmt->get_result();
 	}

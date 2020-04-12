@@ -162,10 +162,6 @@ if (!$_SESSION['User']) {
     $(document).ready(function() {
       $('#manufacturerTable').DataTable({
         "lengthMenu": [5, 10],
-        "language": {
-            "decimal": ".",
-            "thousands": ",",
-        }
       });
     });
   </script>

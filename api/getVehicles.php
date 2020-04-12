@@ -10,7 +10,7 @@ if (isset($_SESSION['User'])) {
     // db object
     $db = new DbOperations();
 
-    $result = $db->getManufacturers();
+    $result = $db->getVehicles();
 } else {
     // session not started
     $response['error'] = true;
