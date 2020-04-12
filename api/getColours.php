@@ -10,7 +10,7 @@ $response = array();
     // db object
     $db = new DbOperations();
 
-    $result = $db->getVehicles();
+    $result = $db->getColours();
 // } else {
 //     // session not started
 //     $response['error'] = true;

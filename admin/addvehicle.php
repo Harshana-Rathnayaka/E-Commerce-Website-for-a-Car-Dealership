@@ -115,20 +115,20 @@ if (!$_SESSION['User']) {
 
         <form id="addVehicleForm" action="../api/addNewVehicle.php" method="POST" enctype="multipart/form-data">
 
-        <?php
-            if (@$_GET['Invalid'] == true) {
-              ?>
-              <div class=" alert alert-danger fade show">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <h5> <?php echo $_GET['Invalid']; ?> </h5>
-              </div>
-            <?php
-            }
+          <?php
+          if (@$_GET['Invalid'] == true) {
             ?>
+            <div class=" alert alert-danger fade show">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <h5> <?php echo $_GET['Invalid']; ?> </h5>
+            </div>
+          <?php
+          }
+          ?>
 
           <div class="form-row">
 
-            
+
 
             <div class="form-group col-md-3">
               <label for="inputMake">Make :</label>
@@ -185,10 +185,16 @@ if (!$_SESSION['User']) {
               <label for="inputColour">Colour :</label>
               <select class="form-control" id="inputColour" name="colour" required>
                 <option value="0">Select the colour</option>
-                <option value="1">Red</option>
-                <option value="2">Blue</option>
-                <option value="3">Black</option>
-                <option value="4">White</option>
+                <?php
+                include '../api/getColours.php';
+                if ($result) {
+                  while ($row = mysqli_fetch_array($result)) {
+                    ?>
+                    <option value="<?php echo $row['id']; ?>"><?php echo $row['colour']; ?></option>
+                <?php
+                  }
+                }
+                ?>
               </select>
             </div>
 

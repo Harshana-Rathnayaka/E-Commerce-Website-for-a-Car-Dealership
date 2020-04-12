@@ -134,10 +134,18 @@ class DbOperations
 		return $stmt->get_result();
 	}
 
+	// retrieving colours table 
+	public function getColours()
+	{
+		$stmt = $this->con->prepare("SELECT * FROM `colours`");
+		$stmt->execute();
+		return $stmt->get_result();
+	}
+
 	// retrieving vehicles table 
 	public function getVehicles()
 	{
-		$stmt = $this->con->prepare("SELECT * FROM `vehicles` INNER JOIN `manufacturers` ON manufacturers.make_id = vehicles.make INNER JOIN `colours` ON colours.id = vehicles.colour INNER JOIN `transmissions` ON transmissions.id = vehicles.transmission");
+		$stmt = $this->con->prepare("SELECT * FROM `vehicles` INNER JOIN `manufacturers` ON manufacturers.make_id = vehicles.make INNER JOIN `colours` ON colours.id = vehicles.colour INNER JOIN `transmissions` ON transmissions.id = vehicles.transmission ORDER BY `vehicle_id`");
 		$stmt->execute();
 		return $stmt->get_result();
 	}
@@ -146,14 +154,6 @@ class DbOperations
 	public function getUsers()
 	{
 		$stmt = $this->con->prepare("SELECT `id`, CONCAT( `first_name`, ' ', `last_name`) AS 'name', `username`, `email` FROM `users`");
-		$stmt->execute();
-		return $stmt->get_result();
-	}
-
-	// retrieving approved companies
-	public function getApprovedCompanies()
-	{
-		$stmt = $this->con->prepare("SELECT `id`, CONCAT( `first_name`, ' ', `last_name`) AS 'name', `username`, `email` FROM `users` WHERE `user_status` = 1 AND `user_type` = 2");
 		$stmt->execute();
 		return $stmt->get_result();
 	}
