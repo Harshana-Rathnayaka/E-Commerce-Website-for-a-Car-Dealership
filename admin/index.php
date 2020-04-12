@@ -125,6 +125,17 @@ if (!$_SESSION['User']) {
         }
         ?>
 
+        <?php
+        if (@$_GET['Invalid'] == true) {
+          ?>
+          <div class=" alert alert-danger fade show">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <h5> <?php echo $_GET['Invalid']; ?> </h5>
+          </div>
+        <?php
+        }
+        ?>
+
         <div class="table-responsive">
           <table id="vehiclesTable" class="table table-striped table-hover table-dark text-center">
             <thead>
@@ -149,7 +160,7 @@ if (!$_SESSION['User']) {
                 while ($row = mysqli_fetch_array($result)) {
                   ?>
                   <tr>
-                    <td><?php echo $row['vehicle_id']; ?></td>
+                    <td><?php echo $vehicle_id = $row['vehicle_id']; ?></td>
                     <td><?php echo $row['name']; ?></td>
                     <td><?php echo $row['model']; ?></td>
                     <td><?php echo $row['transmission_type']; ?></td>
@@ -179,8 +190,8 @@ if (!$_SESSION['User']) {
                           ?></td>
                     <td><?php echo $row['price']; ?></td>
                     <td>
-                      <form action="viewVehicleDetails.php?vehicle_id=<?php echo $row['vehicle_id']; ?>" method="POST">
-                        <input type="submit" value="View" class="btn btn-success btn-sm"></input>
+                      <form action="viewvehicle.php?vehicle_id=<?php echo $vehicle_id; ?>" method="POST">
+                        <button type="submit" name="view" class="btn btn-success btn-sm">View</button>
                       </form>
                     </td>
                   </tr>

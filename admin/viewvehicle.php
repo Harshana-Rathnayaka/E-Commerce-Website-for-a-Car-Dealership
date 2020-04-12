@@ -118,91 +118,137 @@ if (!$_SESSION['User']) {
                         </div>
 
                         <div class="container">
-                            <h5 class="text-center">Vehicle Details </h5>
-
+                            <!-- <h5 class="text-left">Vehicle Details </h5> -->
                             <?php
-                            include '../api/viewAccountDetails.php';
+                            require_once '../includes/dbOperations.php';
+                            $vehicle_id = $_REQUEST['vehicle_id'];
+                            $db = new DbOperations();
+                            $result = $db->getVehicleByID($vehicle_id);
                             ?>
-                            <form id="myform" action="../api/updateAccountDetails.php?user=<?php echo $_SESSION['User']; ?>" method="post" enctype="multipart/form-data">
 
-                                <div class="form-group">
-                                    <label>First Name :</label>
-                                    <input type="text" class="form-control" value="<?php echo $result['first_name'] ?>" name="fname">
-                                </div>
-                                <div class="form-group">
-                                    <label>Last Name :</label>
-                                    <input type="text" class="form-control" value="<?php echo $result['last_name'] ?>" name="lname">
-                                </div>
-                                <div class="form-group">
-                                    <label>Username :</label>
-                                    <input type="text" class="form-control" value="<?php echo $result['username'] ?>" name="uname">
-                                </div>
-                                <div class="form-group">
-                                    <label>Email :</label>
-                                    <input type="email" class="form-control" value="<?php echo $result['email'] ?>" name="email">
-                                </div>
-                                <div class="form-group">
-                                    <label>Password :</label>
-                                    <input type="password" class="form-control" value="<?php echo $result['password'] ?>" name="password">
-                                </div>
+                            <form>
 
-                                <div class="form-group">
-                                    <input type="submit" value="Add" class="btn btn-success btn-block" id="btnAddManufacturer">
-                                </div>
-
-                                <?php
-                                if (@$_GET['Invalid'] == true) {
-                                    ?>
-                                    <div class="alert-light text-danger text-center py-1">
-                                        <h6> <?php echo $_GET['Invalid']; ?> </h6>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Vehicle ID :</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" readonly class="form-control-plaintext" value="<?php echo $result['vehicle_id'] ?>">
                                     </div>
-                                <?php
-                                }
-                                ?>
-                                <?php
-                                if (@$_GET['Valid'] == true) {
-                                    ?>
-                                    <div class="alert-light text-danger text-center py-1">
-                                        <h6> <?php echo $_GET['Valid']; ?> </h6>
-                                    </div>
-                                <?php
-                                }
-                                ?>
 
-                                <button id="saveForm" type="button" class="btn btn-success btn-block">Update</button>
+                                    <label class="col-sm-2 col-form-label">Make :</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" readonly class="form-control-plaintext" value="<?php echo $result['name']; ?>">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Model :</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" readonly class="form-control-plaintext" value="<?php echo $result['model']; ?>">
+                                    </div>
+
+                                    <label class="col-sm-2 col-form-label">Year :</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" readonly class="form-control-plaintext" value="<?php echo $result['year']; ?>">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Engine Capacity :</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" readonly class="form-control-plaintext" value="<?php echo $result['engine_capacity']; ?>">
+                                    </div>
+
+                                    <label class="col-sm-2 col-form-label">Transmission :</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" readonly class="form-control-plaintext" value="<?php echo $result['transmission_type']; ?>">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Horsepower :</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" readonly class="form-control-plaintext" value="<?php echo $result['horsepower']; ?>Hp">
+                                    </div>
+
+                                    <label class="col-sm-2 col-form-label">Condition :</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" readonly class="form-control-plaintext" value="<?php echo $result['vehicle_condition']; ?>">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Colour :</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" readonly class="form-control-plaintext" value="<?php echo $result['colour']; ?>">
+                                    </div>
+
+                                    <label class="col-sm-2 col-form-label">Convertible :</label>
+                                    <div class="col-sm-4">
+                                        <?php $convertible = $result['convertible'];
+                                        if ($convertible) {
+                                            ?>
+                                            <input type="text" readonly class="form-control-plaintext" value="YES">
+                                        <?php
+                                        } else {
+                                            ?>
+                                            <input type="text" readonly class="form-control-plaintext" value="NO">
+                                        <?php
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Number of Seats :</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" readonly class="form-control-plaintext" value="<?php echo $result['seats']; ?>">
+                                    </div>
+
+                                    <label class="col-sm-2 col-form-label">Price :</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" readonly class="form-control-plaintext" value="<?php echo $result['price']; ?>">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">In Stock :</label>
+                                    <div class="col-sm-4">
+                                        <?php $in_stock = $result['in_stock'];
+                                        if ($in_stock) {
+                                            ?>
+                                            <input type="text" readonly class="form-control-plaintext" value="YES">
+                                        <?php
+                                        } else {
+                                            ?>
+                                            <input type="text" readonly class="form-control-plaintext" value="NO">
+                                        <?php
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Image:</label>
+                                    <br>
+                                    <img src="../vehicleimages/<?php echo $result['image_link']; ?>" width="800" height="300" />
+                                </div>
+
+                                
+
                             </form>
-                            <span id="result"></span>
+                            <div class="form-group">
+                                    <hr>
+                                    <button class="btn btn-info col-md-3" id="btnEdit"> Edit </button>
+                                    <button class="btn btn-danger col-md-3" id="btnDelete"> Delete </button>
+                                </div>
                         </div>
-                        <br>
-
-
                     </main>
-
-                    <script src="../js/jquery-2.2.3.min.js"></script>
-                    <script>
-                        $("#saveForm").click(function() {
-                            $.post($("#myform").attr("action"), $("#myform :input").serializeArray(), function(info) {
-                                $("#result").html(info);
-                            });
-                            clearInput();
-
-                        });
-
-                        $("#myform").submit(function() {
-                            return false;
-                        });
-
-                        /*function clearInput(){
-
-                         $("#myform :input").each(function(index, element) {
-                         $(this).val('NA');
-                         });
-
-                         }*/
-                    </script>
                 </div>
             </div>
-
+            <script src="js/jquery-3.3.1.slim.min.js"></script>
+            <!-- <script>
+        window.jQuery || document.write('<script src="js/jquery-slim.min.js">
+    </script>') -->
             <script src="js/bootstrap.bundle.min.js"></script>
             <script src="js/feather.min.js"></script>
             <script src="js/Chart.min.js"></script>
