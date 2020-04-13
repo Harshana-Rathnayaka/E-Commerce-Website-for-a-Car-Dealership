@@ -213,6 +213,8 @@
                 $result = $db->getVehicleByID($vehicle_id);
 
                 $vehicle_id = $result['vehicle_id'];
+                $make_id = $result['make'];
+
                 $make = $result['name'];
                 $model = $result['model'];
                 $year = $result['year'];
@@ -251,6 +253,10 @@
                     <div class="product-name">
                       <h1><?php echo $make; ?> <?php echo $model; ?> <?php echo $year; ?></h1>
                     </div>
+
+                    <input type="hidden" id="vehicleId" value="<?php echo $vehicle_id; ?>">
+                    <input type="hidden" id="makeId" value="<?php echo $make_id; ?>">
+
 
                     <div class="price-block">
                       <div class="price-box">
@@ -294,7 +300,7 @@
                     </div>
                     <div class="email-addto-box">
                       <ul class="add-to-links">
-                        <li> <a class="link-wishlist" href="wishlist.php?vehicle_id=<?php echo $vehicle_id; ?>"><span>Add to Wishlist</span></a></li>
+                        <li> <a id="btnWishlist" class="link-wishlist" href="#"><span>Add to Wishlist</span></a></li>
                         <li><a class="link-compare" href="compare.html"><span>Add to Compare</span></a></li>
                       </ul>
                       <p class="email-friend"><a href="#" class=""><span>Email to a Friend</span></a></p>
@@ -560,7 +566,7 @@
 
 
   <!-- JavaScript -->
-  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script src="js/bootstrap-slider.min.js"></script>
   <script src="js/bootstrap-select.min.js"></script>
@@ -574,10 +580,22 @@
 
 
   <script type="text/javascript">
-    function HideMe() {
-      jQuery('.popup1').hide();
-      jQuery('#fade').hide();
-    }
+    // jQuery function to send data to the wishlist
+    $(document).ready(function() {
+      $('#btnWishlist').on('click', function() {
+
+        var vehicle_id = $('#vehicleId').val();
+        var make_id = $('#makeId').val();
+
+        $.post('../api/addToWishlist.php', {
+          vehicle_id: vehicle_id,
+          make_id: make_id,
+        }, function(data) {
+          console.log('added to wishlist');
+          window.location.replace('wishlist.php');
+        })
+      });
+    });
   </script>
 
 </body>

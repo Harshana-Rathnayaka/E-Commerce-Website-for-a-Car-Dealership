@@ -22,8 +22,7 @@
   <link rel="stylesheet" type="text/css" href="stylesheet/jquery.mobile-menu.css">
   <link rel="stylesheet" type="text/css" href="stylesheet/style.css" media="all">
   <link rel="stylesheet" type="text/css" href="stylesheet/responsive.css" media="all">
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800'
-    rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
 </head>
@@ -79,14 +78,10 @@
                         <ul class="mini-products-list" id="cart-sidebar">
                           <li class="item first">
                             <div class="item-inner">
-                              <a class="product-image"
-                                title="timi &amp; leslie Sophia Diaper Bag, Lemon Yellow/Shadow White" href="#l"><img
-                                  alt="timi &amp; leslie Sophia Diaper Bag, Lemon Yellow/Shadow White"
-                                  src="products-images/p4.jpg"></a>
+                              <a class="product-image" title="timi &amp; leslie Sophia Diaper Bag, Lemon Yellow/Shadow White" href="#l"><img alt="timi &amp; leslie Sophia Diaper Bag, Lemon Yellow/Shadow White" src="products-images/p4.jpg"></a>
                               <div class="product-details">
                                 <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a>
-                                  <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span
-                                      class="hidden">Edit item</span></a> </div>
+                                  <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                                 <!--access-->
                                 <strong>1</strong> x <span class="price">$179.99</span>
                                 <p class="product-name"><a href="accessories-detail.html">timi &amp; leslie Sophia
@@ -96,13 +91,10 @@
                           </li>
                           <li class="item last">
                             <div class="item-inner">
-                              <a class="product-image" title="JP Lizzy Satchel Designer Diaper Bag - Slate Citron"
-                                href="#"><img alt="JP Lizzy Satchel Designer Diaper Bag - Slate Citron"
-                                  src="products-images/p3.jpg"></a>
+                              <a class="product-image" title="JP Lizzy Satchel Designer Diaper Bag - Slate Citron" href="#"><img alt="JP Lizzy Satchel Designer Diaper Bag - Slate Citron" src="products-images/p3.jpg"></a>
                               <div class="product-details">
                                 <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a>
-                                  <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span
-                                      class="hidden">Edit item</span></a> </div>
+                                  <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                                 <!--access-->
                                 <strong>1</strong> x <span class="price">$80.00</span>
                                 <p class="product-name"><a href="accessories-detail.html">JP Lizzy Satchel Designer
@@ -112,8 +104,7 @@
                           </li>
                         </ul>
                         <div class="actions">
-                          <button class="btn-checkout" title="Checkout" type="button"
-                            onClick="window.location=checkout.html"><span>Checkout</span></button>
+                          <button class="btn-checkout" title="Checkout" type="button" onClick="window.location=checkout.html"><span>Checkout</span></button>
                         </div>
                         <!--actions-->
                       </div>
@@ -126,8 +117,7 @@
                       <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search">
                         <span class="input-group-btn">
-                          <button type="submit" class="search-btn"> <span class="glyphicon glyphicon-search"> <span
-                                class="sr-only">Search</span> </span>
+                          <button type="submit" class="search-btn"> <span class="glyphicon glyphicon-search"> <span class="sr-only">Search</span> </span>
                           </button>
                         </span>
                       </div>
@@ -165,8 +155,7 @@
 
                         <li class="mega-menu hidden-sm"> <a class="level-top" href="compare.html"><span>Compare
                               Cars‎</span></a> </li>
-                        <li class="mega-menu hidden-sm"> <a class="level-top"
-                            href="contact-us.html"><span>Contact‎</span></a> </li>
+                        <li class="mega-menu hidden-sm"> <a class="level-top" href="contact-us.html"><span>Contact‎</span></a> </li>
                         <li class="mega-menu hidden-sm"> <a class="level-top" href="about-us.html"><span>About
                               us‎</span></a> </li>
 
@@ -222,48 +211,68 @@
                         </thead>
                         <tbody>
 
-                          <tr id="item_32" class="first odd">
-                            <td class="wishlist-cell0 customer-wishlist-item-image"><a class="product-image"
-                                href="product-detail.html" title="Slim Fit Casual Shirt"> <img
-                                  src="products-images/p9.jpg" width="80" height="80" alt="Vehicle"> </a>
-                            </td>
-                            <td class="wishlist-cell1 customer-wishlist-item-info">
-                              <h3 class="product-name"><a href="product-detail.html" title="Vehicle">Slim
-                                  Fit Casual Shirt</a></h3>
-                              <div class="description std">
-                                <div class="inner">Full sleeve with buttoned cuffs, brand embroidery at the left side of
-                                  the chest. Blue colour self design casual shirt, made with 100% cotton, slim fit,
-                                  mandarin collar with a full buttoned chest placket, single chest patch pocket, full
-                                  sleeve with buttoned cuffs, brand embroidery at the left side of the chest.</div>
-                              </div>
+                          <?php
+                          include '../api/getWishlist.php';
+                          if ($result) {
+                            while ($row = mysqli_fetch_array($result)) {
 
-                            </td>
-                            <td class="wishlist-cell2 customer-wishlist-item-quantity" data-rwd-label="Quantity">
-                              <div class="cart-cell">
-                                <div class="add-to-cart-alt">
-                                  <input type="text" pattern="\d*" class="input-text qty validate-not-negative-number"
-                                    name="qty[32]" value="1">
-                                </div>
-                              </div>
-                            </td>
-                            <td class="wishlist-cell3 customer-wishlist-item-price" data-rwd-label="Price">
-                              <div class="cart-cell">
-                                <div class="price-box"> <span class="regular-price" id="product-price-2"> <span
-                                      class="price">$55.00</span> </span> </div>
-                              </div>
-                            </td>
-                            <td class="wishlist-cell4 customer-wishlist-item-cart">
-                              <div class="cart-cell">
-                                <button type="button" title="Add to Cart" onClick="addWItemToCart(32);"
-                                  class="button btn-cart"><span><span>Add to Cart</span></span></button>
-                              </div>
-                              <div class="edit-wishlist"> <a href="#" title="Edit item" class="btn-edit"><i
-                                    class="icon-pencil"></i><span class="hidden">Edit</span></a> </div>
-                            </td>
-                            <td class="wishlist-cell5 customer-wishlist-item-remove last"><a href="#"
-                                onClick="return confirmRemoveWishlistItem();" title="Clear Cart"
-                                class="remove-item"><span><span></span></span></a></td>
-                          </tr>
+                              $username = $row['username'];
+                              $vehicle_id = $row['vehicle_id'];
+                              $make = $row['name'];
+                              $model = $row['model'];
+                              $year = $row['year'];
+                              $capacity = $row['engine_capacity'];
+                              $horsepower = $row['horsepower'];
+                              $condition = $row['vehicle_condition'];
+                              $colour = $row['colour'];
+                              $convertible = $row['convertible'];
+                              $seats = $row['seats'];
+                              $price = $row['price'];
+                              $image_link = $row['image_link'];
+
+                              ?>
+
+                              <tr id="item_32" class="first odd">
+
+                                <td class="wishlist-cell0 customer-wishlist-item-image"><a class="product-image" href="product-detail.html" title="Slim Fit Casual Shirt"> <img src="../vehicleimages/<?php echo $image_link; ?>" width="80" height="80" alt="Vehicle"> </a>
+                                </td>
+                                <td class="wishlist-cell1 customer-wishlist-item-info">
+                                  <h3 class="product-name"><a href="product-detail.html" title="Vehicle"><?php echo $make; ?> <?php echo $model; ?> <?php echo $year; ?></a></h3>
+                                  <div class="description std">
+                                    <div class="inner">
+                                      <?php echo $capacity; ?> leters <br>
+                                      <?php echo $horsepower; ?> Hp <br>
+                                      <?php echo $condition; ?> <br>
+                                      <?php echo $seats; ?> seats <br>
+                                    </div>
+                                  </div>
+
+                                </td>
+                                <td class="wishlist-cell2 customer-wishlist-item-quantity" data-rwd-label="Quantity">
+                                  <div class="cart-cell">
+                                    <div class="add-to-cart-alt">
+                                      <input type="text" pattern="\d*" class="input-text qty validate-not-negative-number" name="qty[32]" value="1">
+                                    </div>
+                                  </div>
+                                </td>
+                                <td class="wishlist-cell3 customer-wishlist-item-price" data-rwd-label="Price">
+                                  <div class="cart-cell">
+                                    <div class="price-box"> <span class="regular-price" id="product-price-2"> <span class="price">LKR <?php echo $price; ?></span> </span> </div>
+                                  </div>
+                                </td>
+                                <td class="wishlist-cell4 customer-wishlist-item-cart">
+                                  <div class="cart-cell">
+                                    <button type="button" title="Add to Cart" onClick="addWItemToCart(32);" class="button btn-cart"><span><span>Add to Cart</span></span></button>
+                                  </div>
+                                  <div class="edit-wishlist"> <a href="#" title="Edit item" class="btn-edit"><i class="icon-pencil"></i><span class="hidden">Edit</span></a> </div>
+                                </td>
+                                <td class="wishlist-cell5 customer-wishlist-item-remove last"><a href="#" onClick="return confirmRemoveWishlistItem();" title="Clear Cart" class="remove-item"><span><span></span></span></a></td>
+                              </tr>
+
+                          <?php
+                            }
+                          }
+                          ?>
 
                         </tbody>
                       </table>
@@ -271,8 +280,7 @@
 
                     <div class="buttons-set buttons-set2">
 
-                      <button type="button" title="Add All to Cart" onClick="addAllWItemsToCart()"
-                        class="button btn-add"><span>Add All to Cart</span></button>
+                      <button type="button" title="Add All to Cart" onClick="addAllWItemsToCart()" class="button btn-add"><span>Add All to Cart</span></button>
                       <button type="submit" name="do" title="Update Wishlist" class="button btn-update"><span>Update
                           Wishlist</span></button>
                     </div>
@@ -291,8 +299,7 @@
             </div>
           </section>
           <!--col-main col-sm-9 wow bounceInUp animated-->
-          <aside class="col-right sidebar col-sm-3 col-xs-12 wow bounceInUp animated animated"
-            style="visibility: visible;">
+          <aside class="col-right sidebar col-sm-3 col-xs-12 wow bounceInUp animated animated" style="visibility: visible;">
             <div class="block block-account">
               <div class="block-title"> My Account </div>
               <div class="block-content">
@@ -449,12 +456,10 @@
                 </ul>
               </div>
             </div>
-            <div class="col-sm-4 col-xs-12 coppyright"><a target="_blank"
-                href="https://github.com/Harshana-Rathnayaka">2020 Dreeko Corporations. All Rights Reserved. &copy;
+            <div class="col-sm-4 col-xs-12 coppyright"><a target="_blank" href="https://github.com/Harshana-Rathnayaka">2020 Dreeko Corporations. All Rights Reserved. &copy;
                 &reg;</a></div>
             <div class="col-xs-12 col-sm-4">
-              <div class="payment-accept"> <img src="images/payment-1.png" alt=""> <img src="images/payment-2.png"
-                  alt=""> <img src="images/payment-3.png" alt=""> <img src="images/payment-4.png" alt=""> </div>
+              <div class="payment-accept"> <img src="images/payment-1.png" alt=""> <img src="images/payment-2.png" alt=""> <img src="images/payment-3.png" alt=""> <img src="images/payment-4.png" alt=""> </div>
             </div>
           </div>
         </div>

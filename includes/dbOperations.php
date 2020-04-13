@@ -85,6 +85,21 @@ class DbOperations
 		}
 	}
 
+	// adding to wishlist
+	public function addToWishlist($user_id, $vehicle_id, $make_id)
+	{
+		$stmt = $this->con->prepare("INSERT INTO `wishlist`(`user_id`, `vehicle_id`, `make_id`) VALUES (?, ?, ?); ");
+		$stmt->bind_param("iii", $user_id, $vehicle_id, $make_id);
+
+		if ($stmt->execute()) {
+			// added to wishlist
+			return 1;
+		} else {
+			// some error
+			return 2;
+		}
+	}
+
 
 	/* CRUD  -> r -> RETRIEVE */
 
@@ -146,6 +161,14 @@ class DbOperations
 	public function getVehicles()
 	{
 		$stmt = $this->con->prepare("SELECT * FROM `vehicles` INNER JOIN `manufacturers` ON manufacturers.make_id = vehicles.make INNER JOIN `colours` ON colours.id = vehicles.colour INNER JOIN `transmissions` ON transmissions.id = vehicles.transmission ORDER BY `vehicle_id`");
+		$stmt->execute();
+		return $stmt->get_result();
+	}
+
+	// retrieving vehicles table 
+	public function getWishlist()
+	{
+		$stmt = $this->con->prepare("SELECT * FROM `wishlist` INNER JOIN `users` ON users.id = wishlist.user_id INNER JOIN `vehicles` ON vehicles.vehicle_id = wishlist.wishlist_id INNER JOIN `manufacturers` ON manufacturers.make_id = wishlist.make_id ORDER BY `wishlist_id`");
 		$stmt->execute();
 		return $stmt->get_result();
 	}
