@@ -165,8 +165,8 @@
                 </div>
             </div>
         </header>
-        <!--container-->
 
+        <!--container-->
         <div class="content">
             <div class="container-fluid">
 
@@ -318,7 +318,7 @@
 
                                             <div class="item-img">
                                                 <div class="item-img-info">
-                                                    <a href="accessories-detail.html" title="See more" class="product-image"><img src="../vehicleimages/<?php echo $row['image_link']; ?>" alt="Retis lapen casen"></a>
+                                                    <a href="details.php?vehicle_id=<?php echo $row['vehicle_id']; ?>" title="See more" class="product-image"><img src="../vehicleimages/<?php echo $row['image_link']; ?>" alt="Retis lapen casen"></a>
                                                     <?php $condition = $row['vehicle_condition'];
                                                             if ($condition == "Brand New") {
                                                                 ?>
@@ -330,6 +330,7 @@
                                                     <?php
                                                             }
                                                             ?>
+
                                                     <div class="item-box-hover">
                                                         <div class="box-inner">
                                                             <div class="add_cart">
@@ -345,30 +346,32 @@
 
                                             <div class="item-info">
                                                 <div class="info-inner">
-                                                    <div class="item-title"><a href="accessories-detail.html" title="Retis lapen casen"><?php echo $row['name']; ?> <?php echo $row['model']; ?></a> </div>
-                                                    <div class="item-content">
+                                                    <div class="item-title">
+                                                        <a href="details.php?vehicle_id=<?php echo $row['vehicle_id']; ?>" title="Retis lapen casen"><?php echo $row['name']; ?> <?php echo $row['model']; ?></a>
+                                                    </div>
 
+                                                    <div class="item-content">
                                                         <div class="item-price">
-                                                            <div class="price-box"><span class="regular-price"><span class="price">LKR <?php echo $row['price']; ?></span> </span>
+                                                            <div class="price-box">
+                                                                <span class="regular-price"><span class="price">LKR <?php echo $row['price']; ?></span> </span>
                                                             </div>
                                                         </div>
+
                                                         <div class="other-info">
                                                             <div class="col-km"><i class="fa fa-tachometer"></i> <?php echo $row['colour']; ?></div>
                                                             <div class="col-engine"><i class="fa fa-gear"></i> <?php echo $row['transmission_type']; ?></div>
                                                             <div class="col-date"><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo $row['year']; ?></div>
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </div>
                             <?php
                                 }
                             }
                             ?>
-
                         </div>
                     </div>
                 </div>
