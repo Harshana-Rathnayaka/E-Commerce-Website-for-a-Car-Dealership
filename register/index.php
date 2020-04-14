@@ -109,6 +109,10 @@
                             <button class="btn btn--radius-2 btn--blue" name="Register" type="submit">REGISTER</button>
                         </div>
                     </form>
+
+                    <div class="p-t-15 col-3">
+                        <label class="label">Already a member? <a href="../login/login-page.php">Login now</a> </label>
+                    </div>
                 </div>
             </div>
         </div>
