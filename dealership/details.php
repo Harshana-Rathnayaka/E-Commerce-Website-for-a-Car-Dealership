@@ -586,14 +586,16 @@
 
         var vehicle_id = $('#vehicleId').val();
         var make_id = $('#makeId').val();
+        var quantity = $('#qty').val();
 
         $.post('../api/addToWishlist.php', {
           vehicle_id: vehicle_id,
           make_id: make_id,
+          quantity: quantity,
         }, function(data) {
           console.log('added to wishlist');
           window.location.replace('wishlist.php');
-        })
+        });
       });
     });
   </script>

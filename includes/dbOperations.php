@@ -86,13 +86,28 @@ class DbOperations
 	}
 
 	// adding to wishlist
-	public function addToWishlist($user_id, $vehicle_id, $make_id)
+	public function addToWishlist($user_id, $vehicle_id, $make_id, $quantity)
 	{
-		$stmt = $this->con->prepare("INSERT INTO `wishlist`(`user_id`, `vehicle_id`, `make_id`) VALUES (?, ?, ?); ");
-		$stmt->bind_param("iii", $user_id, $vehicle_id, $make_id);
+		$stmt = $this->con->prepare("INSERT INTO `wishlist`(`user_id`, `vehicle_id`, `make_id`, `quantity`) VALUES (?, ?, ?, ?); ");
+		$stmt->bind_param("iiii", $user_id, $vehicle_id, $make_id, $quantity);
 
 		if ($stmt->execute()) {
 			// added to wishlist
+			return 1;
+		} else {
+			// some error
+			return 2;
+		}
+	}
+
+	// adding to cart
+	public function addToCart($user_id, $vehicle_id, $make_id, $quantity, $wishlist_id)
+	{
+		$stmt = $this->con->prepare("INSERT INTO `cart`(`user_id`, `vehicle_id`, `make_id`, `quantity`, `wishlist_id`) VALUES (?, ?, ?, ?, ?); ");
+		$stmt->bind_param("iiiii", $user_id, $vehicle_id, $make_id, $quantity, $wishlist_id);
+
+		if ($stmt->execute()) {
+			// added to cart
 			return 1;
 		} else {
 			// some error
@@ -207,5 +222,26 @@ class DbOperations
 			// some error 
 			return 1;
 		}
+	}
+
+
+
+
+	/* CRUD  -> U -> UPDATE */
+
+	// delete wishlist item
+	public function deleteWishlist($wishlist_id)
+	{ 
+		$stmt = $this->con->prepare("DELETE FROM `wishlist` WHERE `wishlist_id` = ?");
+		$stmt->bind_param("i", $wishlist_id);
+
+		if($stmt->execute()) {
+			// item deleted
+			return 1;
+		} else {
+			return 2;
+		}
+
+		
 	}
 }

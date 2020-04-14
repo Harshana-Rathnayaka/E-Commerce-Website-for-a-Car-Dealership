@@ -133,7 +133,7 @@
                     <div class="nav-inner">
                       <!-- BEGIN NAV -->
                       <ul id="nav" class="hidden-xs">
-                        <li class="active"> <a class="level-top" href="index.html"><span>Home</span></a></li>
+                        <li class="active"> <a class="level-top" href="index.php"><span>Home</span></a></li>
 
                         <li class="level0 parent drop-menu"> <a class="level-top" href="#"><span>Listing‎</span></a>
                           <ul class="level1">
@@ -229,6 +229,11 @@
                               $seats = $row['seats'];
                               $price = $row['price'];
                               $image_link = $row['image_link'];
+                              $quantity = $row['quantity'];
+                              $wishlist_id = $row['wishlist_id'];
+                              $make_id = $row['make_id'];
+
+                              $total = $price * $quantity;
 
                               ?>
 
@@ -251,22 +256,27 @@
                                 <td class="wishlist-cell2 customer-wishlist-item-quantity" data-rwd-label="Quantity">
                                   <div class="cart-cell">
                                     <div class="add-to-cart-alt">
-                                      <input type="text" pattern="\d*" class="input-text qty validate-not-negative-number" name="qty[32]" value="1">
+                                      <input type="text" pattern="\d*" readonly class="input-text qty validate-not-negative-number" name="qty[32]" value="<?php echo $quantity; ?>">
                                     </div>
                                   </div>
                                 </td>
                                 <td class="wishlist-cell3 customer-wishlist-item-price" data-rwd-label="Price">
                                   <div class="cart-cell">
-                                    <div class="price-box"> <span class="regular-price" id="product-price-2"> <span class="price">LKR <?php echo $price; ?></span> </span> </div>
+                                    <div class="price-box"> <span class="regular-price" id="product-price-2"> <span class="price">LKR <?php echo $total; ?></span> </span> </div>
                                   </div>
                                 </td>
                                 <td class="wishlist-cell4 customer-wishlist-item-cart">
                                   <div class="cart-cell">
-                                    <button type="button" title="Add to Cart" onClick="addWItemToCart(32);" class="button btn-cart"><span><span>Add to Cart</span></span></button>
+                                    <form action="../api/addToCart.php?wishlist_id=<?php echo $wishlist_id; ?>&&make_id=<?php echo $make_id; ?>&&vehicle_id=<?php echo $vehicle_id; ?>&&quantity=<?php echo $quantity; ?>" method="post">
+                                      <input type="submit" class="button" value="Add to cart">
+                                    </form>
                                   </div>
-                                  <div class="edit-wishlist"> <a href="#" title="Edit item" class="btn-edit"><i class="icon-pencil"></i><span class="hidden">Edit</span></a> </div>
                                 </td>
-                                <td class="wishlist-cell5 customer-wishlist-item-remove last"><a href="#" onClick="return confirmRemoveWishlistItem();" title="Clear Cart" class="remove-item"><span><span></span></span></a></td>
+                                <td class="wishlist-cell5 customer-wishlist-item-remove last">
+                                  <form action="../api/deleteFromWishlist.php?wishlist_id=<?php echo $wishlist_id; ?>" method="post">
+                                    <input type="submit" class="button" value="Delete">
+                                  </form>
+                                </td>
                               </tr>
 
                           <?php
@@ -281,8 +291,7 @@
                     <div class="buttons-set buttons-set2">
 
                       <button type="button" title="Add All to Cart" onClick="addAllWItemsToCart()" class="button btn-add"><span>Add All to Cart</span></button>
-                      <button type="submit" name="do" title="Update Wishlist" class="button btn-update"><span>Update
-                          Wishlist</span></button>
+
                     </div>
                   </fieldset>
                 </form>
@@ -540,7 +549,7 @@
     </ul>
   </div>
   <!-- JavaScript -->
-  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/parallax.js"></script>
   <script type="text/javascript" src="js/revslider.js"></script>
