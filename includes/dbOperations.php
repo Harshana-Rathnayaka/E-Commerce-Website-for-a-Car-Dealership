@@ -209,6 +209,7 @@ class DbOperations
 		return $stmt->get_result();
 	}
 
+	// update user details
 	public function upateUserDetails($user, $firstname, $lastname, $username, $email, $password)
 	{
 		$pass = md5($password); // password encrypting
@@ -224,24 +225,53 @@ class DbOperations
 		}
 	}
 
+	// update a vehicle
+	public function updateVehicleDetails($vehicle_id,  $model, $year, $engine, $transmission, $horsepower, $condition, $seats, $price)
+	{
+		$stmt = $this->con->prepare("UPDATE `vehicles` SET `model` = ?, `year` = ?, `engine_capacity` = ?, `transmission` = ?, `horsepower` = ?, `vehicle_condition` = ?, `seats` = ?, `price` = ? WHERE `vehicle_id` = ?");
+		$stmt->bind_param("ssssssiss", $model, $year, $engine, $transmission, $horsepower, $condition, $seats, $price, $vehicle_id);
+
+		if ($stmt->execute()) {
+			// vehicle updated
+			return 0;
+		} else {
+			// some error 
+			return 1;
+		}
+	}
 
 
 
-	/* CRUD  -> U -> UPDATE */
+
+	/* CRUD  -> D -> DELETE */
 
 	// delete wishlist item
 	public function deleteWishlist($wishlist_id)
-	{ 
+	{
 		$stmt = $this->con->prepare("DELETE FROM `wishlist` WHERE `wishlist_id` = ?");
 		$stmt->bind_param("i", $wishlist_id);
 
-		if($stmt->execute()) {
+		if ($stmt->execute()) {
 			// item deleted
 			return 1;
 		} else {
+			// some error
 			return 2;
 		}
+	}
 
-		
+	// delete vehicle
+	public function deleteVehicle($vehicle_id)
+	{
+		$stmt = $this->con->prepare("DELETE FROM `vehicles` WHERE `vehicle_id` = ?");
+		$stmt->bind_param("i", $vehicle_id);
+
+		if ($stmt->execute()) {
+			// item deleted
+			return 1;
+		} else {
+			// some error
+			return 2;
+		}
 	}
 }

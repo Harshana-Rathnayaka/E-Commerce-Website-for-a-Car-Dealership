@@ -81,7 +81,7 @@ if (isset($_SESSION['User'])) {
             // some fields are missing
             $response['error'] = true;
             $response['message'] = "Please fill all the details";
-            header("location:../admin/addvehicle.php?Invalid= Please fill all the details.");
+            header("location:../admin/addvehicle.php?Missing= Please fill all the details.");
         }
     } else {
         // wrong method

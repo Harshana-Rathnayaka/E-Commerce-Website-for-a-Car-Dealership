@@ -1,0 +1,222 @@
+<?php
+session_start();
+if (!$_SESSION['User']) {
+    $msg = "Session Not Started";
+    echo "<script>window.top.location='../login/login-page.php?msg=$msg'</script>";
+}
+?>
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Add a Vehicle</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-center text-info" href="#">Welcome <?php echo $_SESSION['User']; ?>!</a>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="../logout.php?logout">Sign out</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+
+                        <li class="nav-item">
+                            <a class="nav-link active " href="index.php">
+                                <span data-feather="list"></span>
+                                Vehicles <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link " href="addvehicle.php">
+                                <span data-feather="plus-circle"></span>
+                                Add vehicle
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="allusers.php">
+                                <span data-feather="users"></span>
+                                Users
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="allmanufacturers.php">
+                                <span data-feather="file-text"></span>
+                                Manufacturers
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="addmanufacturer.php">
+                                <span data-feather="plus-circle"></span>
+                                Add manufacturer
+                            </a>
+                        </li>
+
+                        <div class="dropdown-divider"></div>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="changesettings.php">
+                                <span data-feather="settings"></span>
+                                Settings
+                            </a>
+                        </li>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="index.php">Vehicles</a></li>
+                            <li class="breadcrumb-item"><a href="viewvehicle.php">Vehicle Details</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit Vehicle Details</li>
+                        </ol>
+                    </nav>
+                </div>
+
+
+
+
+                <form id="updateVehicleForm" action="../api/updateVehicleDetails.php" method="POST" enctype="multipart/form-data">
+
+                    <?php
+                    if (@$_GET['Invalid'] == true) {
+                        ?>
+                        <div class=" alert alert-danger fade show">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <h5> <?php echo $_GET['Invalid']; ?> </h5>
+                        </div>
+                    <?php
+                    }
+                    ?>
+
+                    <div class="form-row">
+
+                        <?php
+                        if (isset($_POST['btnEdit'])) {
+                            require_once '../includes/dbOperations.php';
+                            $vehicle_id = $_POST['vehicleId'];
+                            $db = new DbOperations();
+                            $result = $db->getVehicleByID($vehicle_id);
+
+                            ?>
+
+                            <input type="hidden" name="vehicleId" value="<?php echo $result['vehicle_id']; ?>">
+
+                            <div class="form-group col-md-3">
+                                <label for="inputModel">Model :</label>
+                                <input type="text" name="model" value="<?php echo $result['model']; ?>" class="form-control" id="inputModel" required>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="inputYear">Year :</label>
+                                <input type="text" name="year" value="<?php echo $result['year']; ?>" class="form-control" id="inputYear" required>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="inputEngine">Engine :</label>
+                                <input type="text" name="engine" value="<?php echo $result['engine_capacity']; ?>" class="form-control" id="inputEngine" required>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="inputHorsepower">Horsepower :</label>
+                                <input type="text" name="horsepower" value="<?php echo $result['horsepower']; ?>" class="form-control" id="inputHorsepower" required>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="inputCondition">Condition :</label>
+                                <input type="text" name="condition" value="<?php echo $result['vehicle_condition']; ?>" class="form-control" id="inputCondition" required>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="inputTransmission">Transmission :</label>
+                                <select class="form-control" id="inputTransmission" name="transmission" required>
+                                    <option value="<?php echo $result['id']; ?>"><?php echo $result['transmission_type']; ?> (Selected)</option>
+                                    <option value="1">Manual</option>
+                                    <option value="2">Automatic</option>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group col-md-3">
+                                <label for="inputSeats">Number of Seats :</label>
+                                <input type="text" name="seats" value="<?php echo $result['seats']; ?>" class="form-control" id="inputSeats" required>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="inputSeats">Price :</label>
+                                <input type="text" name="price" value="<?php echo $result['price']; ?>" class="form-control" id="inputPrice" required>
+                            </div>
+
+                            <div class="form-group col-md-8">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="inStock">
+                                    <label class="custom-control-label" for="inStock">Out of Stock</label>
+                                </div>
+                            </div>
+                    </div>
+
+                    <button name="updateVehicleButton" type="submit" class="btn btn-success btn-block">Save</button>
+                    <a href="viewVehicle.php?vehicle_id=<?php echo $result['vehicle_id']; ?>" class="btn btn-danger btn-block">Cancel</a>
+
+                </form>
+            <?php
+            }
+            ?>
+            <span id="result"></span>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/feather.min.js"></script>
+    <script src="js/Chart.min.js"></script>
+    <script src="js/dashboard.js"></script>
+
+    <!--===============================================================================================-->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+</body>
+
+</html>

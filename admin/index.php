@@ -12,7 +12,7 @@ if (!$_SESSION['User']) {
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Pending Requests</title>
+  <title>All Vehicles</title>
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -21,6 +21,8 @@ if (!$_SESSION['User']) {
   <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
 
   <style>
@@ -116,25 +118,44 @@ if (!$_SESSION['User']) {
 
         <?php
         if (@$_GET['Valid'] == true) {
+          $valid = $_GET['Valid'];
           ?>
-          <div class=" alert alert-success fade show">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <h5> <?php echo $_GET['Valid']; ?> </h5>
-          </div>
+          <script>
+            swal({
+              title: "SUCCESS!",
+              text: "<?php echo $valid; ?>",
+              icon: "success",
+              button: "OK",
+            });
+          </script>
+        <?php
+        } elseif (@$_GET['Invalid'] == true) {
+          $invalid = $_GET['Invalid'];
+          ?>
+          <script>
+            swal({
+              title: "ERROR!",
+              text: "<?php echo $invalid; ?>",
+              icon: "warning",
+              button: "OK",
+            });
+          </script>
+        <?php
+        } elseif (@$_GET['Missing'] == true) {
+          $warning = $_GET['Missing'];
+          ?>
+          <script>
+            swal({
+              title: "WARNING!",
+              text: "<?php echo $warning; ?>",
+              icon: "warning",
+              button: "OK",
+            });
+          </script>
         <?php
         }
         ?>
 
-        <?php
-        if (@$_GET['Invalid'] == true) {
-          ?>
-          <div class=" alert alert-danger fade show">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <h5> <?php echo $_GET['Invalid']; ?> </h5>
-          </div>
-        <?php
-        }
-        ?>
 
         <div class="table-responsive">
           <table id="vehiclesTable" class="table table-striped table-hover table-dark text-center">

@@ -112,19 +112,28 @@ if (!$_SESSION['User']) {
                                     <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
                                     <li class="breadcrumb-item"><a href="index.php">Vehicles</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Vehicle Details</li>
-
                                 </ol>
                             </nav>
                         </div>
 
                         <div class="container">
-                            <!-- <h5 class="text-left">Vehicle Details </h5> -->
                             <?php
                             require_once '../includes/dbOperations.php';
                             $vehicle_id = $_REQUEST['vehicle_id'];
                             $db = new DbOperations();
                             $result = $db->getVehicleByID($vehicle_id);
                             ?>
+
+                            <form action="editVehicle.php" method="POST">
+                                <input type="hidden" name="vehicleId" value="<?php echo $result['vehicle_id']; ?>">
+                                <button class="btn btn-success form-control" name="btnEdit"> Edit </button>
+                            </form>
+                            <form action="../api/deleteVehicle.php" method="POST">
+                                <br>
+                                <input type="hidden" name="vehicleId" value="<?php echo $result['vehicle_id']; ?>">
+                                <button type="submit" class="btn btn-danger form-control" name="btnDelete"> Delete </button>
+                                <hr>
+                            </form>
 
                             <form>
 
@@ -233,14 +242,7 @@ if (!$_SESSION['User']) {
                                     <img src="../vehicleimages/<?php echo $result['image_link']; ?>" width="800" height="300" />
                                 </div>
 
-                                
-
                             </form>
-                            <div class="form-group">
-                                    <hr>
-                                    <button class="btn btn-info col-md-3" id="btnEdit"> Edit </button>
-                                    <button class="btn btn-danger col-md-3" id="btnDelete"> Delete </button>
-                                </div>
                         </div>
                     </main>
                 </div>

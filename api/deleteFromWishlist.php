@@ -20,7 +20,7 @@ if (!isset($_REQUEST['wishlist_id'])) {
     $result = $db->deleteWishlist($wishlist_id);
 
     if ($result == 1) {
-        // successfully added to the wishlist
+        // successfully deleted from the wishlist
         $response['error'] = false;
         $response['message'] = 'Successfully deleted from the wishlist';
         header("location:../dealership/wishlist.php?Valid= Successfully deleted from the wishlist.");
