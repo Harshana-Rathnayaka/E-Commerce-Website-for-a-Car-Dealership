@@ -9,10 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (
 		isset($_POST['firstname']) and
 		isset($_POST['lastname']) and
+		isset($_POST['birthday']) and
+		isset($_POST['gender']) and
 		isset($_POST['username']) and
-		isset($_POST['password']) and
 		isset($_POST['email']) and
-		isset($_POST['usertype'])
+		isset($_POST['contact']) and
+		isset($_POST['password'])
 	) {
 
 		// we can operate the data further
@@ -21,10 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$result = $db->createUser(
 			$_POST['firstname'],
 			$_POST['lastname'],
+			$_POST['birthday'],
+			$_POST['gender'],
 			$_POST['username'],
-			$_POST['password'],
 			$_POST['email'],
-			$_POST['usertype']
+			$_POST['contact'],
+			$_POST['password']
 		);
 		// success
 		if ($result == 1) {

@@ -18,15 +18,15 @@ class DbOperations
 	/* CRUD  -> C -> CREATE */
 
 	// user registration
-	public function createUser($firstname, $lastname, $username, $pass, $email, $usertype)
+	public function createUser($firstname, $lastname, $birthday, $gender, $username, $email, $contact, $pass)
 	{
 		$password = md5($pass); // password encrypting
 		if ($this->isUserExist($username, $email)) {
 			// user exists
 			return 0;
 		} else {
-			$stmt = $this->con->prepare("INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `user_type`, `user_status`) VALUES (NULL, ?, ?, ?, ?, ?, ?, 0);");
-			$stmt->bind_param("ssssss", $firstname, $lastname, $username, $password, $email, $usertype);
+			$stmt = $this->con->prepare("INSERT INTO `users` (`id`, `first_name`, `last_name`, `birthday`, `gender`, `username`, `email`, `contact`, `password`, `user_type`, `user_status`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, 1, 1);");
+			$stmt->bind_param("ssssssss", $firstname, $lastname, $birthday, $gender, $username, $email, $contact, $password);
 
 			if ($stmt->execute()) {
 				// user created
@@ -141,6 +141,26 @@ class DbOperations
 	{
 		$stmt = $this->con->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
 		$stmt->bind_param("ss", $username, $email);
+		$stmt->execute();
+		$stmt->store_result();
+		return $stmt->num_rows > 0;
+	}
+
+	// checking if the email is taken
+	public function isEmailTaken($email)
+	{
+		$stmt = $this->con->prepare("SELECT * FROM `users` WHERE `email` = ?");
+		$stmt->bind_param("s", $email);
+		$stmt->execute();
+		$stmt->store_result();
+		return $stmt->num_rows > 0;
+	}
+
+	// checking if the username is taken
+	public function isUsernameTaken($username)
+	{
+		$stmt = $this->con->prepare("SELECT * FROM `users` WHERE `username` = ?");
+		$stmt->bind_param("s", $username);
 		$stmt->execute();
 		$stmt->store_result();
 		return $stmt->num_rows > 0;

@@ -11,7 +11,7 @@ if (isset($_SESSION['User'])) {
 <html lang="en">
 
 <head>
-    <title>IPT - Login</title>
+    <title>Login</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -89,7 +89,7 @@ if (isset($_SESSION['User'])) {
                             Not a member?
                         </span>
 
-                        <a class="txt1 bo1 hov1" href="../register/register-page.php">
+                        <a class="txt1 bo1 hov1" href="../register/index.php">
                             Register now
                         </a>
                     </div>
