@@ -16,9 +16,7 @@
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <!-- Font special for pages-->
-    <link
-        href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Vendor CSS-->
     <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
@@ -39,15 +37,13 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">First Name</label>
-                                    <input class="input--style-4" type="text" placeholder="First Name" required=""
-                                        name="firstname">
+                                    <input class="input--style-4" type="text" placeholder="First Name" required="" name="firstname">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">last name</label>
-                                    <input class="input--style-4" type="text" placeholder="Last Name" required=""
-                                        name="lastname">
+                                    <input class="input--style-4" type="text" placeholder="Last Name" required="" name="lastname">
                                 </div>
                             </div>
                         </div>
@@ -81,16 +77,14 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Email</label>
-                                    <input class="input--style-4" id="checkEmail" type="email"
-                                        placeholder="example@this.com" required="" name="email">
+                                    <input class="input--style-4" id="checkEmail" type="email" placeholder="example@this.com" required="" name="email">
                                     <small id="emailError" class="text-success "></small>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Phone Number</label>
-                                    <input class="input--style-4" type="text" placeholder="0114567896" required=""
-                                        name="contact">
+                                    <input class="input--style-4" type="text" placeholder="0114567896" required="" name="contact">
                                 </div>
                             </div>
                         </div>
@@ -99,8 +93,7 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Username</label>
-                                    <input class="input--style-4" type="text" id="usernameCheck" placeholder="user11"
-                                        required="" name="username">
+                                    <input class="input--style-4" type="text" id="usernameCheck" placeholder="user11" required="" name="username">
                                     <small id="userError" class="text-success "></small>
                                 </div>
 
@@ -131,9 +124,10 @@
     <!-- Main JS-->
     <script src="js/global.js"></script>
 
+    <!-- script to check the availability of the email -->
     <script>
-        $(document).ready(function () {
-            $('#checkEmail').keyup(function (e) {
+        $(document).ready(function() {
+            $('#checkEmail').keyup(function(e) {
 
                 var email = $('#checkEmail').val();
 
@@ -144,7 +138,7 @@
                         'Register': 1,
                         'email_value': email,
                     },
-                    success: function (response) {
+                    success: function(response) {
                         $('#emailError').text(response);
 
                     }
@@ -153,9 +147,10 @@
         });
     </script>
 
+    <!-- script to check the availability of the username -->
     <script>
-        $(document).ready(function () {
-            $('#usernameCheck').keyup(function (e) {
+        $(document).ready(function() {
+            $('#usernameCheck').keyup(function(e) {
 
                 var username = $('#usernameCheck').val();
 
@@ -167,7 +162,7 @@
                         'username_value': username,
 
                     },
-                    success: function (response) {
+                    success: function(response) {
                         $('#userError').text(response);
 
                     }
