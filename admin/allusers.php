@@ -1,10 +1,18 @@
 <?php
 session_start();
-if (!$_SESSION['User']) {
-  $msg = "Session Not Started";
-  echo "<script>window.top.location='../login/login-page.php?msg=$msg'</script>";
+if (!isset($_SESSION['User'])) {
+  $_SESSION['error'] = "Session timed out. Please login to continue.";
+  header('location:../login/login-page.php');
+} elseif (isset($_SESSION['UserType'])) {
+  $usertype = $_SESSION['UserType'];
+
+  if ($usertype == 1) {
+    header('location:../user/index.php');
+  }
 }
 ?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -90,13 +98,13 @@ if (!$_SESSION['User']) {
                 </li>
 
                 <li class="nav-item">
-              <a class="nav-link" href="addmanufacturer.php">
-                <span data-feather="plus-circle"></span>
-                Add manufacturer
-              </a>
-            </li>
+                  <a class="nav-link" href="addmanufacturer.php">
+                    <span data-feather="plus-circle"></span>
+                    Add manufacturer
+                  </a>
+                </li>
 
-            <div class="dropdown-divider"></div>
+                <div class="dropdown-divider"></div>
 
                 <li class="nav-item">
                   <a class="nav-link" href="changesettings.php">
@@ -119,7 +127,7 @@ if (!$_SESSION['User']) {
             <div class="table-responsive">
               <table class="table table-striped table-hover table-dark">
                 <thead>
-                  <tr >
+                  <tr>
                     <th width="5%">#</th>
                     <th width="15%">Name</th>
                     <th width="15%">Username</th>
@@ -127,21 +135,21 @@ if (!$_SESSION['User']) {
                   </tr>
                 </thead>
                 <tbody>
-                <?php
-              include '../api/getUsers.php';
-              if ($result) {
-                while ($row = mysqli_fetch_array($result)) {
+                  <?php
+                  include '../api/getUsers.php';
+                  if ($result) {
+                    while ($row = mysqli_fetch_array($result)) {
+                      ?>
+                      <tr>
+                        <td><?php echo $row['id']; ?></td>
+                        <td><?php echo $row['name']; ?></td>
+                        <td><?php echo $row['username']; ?></td>
+                        <td><?php echo $row['email']; ?></td>
+                      </tr>
+                  <?php
+                    }
+                  }
                   ?>
-                  <tr>
-                    <td><?php echo $row['id']; ?></td>
-                    <td><?php echo $row['name']; ?></td>
-                    <td><?php echo $row['username']; ?></td>
-                    <td><?php echo $row['email']; ?></td>
-                  </tr>
-              <?php
-                }
-              }
-              ?>
                 </tbody>
               </table>
             </div>

@@ -13,7 +13,7 @@ if (isset($_POST['Register'])) {
     $result = $db->isEmailTaken($email);
 
     if ($result > 0) {
-        echo "$email is already taken.";
+        echo "$email is already taken. Please choose a different email.";
     } else {
         echo "$email is Available.";
     }

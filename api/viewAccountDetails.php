@@ -5,14 +5,14 @@ require_once '../includes/dbOperations.php';
 $response = array();
 
 // check if the session is started
-if (isset($_SESSION['User'])) {
+if (isset($_SESSION['Id'])) {
 
-    $username = $_SESSION['User'];
+    $userid = $_SESSION['Id'];
 
     // db object
     $db = new DbOperations();
 
-    $result = $db->getUserByUsername($username);
+    $result = $db->getUserById($userid);
 } else {
     // session not started
     $response['error'] = true;

@@ -1,3 +1,16 @@
+<?php
+session_start();
+if (isset($_SESSION['User'])) {
+    $usertype = $_SESSION['UserType'];
+    if ($usertype == 0) {
+        header("location:../admin/index.php");
+    } elseif ($usertype == 1) {
+        header("location:../user/index.php");
+    }
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +45,9 @@
             <div class="card card-4">
                 <div class="card-body">
                     <h2 class="title">Registration Info</h2>
+
                     <form action="../api/registerUser.php" method="POST">
+
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
@@ -40,13 +55,16 @@
                                     <input class="input--style-4" type="text" placeholder="First Name" required="" name="firstname">
                                 </div>
                             </div>
+
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">last name</label>
                                     <input class="input--style-4" type="text" placeholder="Last Name" required="" name="lastname">
                                 </div>
                             </div>
+
                         </div>
+
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
@@ -57,6 +75,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Gender</label>
@@ -72,7 +91,9 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
@@ -81,12 +102,14 @@
                                     <small id="emailError" class="text-success "></small>
                                 </div>
                             </div>
+
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Phone Number</label>
                                     <input class="input--style-4" type="text" placeholder="0114567896" required="" name="contact">
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="row row-space">
@@ -96,18 +119,39 @@
                                     <input class="input--style-4" type="text" id="usernameCheck" placeholder="user11" required="" name="username">
                                     <small id="userError" class="text-success "></small>
                                 </div>
-
                             </div>
+
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Password</label>
                                     <input class="input--style-4" type="password" required="" name="password">
                                 </div>
                             </div>
+
                         </div>
+
+                        <?php
+                        if (@$_SESSION['error'] == true) {
+                            ?>
+                            <div class=" text-danger alert text-center py-3">
+                                <?php echo $_SESSION['error']; ?>
+                            </div>
+                        <?php
+                            unset($_SESSION['error']);
+                        } elseif (@$_SESSION['missing'] == true) {
+                            ?>
+                            <div class=" text-danger alert text-center py-3">
+                                <?php echo $_SESSION['missing']; ?>
+                            </div>
+                        <?php
+                            unset($_SESSION['missing']);
+                        }
+                        ?>
+
                         <div class="p-t-15">
                             <button class="btn btn--radius-2 btn--blue" name="Register" type="submit">REGISTER</button>
                         </div>
+
                     </form>
 
                     <div class="p-t-15 col-3">

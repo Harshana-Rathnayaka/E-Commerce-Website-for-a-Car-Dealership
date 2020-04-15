@@ -1,10 +1,18 @@
 <?php
 session_start();
-if (!$_SESSION['User']) {
-    $msg = "Session Not Started";
-    echo "<script>window.top.location='../login/login-page.php?msg=$msg'</script>";
+if (!isset($_SESSION['User'])) {
+    $_SESSION['error'] = "Session timed out. Please login to continue.";
+    header('location:../login/login-page.php');
+} elseif (isset($_SESSION['UserType'])) {
+    $usertype = $_SESSION['UserType'];
+
+    if ($usertype == 1) {
+        header('location:../user/index.php');
+    }
 }
 ?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -19,6 +27,9 @@ if (!$_SESSION['User']) {
     <link href="css/bootstrap.min.css" rel="stylesheet" />
 
     <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
     <style>
         .bd-placeholder-img {
@@ -119,10 +130,54 @@ if (!$_SESSION['User']) {
                             <h5 class="text-center">Account Details </h5>
 
                             <?php
+                            if (@$_SESSION['success'] == true) {
+                                $success = $_SESSION['success'];
+                                ?>
+                                <script>
+                                    swal({
+                                        title: "SUCCESS!",
+                                        text: "<?php echo $success; ?>",
+                                        icon: "success",
+                                        button: "OK",
+                                    });
+                                </script>
+                            <?php
+                                unset($_SESSION['success']);
+                            } elseif (@$_SESSION['error'] == true) {
+                                $error = $_SESSION['error'];
+                                ?>
+                                <script>
+                                    swal({
+                                        title: "ERROR!",
+                                        text: "<?php echo $error; ?>",
+                                        icon: "error",
+                                        button: "OK",
+                                    });
+                                </script>
+                            <?php
+                                unset($_SESSION['error']);
+                            } elseif (@$_SESSION['missing'] == true) {
+                                $missing = $_SESSION['missing'];
+                                ?>
+                                <script>
+                                    swal({
+                                        title: "INFO!",
+                                        text: "<?php echo $missing; ?>",
+                                        icon: "info",
+                                        button: "OK",
+                                    });
+                                </script>
+                            <?php
+                                unset($_SESSION['missing']);
+                            }
+                            ?>
+
+                            <?php
                             include '../api/viewAccountDetails.php';
                             ?>
-                            <form id="myform" action="../api/updateAccountDetails.php?user=<?php echo $_SESSION['User']; ?>" method="post" enctype="multipart/form-data">
+                            <form id="myform" action="../api/updateAdminDetails.php" method="POST" enctype="multipart/form-data">
 
+                                <input type="hidden" name="userid" value="<?php echo $_SESSION['Id']; ?>">
                                 <div class="form-group">
                                     <label>First Name :</label>
                                     <input type="text" class="form-control" value="<?php echo $result['first_name'] ?>" name="fname">
@@ -139,72 +194,20 @@ if (!$_SESSION['User']) {
                                     <label>Email :</label>
                                     <input type="email" class="form-control" value="<?php echo $result['email'] ?>" name="email">
                                 </div>
-                                <div class="form-group">
-                                    <label>Password :</label>
-                                    <input type="password" class="form-control" value="<?php echo $result['password'] ?>" name="password">
-                                </div>
 
-                                <div class="form-group">
-                                    <input type="submit" value="Add" class="btn btn-success btn-block" id="btnAddManufacturer">
-                                </div>
+                                <button name="btnUpdate" type="submit" class="btn btn-warning btn-block">Update</button>
 
-                                <?php
-                                if (@$_GET['Invalid'] == true) {
-                                    ?>
-                                    <div class="alert-light text-danger text-center py-1">
-                                        <h6> <?php echo $_GET['Invalid']; ?> </h6>
-                                    </div>
-                                <?php
-                                }
-                                ?>
-                                <?php
-                                if (@$_GET['Valid'] == true) {
-                                    ?>
-                                    <div class="alert-light text-danger text-center py-1">
-                                        <h6> <?php echo $_GET['Valid']; ?> </h6>
-                                    </div>
-                                <?php
-                                }
-                                ?>
-
-                                <button id="saveForm" type="button" class="btn btn-success btn-block">Update</button>
                             </form>
                             <span id="result"></span>
                         </div>
                         <br>
 
-
                     </main>
-
-                    <script src="../js/jquery-2.2.3.min.js"></script>
-                    <script>
-                        $("#saveForm").click(function() {
-                            $.post($("#myform").attr("action"), $("#myform :input").serializeArray(), function(info) {
-                                $("#result").html(info);
-                            });
-                            clearInput();
-
-                        });
-
-                        $("#myform").submit(function() {
-                            return false;
-                        });
-
-                        /*function clearInput(){
-
-                         $("#myform :input").each(function(index, element) {
-                         $(this).val('NA');
-                         });
-
-                         }*/
-                    </script>
                 </div>
             </div>
 
             <script src="js/bootstrap.bundle.min.js"></script>
             <script src="js/feather.min.js"></script>
-            <script src="js/Chart.min.js"></script>
-            <script src="js/dashboard.js"></script>
 </body>
 
 </html>

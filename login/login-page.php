@@ -1,7 +1,12 @@
 <?php
 session_start();
 if (isset($_SESSION['User'])) {
-    header("location:../admin/index.php");
+    $usertype = $_SESSION['UserType'];
+    if ($usertype == 0) {
+        header("location:../admin/index.php");
+    } elseif ($usertype == 1) {
+        header("location:../user/index.php");
+    }
     exit;
 }
 ?>
@@ -76,14 +81,23 @@ if (isset($_SESSION['User'])) {
                     </div>
 
                     <?php
-                    if (@$_GET['Invalid'] == true) {
+                    if (@$_SESSION['error'] == true) {
                         ?>
                         <div class=" text-danger alert text-center py-3">
-                            <?php echo $_GET['Invalid']; ?>
+                            <?php echo $_SESSION['error']; ?>
                         </div>
                     <?php
+                        unset($_SESSION['error']);
+                    } elseif (@$_SESSION['missing'] == true) {
+                        ?>
+                        <div class=" text-danger alert text-center py-3">
+                            <?php echo $_SESSION['missing']; ?>
+                        </div>
+                    <?php
+                        unset($_SESSION['missing']);
                     }
                     ?>
+                    
                     <div class="text-center w-full p-t-115">
                         <span class="txt1">
                             Not a member?

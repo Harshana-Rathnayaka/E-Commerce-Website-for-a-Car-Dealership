@@ -118,11 +118,20 @@ class DbOperations
 
 	/* CRUD  -> r -> RETRIEVE */
 
-	// retreiving user data
+	// retreiving user data by username
 	public function getUserByUsername($username)
 	{
 		$stmt = $this->con->prepare("SELECT * FROM `users` WHERE `username` = ?");
 		$stmt->bind_param("s", $username);
+		$stmt->execute();
+		return $stmt->get_result()->fetch_assoc();
+	}
+
+	// retreiving user data by id
+	public function getUserById($userid)
+	{
+		$stmt = $this->con->prepare("SELECT * FROM `users` WHERE `id` = ?");
+		$stmt->bind_param("i", $userid);
 		$stmt->execute();
 		return $stmt->get_result()->fetch_assoc();
 	}
@@ -220,8 +229,8 @@ class DbOperations
 
 	/* CRUD  -> U -> UPDATE */
 
-	// updating user status
-	public function approveUser($username)
+	// deactivate user account  by updating user status
+	public function deactivateAccount($username)
 	{
 		$stmt = $this->con->prepare("UPDATE `users` SET `user_status` = 1 WHERE `username` = ?");
 		$stmt->bind_param("s", $username);
@@ -229,15 +238,29 @@ class DbOperations
 		return $stmt->get_result();
 	}
 
-	// update user details
-	public function upateUserDetails($user, $firstname, $lastname, $username, $email, $password)
+	// update admin details
+	public function updateAdminAccountDetails($userid, $firstname, $lastname, $username, $email)
 	{
-		$pass = md5($password); // password encrypting
-		$stmt = $this->con->prepare("UPDATE `users` SET `first_name` = ?, `last_name` = ?, `username` = ?, `email` = ?, `password` = ? WHERE `username` = ?");
-		$stmt->bind_param("ssssss", $firstname, $lastname, $username, $email, $pass, $user);
+		$stmt = $this->con->prepare("UPDATE `users` SET `first_name` = ?, `last_name` = ?, `username` = ?, `email` = ? WHERE `id` = ?");
+		$stmt->bind_param("ssssi", $firstname, $lastname, $username, $email, $userid);
 
 		if ($stmt->execute()) {
-			// manufacturer created
+			// admin account details updated
+			return 0;
+		} else {
+			// some error 
+			return 1;
+		}
+	}
+
+	// update user details
+	public function updateUserAccountDetails($userid, $firstname, $lastname, $birthday, $gender, $username, $email, $contact)
+	{
+		$stmt = $this->con->prepare("UPDATE `users` SET `first_name` = ?, `last_name` = ?, `birthday` = ?, `gender` = ?, `username` = ?, `email` = ?, `contact` = ? WHERE `id` = ?");
+		$stmt->bind_param("sssssssi", $firstname, $lastname, $birthday, $gender, $username, $email, $contact, $userid);
+
+		if ($stmt->execute()) {
+			// user account details updated
 			return 0;
 		} else {
 			// some error 
@@ -287,7 +310,7 @@ class DbOperations
 		$stmt->bind_param("i", $vehicle_id);
 
 		if ($stmt->execute()) {
-			// item deleted
+			// vehicle deleted
 			return 1;
 		} else {
 			// some error

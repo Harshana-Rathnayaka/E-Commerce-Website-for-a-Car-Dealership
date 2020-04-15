@@ -27,62 +27,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     // session and reroute
                     $_SESSION['User'] = $_POST['username'];
-                    header("location:../students/index.php");
+                    $_SESSION['FirstName'] = $user['first_name'];
+                    $_SESSION['LastName'] = $user['last_name'];
+                    $_SESSION['Email'] = $user['email'];
+                    $_SESSION['Id'] = $user['id'];
+                    $_SESSION['UserType'] = $user['user_type'];
 
-                    // adding user data to json array
-                    $response['error'] = false;
-                    $response['id'] = $user['id'];
-                    $response['email'] = $user['email'];
-                    $response['username'] = $user['username'];
-                    $response['firstname'] = $user['first_name'];
-                    $response['lastname'] = $user['last_name'];
-
-                    // company account
-                } else if ($user['user_type'] == 2) {
-
-                    // session and reroute
-                    $_SESSION['User'] = $_POST['username'];
-                    header("location:../companies/index.php");
-
-                    // adding user data to json array
-                    $response['error'] = false;
-                    $response['id'] = $user['id'];
-                    $response['email'] = $user['email'];
-                    $response['username'] = $user['username'];
-                    $response['firstname'] = $user['first_name'];
-                    $response['lastname'] = $user['last_name'];
+                    header("location:../user/index.php");
 
                     // admin account
                 } elseif ($user['user_type'] == 0) {
 
                     // session and reroute
                     $_SESSION['User'] = $_POST['username'];
-                    header("location:../admin/index.php");
+                    $_SESSION['Id'] = $user['id'];
+                    $_SESSION['UserType'] = $user['user_type'];
 
-                    // adding user data to json array
-                    $response['error'] = false;
-                    $response['id'] = $user['id'];
-                    $response['email'] = $user['email'];
-                    $response['username'] = $user['username'];
-                    $response['firstname'] = $user['first_name'];
-                    $response['lastname'] = $user['last_name'];
+                    header("location:../admin/index.php");
                 } else {
-                    header("location:../login/login-page.php?Invalid= Your account is not of a valid type.");
+                    $_SESSION['error'] = "Your account is not valid.";
+                    header("location:../login/login-page.php");
+
                     $response['error'] = true;
                     $response['message'] = "Your account is not of a valid type.";
                 }
             } else {
-                header("location:../login/login-page.php?Invalid= Your request hasn't been approved yet. Please try again later.");
+                $_SESSION['error'] = "Your account is deleted. Please create a new account or contact the administrator.";
+                header("location:../login/login-page.php");
+
                 $response['error'] = true;
                 $response['message'] = "Your request hasn't been approved yet. Please try again later.";
             }
         } else {
-            header("location:../login/login-page.php?Invalid= Please provide a valid username and a password");
+            $_SESSION['error'] = "The username or password you entered is incorrect. Please check again.";
+            header("location:../login/login-page.php");
+
             $response['error'] = true;
             $response['message'] = "Invalid username or password";
         }
     } else {
-        header('location:../login/login-page.php?Empty=Please fill in the blanks');
+        header('location:../login/login-page.php');
         $response['error'] = true;
         $response['message'] = "Required fields are missing";
     }

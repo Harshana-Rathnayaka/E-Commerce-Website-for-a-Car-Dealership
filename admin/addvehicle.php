@@ -1,10 +1,18 @@
 <?php
 session_start();
-if (!$_SESSION['User']) {
-  $msg = "Session Not Started";
-  echo "<script>window.top.location='../login/login-page.php?msg=$msg'</script>";
+if (!isset($_SESSION['User'])) {
+  $_SESSION['error'] = "Session timed out. Please login to continue.";
+  header('location:../login/login-page.php');
+} elseif (isset($_SESSION['UserType'])) {
+  $usertype = $_SESSION['UserType'];
+
+  if ($usertype == 1) {
+    header('location:../user/index.php');
+  }
 }
 ?>
+
+
 <!doctype html>
 <html lang="en">
 
