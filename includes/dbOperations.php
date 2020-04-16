@@ -101,10 +101,10 @@ class DbOperations
 	}
 
 	// adding to cart
-	public function addToCart($user_id, $vehicle_id, $make_id, $quantity, $wishlist_id)
+	public function addToCart($user_id, $vehicle_id, $make_id, $quantity, $total)
 	{
-		$stmt = $this->con->prepare("INSERT INTO `cart`(`user_id`, `vehicle_id`, `make_id`, `quantity`, `wishlist_id`) VALUES (?, ?, ?, ?, ?); ");
-		$stmt->bind_param("iiiii", $user_id, $vehicle_id, $make_id, $quantity, $wishlist_id);
+		$stmt = $this->con->prepare("INSERT INTO `cart`(`user_id`, `vehicle_id`, `make_id`, `quantity`, `total_price`) VALUES (?, ?, ?, ?, ?); ");
+		$stmt->bind_param("iiiii", $user_id, $vehicle_id, $make_id, $quantity, $total);
 
 		if ($stmt->execute()) {
 			// added to cart
@@ -214,7 +214,19 @@ class DbOperations
 	{
 		$stmt = $this->con->prepare("SELECT * FROM `wishlist` INNER JOIN `users` ON users.id = wishlist.user_id INNER JOIN
 		vehicles ON vehicles.vehicle_id = wishlist.vehicle_id INNER JOIN `manufacturers` ON manufacturers.make_id = wishlist.make_id
-		INNER JOIN `colours` ON colours.id = wishlist.colour_id WHERE user_id = ? ORDER BY `wishlist_id`
+		 WHERE `user_id` = ? ORDER BY `wishlist_id`
+		");
+		$stmt->bind_param("i", $user_id);
+		$stmt->execute();
+		return $stmt->get_result();
+	}
+
+	// retrieving cart table
+	public function getCartByUserId($user_id)
+	{
+		$stmt = $this->con->prepare("SELECT * FROM `cart` INNER JOIN `users` ON users.id = cart.user_id INNER JOIN
+		vehicles ON vehicles.vehicle_id = cart.vehicle_id INNER JOIN `manufacturers` ON manufacturers.make_id = cart.make_id
+		WHERE `user_id` = ? ORDER BY `cart_id`
 		");
 		$stmt->bind_param("i", $user_id);
 		$stmt->execute();
@@ -227,6 +239,45 @@ class DbOperations
 		$stmt = $this->con->prepare("SELECT `id`, CONCAT( `first_name`, ' ', `last_name`) AS 'name', `username`, `email` FROM `users`");
 		$stmt->execute();
 		return $stmt->get_result();
+	}
+
+	// getting the vehicle count
+	public function getVehicleCount()
+	{
+		$stmt = $this->con->prepare("SELECT * FROM `vehicles` WHERE `in_stock` = 1");
+		$stmt->execute();
+		$result =  $stmt->get_result();
+		return mysqli_num_rows($result);
+	}
+
+	// getting the orders count by user
+	public function getOrdersCountByUserId($user_id)
+	{
+		$stmt = $this->con->prepare("SELECT * FROM `orders` WHERE `user_id` = ?");
+		$stmt->bind_param("i", $user_id);
+		$stmt->execute();
+		$result =  $stmt->get_result();
+		return mysqli_num_rows($result);
+	}
+
+	// getting the cart count by user
+	public function getCartCountByUserId($user_id)
+	{
+		$stmt = $this->con->prepare("SELECT * FROM `cart` WHERE `user_id` = ?");
+		$stmt->bind_param("i", $user_id);
+		$stmt->execute();
+		$result =  $stmt->get_result();
+		return mysqli_num_rows($result);
+	}
+
+	// getting the wishlist count by user
+	public function getWishlistCountByUserId($user_id)
+	{
+		$stmt = $this->con->prepare("SELECT * FROM `wishlist` WHERE `user_id` = ?");
+		$stmt->bind_param("i", $user_id);
+		$stmt->execute();
+		$result =  $stmt->get_result();
+		return mysqli_num_rows($result);
 	}
 
 

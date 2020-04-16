@@ -32,6 +32,9 @@ session_start();
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body>
@@ -64,7 +67,7 @@ session_start();
                     <div class="no-js">
                       <a title="" class="clicker"></a>
                       <div class="fl-nav-links">
-                        <h3>My Acount</h3>
+                        <h3><a href="../user/index.php">My Acount</a></h3>
                         <ul class="links">
                           <li><a href="../login/login-page.php" title="Login">Login</a></li>
                           <li><a href="../register/index.php" title="Register">Register</a></li>
@@ -154,122 +157,159 @@ session_start();
           <section class="col-main col-sm-9 col-xs-12 wow bounceInUp animated animated" style="visibility: visible;">
             <div class="my-account">
 
+              <?php
+              if (@$_SESSION['success'] == true) {
+                $success = $_SESSION['success'];
+                ?>
+                <script>
+                  swal({
+                    title: "SUCCESS!",
+                    text: "<?php echo $success; ?>",
+                    icon: "success",
+                    button: "OK",
+                  });
+                </script>
+              <?php
+                unset($_SESSION['success']);
+              } elseif (@$_SESSION['error'] == true) {
+                $error = $_SESSION['error'];
+                ?>
+                <script>
+                  swal({
+                    title: "ERROR!",
+                    text: "<?php echo $error; ?>",
+                    icon: "warning",
+                    button: "OK",
+                  });
+                </script>
+              <?php
+                unset($_SESSION['error']);
+              } elseif (@$_SESSION['missing'] == true) {
+                $missing = $_SESSION['missing'];
+                ?>
+                <script>
+                  swal({
+                    title: "INFO!",
+                    text: "<?php echo $missing; ?>",
+                    icon: "info",
+                    button: "OK",
+                  });
+                </script>
+              <?php
+                unset($_SESSION['missing']);
+              }
+              ?>
+
               <div class="my-wishlist">
-                <form id="wishlist-view-form" action="../api/addToCart.php" method="post">
-                  <fieldset>
-                    <input name="form_key" type="hidden" value="EPYwQxF6xoWcjLUr">
-                    <div class="table-responsive">
-                      <table class="clean-table linearize-table data-table table-striped" id="wishlist-table">
-                        <thead>
-                          <tr class="first last">
-                            <th class="customer-wishlist-item-image"></th>
-                            <th class="customer-wishlist-item-info"></th>
-                            <th class="customer-wishlist-item-quantity">Quantity</th>
-                            <th class="customer-wishlist-item-price">Price</th>
-                            <th class="customer-wishlist-item-cart"></th>
-                            <th class="customer-wishlist-item-remove"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
+                <fieldset>
+                  <input name="form_key" type="hidden" value="EPYwQxF6xoWcjLUr">
+                  <div class="table-responsive">
+                    <table class="clean-table linearize-table data-table table-striped" id="wishlist-table">
+                      <thead>
+                        <tr class="first last">
+                          <th class="customer-wishlist-item-image"></th>
+                          <th class="customer-wishlist-item-info"></th>
+                          <th class="customer-wishlist-item-quantity">Quantity</th>
+                          <th class="customer-wishlist-item-price">Price</th>
+                          <th class="customer-wishlist-item-cart"></th>
+                          <th class="customer-wishlist-item-remove"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
 
+                        <?php
+                        $user_id = $_SESSION['Id'];
+                        include '../api/getWishlist.php';
+                        if ($result) {
+                          while ($row = mysqli_fetch_array($result)) {
 
+                            $username = $row['username'];
+                            $make = $row['name'];
+                            $model = $row['model'];
+                            $year = $row['year'];
+                            $capacity = $row['engine_capacity'];
+                            $horsepower = $row['horsepower'];
+                            $condition = $row['vehicle_condition'];
+                            $colour = $row['colour'];
+                            $seats = $row['seats'];
+                            $price = $row['price'];
+                            $image_link = $row['image_link'];
+                            $quantity = $row['quantity'];
 
-                          <?php
-                          $user_id = $_SESSION['Id'];
-                          echo $user_id;
-                          require_once '../includes/dbOperations.php';
-                          $db = new DbOperations();
-                          $result = $db->getWishlistByUserId($user_id);
-                          if ($result) {
-                            while ($row = mysqli_fetch_array($result)) {
+                            $vehicle_id = $row['vehicle_id'];
+                            $wishlist_id = $row['wishlist_id'];
+                            $make_id = $row['make_id'];
 
-                              $username = $row['username'];
-                              $make = $row['name'];
-                              $model = $row['model'];
-                              $year = $row['year'];
-                              $capacity = $row['engine_capacity'];
-                              $horsepower = $row['horsepower'];
-                              $condition = $row['vehicle_condition'];
-                              $colour = $row['colour'];
-                              $seats = $row['seats'];
-                              $price = $row['price'];
-                              $image_link = $row['image_link'];
-                              $quantity = $row['quantity'];
+                            $total = $price * $quantity;
 
-                              $vehicle_id = $row['vehicle_id'];
-                              $wishlist_id = $row['wishlist_id'];
-                              $make_id = $row['make_id'];
-                              $colour_id = $row['colour_id'];
+                            ?>
 
+                            <tr id="item_32" class="first odd">
 
-                              $total = $price * $quantity;
+                              <td class="wishlist-cell0 customer-wishlist-item-image"><a class="product-image" href="product-detail.html" title="Slim Fit Casual Shirt"> <img src="../vehicleimages/<?php echo $image_link; ?>" width="80" height="80" alt="Vehicle"> </a>
+                              </td>
 
-                              ?>
-
-                              <tr id="item_32" class="first odd">
-
-                                <td class="wishlist-cell0 customer-wishlist-item-image"><a class="product-image" href="product-detail.html" title="Slim Fit Casual Shirt"> <img src="../vehicleimages/<?php echo $image_link; ?>" width="80" height="80" alt="Vehicle"> </a>
-                                </td>
-
-                                <td class="wishlist-cell1 customer-wishlist-item-info">
-                                  <h3 class="product-name"><a href="product-detail.html" title="Vehicle"><?php echo $make; ?> <?php echo $model; ?> <?php echo $year; ?></a></h3>
-                                  <div class="description std">
-                                    <div class="inner">
-                                      <?php echo $capacity; ?> leters <br>
-                                      <?php echo $horsepower; ?> Hp <br>
-                                      <?php echo $condition; ?> <br>
-                                      <?php echo $colour; ?> <br>
-                                      <?php echo $seats; ?> seats <br>
-                                    </div>
+                              <td class="wishlist-cell1 customer-wishlist-item-info">
+                                <h3 class="product-name"><a href="product-detail.html" title="Vehicle"><?php echo $make; ?> <?php echo $model; ?> <?php echo $year; ?></a></h3>
+                                <div class="description std">
+                                  <div class="inner">
+                                    <?php echo $capacity; ?> leters <br>
+                                    <?php echo $horsepower; ?> Hp <br>
+                                    <?php echo $condition; ?> <br>
+                                    <?php echo $colour; ?> <br>
+                                    <?php echo $seats; ?> seats <br>
                                   </div>
-                                </td>
+                                </div>
+                              </td>
 
-                                <input type="hidden" name="userId" value="<?php echo $user_id; ?>">
-                                <input type="hidden" name="wishlistId" value="<?php echo $wishlist_id; ?>">
-                                <input type="hidden" name="vehicleId" value="<?php echo $vehicle_id; ?>">
-                                <input type="hidden" name="makeId" value="<?php echo $make_id; ?>">
-                                <input type="hidden" name="colourId" value="<?php echo $colour_id; ?>">
-                                <input type="hidden" name="quantity" value="<?php echo $quantity; ?>">
-                                <input type="hidden" name="total" value="<?php echo $total; ?>">
 
-                                <td class="wishlist-cell2 customer-wishlist-item-quantity" data-rwd-label="Quantity">
-                                  <div class="cart-cell">
-                                    <div class="add-to-cart-alt">
-                                      <input type="text" pattern="\d*" readonly class="input-text qty validate-not-negative-number" name="qty[32]" value="<?php echo $quantity; ?>">
-                                    </div>
+
+                              <td class="wishlist-cell2 customer-wishlist-item-quantity" data-rwd-label="Quantity">
+                                <div class="cart-cell">
+                                  <div class="add-to-cart-alt">
+                                    <input type="text" pattern="\d*" readonly class="input-text qty validate-not-negative-number" name="qty[32]" value="<?php echo $quantity; ?>">
                                   </div>
-                                </td>
+                                </div>
+                              </td>
 
-                                <td class="wishlist-cell3 customer-wishlist-item-price" data-rwd-label="Price">
-                                  <div class="cart-cell">
-                                    <div class="price-box"> <span class="regular-price" id="product-price-2"> <span class="price">LKR <?php echo $total; ?></span> </span> </div>
-                                  </div>
-                                </td>
+                              <td class="wishlist-cell3 customer-wishlist-item-price" data-rwd-label="Price">
+                                <div class="cart-cell">
+                                  <div class="price-box"> <span class="regular-price" id="product-price-2"> <span class="price">LKR <?php echo $total; ?></span> </span> </div>
+                                </div>
+                              </td>
 
-                                <td class="wishlist-cell4 customer-wishlist-item-cart">
-                                  <div class="cart-cell">
+                              <td class="wishlist-cell4 customer-wishlist-item-cart">
+                                <div class="cart-cell">
+                                  <form action="../api/addToCart.php" method="POST">
+                                    <input type="hidden" name="userId" value="<?php echo $user_id; ?>">
+                                    <input type="hidden" name="vehicleId" value="<?php echo $vehicle_id; ?>">
+                                    <input type="hidden" name="makeId" value="<?php echo $make_id; ?>">
+                                    <input type="hidden" name="quantity" value="<?php echo $quantity; ?>">
+                                    <input type="hidden" name="total" value="<?php echo $total; ?>">
                                     <input type="submit" name="btnAddToCart" class="button" value="Add to cart">
-                                  </div>
-                                </td>
-
-                                <td class="wishlist-cell5 customer-wishlist-item-remove last">
-                                  <form action="../api/deleteFromWishlist.php?wishlist_id=<?php echo $wishlist_id; ?>" method="post">
-                                    <input type="submit" class="button" value="Delete">
                                   </form>
-                                </td>
+                                </div>
+                              </td>
 
-                              </tr>
+                              <td class="wishlist-cell5 customer-wishlist-item-remove last">
+                                <form action="../api/deleteFromWishlist.php" method="post">
+                                  <input type="hidden" name="formId" value="dealershipWishlist">
+                                  <input type="hidden" name="wishlistId" value="<?php echo $wishlist_id; ?>">
+                                  <input type="submit" name="deleteFromWishlist" class="button" value="Delete">
+                                </form>
+                              </td>
 
-                          <?php
-                            }
+                            </tr>
+
+                        <?php
                           }
-                          ?>
+                        }
+                        ?>
 
-                        </tbody>
-                      </table>
-                    </div>
-                  </fieldset>
-                </form>
+                      </tbody>
+                    </table>
+                  </div>
+                </fieldset>
               </div>
             </div>
           </section>
@@ -280,9 +320,8 @@ session_start();
               <div class="block-title"> My Account </div>
               <div class="block-content">
                 <ul>
-                  <li><a href="#"><span> Account Dashboard</span></a></li>
-                  <li><a href="#"><span> My Orders</span></a></li>
-                  <li><a href="#"><span> Billing Agreements</span></a></li>
+                  <li><a href="../user/index.php"><span> Account Dashboard</span></a></li>
+                  <li><a href="../user/myorders.php"><span> My Orders</span></a></li>
                   <li class="current"><a>My Wishlist</a></li>
                 </ul>
               </div>

@@ -70,6 +70,8 @@ if (!isset($_SESSION['User'])) {
                 </div>
                 <div class="right-menu list-inline no-margin-bottom">
                     <div class="list-inline-item"><a href="#" title="Search" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>
+                    <!-- Go to website -->
+                    <div class="list-inline-item "> <a id="website" title="Go to website" href="../dealership/index.php" class="nav-link">Buy Cars <i class="icon-website"></i></a></div>
                     <!-- Log out               -->
                     <div class="list-inline-item logout"> <a id="logout" title="Logout" href="../logout.php?logout" class="nav-link">Logout <i class="icon-logout"></i></a></div>
                 </div>

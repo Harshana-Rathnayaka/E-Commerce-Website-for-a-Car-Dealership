@@ -69,6 +69,8 @@ if (!isset($_SESSION['User'])) {
                 </div>
                 <div class="right-menu list-inline no-margin-bottom">
                     <div class="list-inline-item"><a href="#" title="Search" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>
+                    <!-- Go to website -->
+                    <div class="list-inline-item"> <a id="website" title="Go to website" href="../dealership/index.php" class="nav-link">Buy Cars <i class="icon-website"></i></a></div>
                     <!-- Log out               -->
                     <div class="list-inline-item logout"> <a id="logout" title="Logout" href="../logout.php?logout" class="nav-link">Logout <i class="icon-logout"></i></a></div>
                 </div>
@@ -90,7 +92,7 @@ if (!isset($_SESSION['User'])) {
             <span class="heading">Main</span>
             <ul class="list-unstyled">
                 <li class="active">
-                    <a href="../dealership/index.php" title="Home"> <i class="icon-home"></i>Home </a>
+                    <a href="index.php" title="Home"> <i class="icon-website"></i>Home </a>
                 </li>
                 <li>
                     <a href="myorders.php" title="Orders"> <i class="icon-bill"></i>My Orders </a>
@@ -119,58 +121,72 @@ if (!isset($_SESSION['User'])) {
                     <h2 class="h5 no-margin-bottom">Home</h2>
                 </div>
             </div>
+
+            <?php
+
+            require_once '../includes/dbOperations.php';
+            $user_id = $_SESSION['Id'];
+
+            $db = new DbOperations();
+
+            $vehicle_count = $db->getVehicleCount();
+            $cart_count = $db->getCartCountByUserId($user_id);
+            $wishlist_count = $db->getWishlistCountByUserId($user_id);
+
+
+            ?>
             <section class="no-padding-top no-padding-bottom">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-3 col-sm-6">
-                            <div class="statistic-block block">
+                            <div class="statistic-block block" title="Vehicles currently on sale">
                                 <div class="progress-details d-flex align-items-end justify-content-between">
                                     <div class="title">
-                                        <div class="icon"><i class="icon-user-1"></i></div><strong>New Clients</strong>
+                                        <div class="icon"><i class="icon-layers"></i></div><strong>Vehicles On Sale</strong>
                                     </div>
-                                    <div class="number dashtext-1">27</div>
+                                    <div class="number dashtext-1"><?php echo $vehicle_count; ?></div>
                                 </div>
                                 <div class="progress progress-template">
-                                    <div role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-1"></div>
+                                    <div role="progressbar" style="width: <?php echo $vehicle_count; ?>%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-3"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
-                            <div class="statistic-block block">
+                            <div class="statistic-block block" title="My orders">
                                 <div class="progress-details d-flex align-items-end justify-content-between">
                                     <div class="title">
-                                        <div class="icon"><i class="icon-contract"></i></div><strong>New Projects</strong>
+                                        <div class="icon"><i class="icon-bill"></i></div><strong>My Orders</strong>
                                     </div>
                                     <div class="number dashtext-2">375</div>
                                 </div>
                                 <div class="progress progress-template">
-                                    <div role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-2"></div>
+                                    <div role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-1"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
-                            <div class="statistic-block block">
+                            <div class="statistic-block block" title="My cart">
                                 <div class="progress-details d-flex align-items-end justify-content-between">
                                     <div class="title">
-                                        <div class="icon"><i class="icon-paper-and-pencil"></i></div><strong>New Invoices</strong>
+                                        <div class="icon"><i class="icon-list"></i></div><strong>My Cart</strong>
                                     </div>
-                                    <div class="number dashtext-3">140</div>
+                                    <div class="number dashtext-3"><?php echo $cart_count; ?></div>
                                 </div>
                                 <div class="progress progress-template">
-                                    <div role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-3"></div>
+                                    <div role="progressbar" style="width: <?php echo $cart_count; ?>%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-5"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
-                            <div class="statistic-block block">
+                            <div class="statistic-block block" title="My wishlist">
                                 <div class="progress-details d-flex align-items-end justify-content-between">
                                     <div class="title">
-                                        <div class="icon"><i class="icon-writing-whiteboard"></i></div><strong>All Projects</strong>
+                                        <div class="icon"><i class="icon-list-1"></i></div><strong>My Wishlist</strong>
                                     </div>
-                                    <div class="number dashtext-4">41</div>
+                                    <div class="number dashtext-4"><?php echo $wishlist_count; ?></div>
                                 </div>
                                 <div class="progress progress-template">
-                                    <div role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-4"></div>
+                                    <div role="progressbar" style="width: <?php echo $wishlist_count; ?>%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-4"></div>
                                 </div>
                             </div>
                         </div>

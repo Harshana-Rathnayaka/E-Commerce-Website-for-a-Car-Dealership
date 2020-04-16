@@ -42,6 +42,9 @@ if (!isset($_SESSION['User'])) {
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body>
@@ -70,6 +73,8 @@ if (!isset($_SESSION['User'])) {
                 </div>
                 <div class="right-menu list-inline no-margin-bottom">
                     <div class="list-inline-item"><a href="#" title="Search" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>
+                    <!-- Go to website -->
+                    <div class="list-inline-item"> <a id="website" title="Go to website" href="../dealership/index.php" class="nav-link">Buy Cars <i class="icon-website"></i></a></div>
                     <!-- Log out               -->
                     <div class="list-inline-item logout"> <a id="logout" title="Logout" href="../logout.php?logout" class="nav-link">Logout <i class="icon-logout"></i></a></div>
                 </div>
@@ -130,6 +135,36 @@ if (!isset($_SESSION['User'])) {
                 </ul>
             </div>
 
+            <?php
+            if (@$_SESSION['success'] == true) {
+                $success = $_SESSION['success'];
+                ?>
+                <script>
+                    swal({
+                        title: "SUCCESS!",
+                        text: "<?php echo $success; ?>",
+                        icon: "success",
+                        button: "OK",
+                    });
+                </script>
+            <?php
+                unset($_SESSION['success']);
+            } elseif (@$_SESSION['error'] == true) {
+                $error = $_SESSION['error'];
+                ?>
+                <script>
+                    swal({
+                        title: "ERROR!",
+                        text: "<?php echo $error; ?>",
+                        icon: "warning",
+                        button: "OK",
+                    });
+                </script>
+            <?php
+                unset($_SESSION['error']);
+            }
+            ?>
+
             <section class="no-padding-top">
                 <div class="container-fluid">
                     <div class="row">
@@ -142,7 +177,6 @@ if (!isset($_SESSION['User'])) {
                                                 <th class="text-info">#</th>
                                                 <th class="text-info">Make</th>
                                                 <th class="text-info">Model</th>
-                                                <th class="text-info">Colour</th>
                                                 <th class="text-info">Quantity</th>
                                                 <th class="text-info">Total</th>
                                                 <th class="text-info">Remove</th>
@@ -150,33 +184,37 @@ if (!isset($_SESSION['User'])) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@twitter </td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
+
+                                            <?php
+                                            include '../api/getCart.php';
+                                            if ($result) {
+                                                while ($row = mysqli_fetch_array($result)) {
+
+                                                    $user_id = $_SESSION['Id'];
+
+                                                    $cart_id = $row['cart_id'];
+                                                    $vehicle_id = $row['vehicle_id'];
+
+                                                    $make = $row['name'];
+                                                    $model = $row['model'];
+                                                    $quantity = $row['quantity'];
+                                                    $total = $row['total_price'];
+
+                                                    ?>
+
+                                                    <tr>
+                                                        <td><?php echo $cart_id ?></td>
+                                                        <td><?php echo $make ?></td>
+                                                        <td><?php echo $model ?></td>
+                                                        <td><?php echo $quantity ?></td>
+                                                        <td><?php echo $total ?></td>
+
+                                                    </tr>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+
                                         </tbody>
                                     </table>
                                 </div>

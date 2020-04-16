@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once '../includes/dbOperations.php';
 
 $response = array();
@@ -7,21 +9,18 @@ $response = array();
 if (isset($_POST['btnAddToCart'])) {
 
     $user_id = $_POST['userId'];
-    $wishlist_id = $_POST['wishlistId'];
     $vehicle_id = $_POST['vehicleId'];
     $make_id = $_POST['makeId'];
-    $colour_id = $_POST['colourId'];
     $quantity = $_POST['quantity'];
     $total = $_POST['total'];
 
     if (
-        !empty($user_id) && !empty($wishlist_id) && !empty($vehicle_id) && !empty($make_id) && !empty($colour_id)
-        && !empty($quantity) && !empty($total)
+        !empty($user_id) && !empty($vehicle_id) && !empty($make_id) && !empty($quantity) && !empty($total)
     ) {
 
         $db = new DbOperations();
 
-        $result = $db->addToCart($user_id, $wishlist_id, $vehicle_id, $make_id, $colour_id, $quantity, $total);
+        $result = $db->addToCart($user_id, $vehicle_id, $make_id, $quantity, $total);
 
         if ($result == 1) {
 
@@ -35,7 +34,7 @@ if (isset($_POST['btnAddToCart'])) {
 
             // error
             $_SESSION['error'] = "Something went wrong, Couldn't add to the Cart.";
-            header('location:wishlist.php');
+            header('location:../dealership/wishlist.php');
 
             $response['error'] = true;
             $response['message'] = "Something went wrong, Couldn't add to the Cart.";
@@ -43,12 +42,12 @@ if (isset($_POST['btnAddToCart'])) {
     } else {
 
         // some fields are missing
-        $_SESSION['error'] = "Some fields are missing.";
-        header('location:wishlist.php');
+        $_SESSION['missing'] = "Some fields are missing.";
+        header('location:../dealership/wishlist.php');
 
         $response['error'] = true;
         $response['message'] = "Some fields are missing.";
     }
 }
 
-echo json_encode($response);
+// echo json_encode($response);
