@@ -162,6 +162,19 @@ if (!isset($_SESSION['User'])) {
                 </script>
             <?php
                 unset($_SESSION['error']);
+            } elseif (@$_SESSION['missing'] == true) {
+                $missing = $_SESSION['missing'];
+                ?>
+                <script>
+                    swal({
+                        title: "INFO!",
+                        text: "<?php echo $missing; ?>",
+                        icon: "info",
+                        button: "OK",
+                    });
+                </script>
+            <?php
+                unset($_SESSION['missing']);
             }
             ?>
 
@@ -171,7 +184,7 @@ if (!isset($_SESSION['User'])) {
                         <div class="col-lg-12">
                             <div class="block">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-hover">
+                                    <table id="cartTable" class="table table-striped table-hover">
                                         <thead>
                                             <tr>
                                                 <th class="text-info">#</th>
@@ -179,7 +192,7 @@ if (!isset($_SESSION['User'])) {
                                                 <th class="text-info">Model</th>
                                                 <th class="text-info">Quantity</th>
                                                 <th class="text-info">Total</th>
-                                                <th class="text-info">Remove</th>
+                                                <th class="text-info"></th>
                                                 <th class="text-info">Checkout</th>
                                             </tr>
                                         </thead>
@@ -200,6 +213,10 @@ if (!isset($_SESSION['User'])) {
                                                     $quantity = $row['quantity'];
                                                     $total = $row['total_price'];
 
+                                                    $image_link = $row['image_link'];
+                                                    $condition = $row['vehicle_condition'];
+                                                    $engine = $row['engine_capacity'];
+
                                                     ?>
 
                                                     <tr>
@@ -208,7 +225,24 @@ if (!isset($_SESSION['User'])) {
                                                         <td><?php echo $model ?></td>
                                                         <td><?php echo $quantity ?></td>
                                                         <td><?php echo $total ?></td>
+                                                        <td>
+                                                            <form action="../api/deleteFromCart.php" method="POST">
+                                                                <input type="hidden" name="cartId" value="<?php echo $cart_id; ?>">
+                                                                <input type="submit" name="deleteFromCart" value="Remove" class="btn btn-outline-danger">
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <form action="../api/buyVehicle.php" method="POST">
+                                                                <input type="hidden" name="userId" value="<?php echo $user_id; ?>">
+                                                                <input type="hidden" name="cartId" value="<?php echo $cart_id; ?>">
+                                                                <input type="hidden" name="make" value="<?php echo $make; ?>">
+                                                                <input type="hidden" name="model" value="<?php echo $model; ?>">
+                                                                <input type="hidden" name="quantity" value="<?php echo $quantity; ?>">
+                                                                <input type="hidden" name="total" value="<?php echo $total; ?>">
 
+                                                                <input type="submit" name="btnBuy" value="Buy" class="btn btn-outline-success">
+                                                            </form>
+                                                        </td>
                                                     </tr>
                                             <?php
                                                 }
@@ -243,6 +277,17 @@ if (!isset($_SESSION['User'])) {
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
     <script src="js/front.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#cartTable').DataTable({
+                "lengthMenu": [3, 5, 10],
+            });
+        });
+    </script>
 </body>
 
 </html>

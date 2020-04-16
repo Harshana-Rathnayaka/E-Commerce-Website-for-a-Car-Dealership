@@ -1,14 +1,14 @@
 <?php
 session_start();
 // if (!isset($_SESSION['User'])) {
-    // $_SESSION['error'] = "Session timed out. Please login to continue.";
-    // header('location:../login/login-page.php');
+// $_SESSION['error'] = "Session timed out. Please login to continue.";
+// header('location:../login/login-page.php');
 // } elseif (isset($_SESSION['UserType'])) {
-    // $usertype = $_SESSION['UserType'];
+// $usertype = $_SESSION['UserType'];
 
-    // if ($usertype == 0) {
-        // header('location:../admin/index.php');
-    // }
+// if ($usertype == 0) {
+// header('location:../admin/index.php');
+// }
 // }
 ?>
 
@@ -50,7 +50,7 @@ session_start();
                     <div id="header">
                         <div class="header-container">
                             <div class="header-logo">
-                                <a href="index-2.html" title="Car HTML" class="logo">
+                                <a href="index.php" title="Car HTML" class="logo">
                                     <div><img src="images/logo.png" alt="Car Store"></div>
                                 </a>
                             </div>
@@ -103,7 +103,7 @@ session_start();
                                         <div class="nav-inner">
                                             <!-- BEGIN NAV -->
                                             <ul id="nav" class="hidden-xs">
-                                                <li class="active"> <a class="level-top" href="index.html"><span>Home</span></a></li>
+                                                <li class="active"> <a class="level-top" href="index.php"><span>Home</span></a></li>
 
                                                 <li class="level0 parent drop-menu"> <a class="level-top" href="#"><span>Listing‎</span></a>
                                                     <ul class="level1">
@@ -546,7 +546,8 @@ session_start();
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-sm-4 col-xs-12 coppyright"><a target="_blank" href="https://github.com/Harshana-Rathnayaka">2020 Dreeko Corporations. All Rights Reserved. &copy; &reg;</a></div>
+                            <div class="col-sm-4 col-xs-12 coppyright"><a target="_blank" href="https://github.com/Harshana-Rathnayaka">2020 Dreeko Corporations &reg; | All Rights Reserved.
+                                    &copy;</a></div>
                             <div class="col-xs-12 col-sm-4">
                                 <div class="payment-accept"> <img src="images/payment-1.png" alt=""> <img src="images/payment-2.png" alt=""> <img src="images/payment-3.png" alt=""> <img src="images/payment-4.png" alt=""> </div>
                             </div>

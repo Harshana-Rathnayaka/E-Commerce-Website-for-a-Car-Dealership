@@ -1,16 +1,15 @@
-﻿<?php
+<?php
 
 session_start();
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>My Wishlist</title>
+  <title>Harrier Checkout Billing Page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Default Description">
   <meta name="keywords" content="fashion, store, E-commerce">
@@ -32,9 +31,6 @@ session_start();
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
-
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 </head>
 
 <body>
@@ -45,7 +41,7 @@ session_start();
           <div id="header">
             <div class="header-container">
               <div class="header-logo">
-                <a href="index-2.html" title="Car HTML" class="logo">
+                <a href="index.php" title="Car HTML" class="logo">
                   <div><img src="images/logo.png" alt="Car Store"></div>
                 </a>
               </div>
@@ -67,7 +63,7 @@ session_start();
                     <div class="no-js">
                       <a title="" class="clicker"></a>
                       <div class="fl-nav-links">
-                        <h3><a href="../user/index.php">My Acount</a></h3>
+                        <h3>My Acount</h3>
                         <ul class="links">
                           <li><a href="../login/login-page.php" title="Login">Login</a></li>
                           <li><a href="../register/index.php" title="Register">Register</a></li>
@@ -76,6 +72,7 @@ session_start();
                     </div>
                   </div>
 
+                  <!--mini-cart-->
                   <div class="collapse navbar-collapse">
                     <form class="navbar-form" role="search">
                       <div class="input-group">
@@ -89,6 +86,7 @@ session_start();
                   </div>
                   <!--links-->
                 </div>
+
                 <div class="fl-nav-menu">
                   <nav>
                     <div class="mm-toggle-wrap">
@@ -139,207 +137,115 @@ session_start();
     </header>
 
     <div class="page-heading">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="page-title">
-              <h2>My Wishlist</h2>
+      <div class="breadcrumbs">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="page-title">
+                <h2>Checkout</h2>
+              </div>
             </div>
+            <!--col-xs-12-->
           </div>
+          <!--row-->
         </div>
+        <!--container-->
       </div>
+      <!--breadcrumbs-->
     </div>
 
+
+
     <!-- BEGIN Main Container col2-right -->
-    <section class="main-container col2-right-layout">
+    <div class="main-container col2-right-layout">
+
       <div class="main container">
         <div class="row">
-          <section class="col-main col-sm-9 col-xs-12 wow bounceInUp animated animated" style="visibility: visible;">
-            <div class="my-account">
+          <section class="col-main col-sm-9 wow bounceInUp animated animated">
+            <ol class="one-page-checkout" id="checkoutSteps">
+              <li id="opc-billing" class="section allow active">
+                <div class="step-title">
+                  <!-- <span class="number">1</span>           -->
+                  <h3 class="one_page_heading"> Billing Information</h3>
+                </div>
 
-              <?php
-              if (@$_SESSION['success'] == true) {
-                $success = $_SESSION['success'];
-                ?>
-                <script>
-                  swal({
-                    title: "SUCCESS!",
-                    text: "<?php echo $success; ?>",
-                    icon: "success",
-                    button: "OK",
-                  });
-                </script>
-              <?php
-                unset($_SESSION['success']);
-              } elseif (@$_SESSION['error'] == true) {
-                $error = $_SESSION['error'];
-                ?>
-                <script>
-                  swal({
-                    title: "ERROR!",
-                    text: "<?php echo $error; ?>",
-                    icon: "warning",
-                    button: "OK",
-                  });
-                </script>
-              <?php
-                unset($_SESSION['error']);
-              } elseif (@$_SESSION['missing'] == true) {
-                $missing = $_SESSION['missing'];
-                ?>
-                <script>
-                  swal({
-                    title: "INFO!",
-                    text: "<?php echo $missing; ?>",
-                    icon: "info",
-                    button: "OK",
-                  });
-                </script>
-              <?php
-                unset($_SESSION['missing']);
-              }
-              ?>
+                <div id="checkout-step-billing" class="step a-item">
 
-              <div class="my-wishlist">
-                <fieldset>
-                  <input name="form_key" type="hidden" value="EPYwQxF6xoWcjLUr">
-                  <div class="table-responsive">
-                    <table class="clean-table linearize-table data-table table-striped" id="wishlist-table">
-                      <thead>
-                        <tr class="first last">
-                          <th class="customer-wishlist-item-image"></th>
-                          <th class="customer-wishlist-item-info"></th>
-                          <th class="customer-wishlist-item-quantity">Quantity</th>
-                          <th class="customer-wishlist-item-price">Price</th>
-                          <th class="customer-wishlist-item-cart"></th>
-                          <th class="customer-wishlist-item-remove"></th>
-                        </tr>
-                      </thead>
-                      <tbody>
+                  <?php
+                  $firstname = $_SESSION['firstname'];
+                  $lastname = $_SESSION['lastname'];
+                  $email = $_SESSION['email'];
+                  $contact = $_SESSION['firstname'];
+                  $cartid = $_SESSION['cartid'];
+                  $make = $_SESSION['make'];
+                  $model = $_SESSION['model'];
+                  $quantity = $_SESSION['quantity'];
+                  $total = $_SESSION['total'];
 
-                        <?php
-                        $user_id = $_SESSION['Id'];
-                        include '../api/getWishlist.php';
-                        if ($result) {
-                          while ($row = mysqli_fetch_array($result)) {
 
-                            $username = $row['username'];
-                            $make = $row['name'];
-                            $model = $row['model'];
-                            $year = $row['year'];
-                            $capacity = $row['engine_capacity'];
-                            $horsepower = $row['horsepower'];
-                            $condition = $row['vehicle_condition'];
-                            $colour = $row['colour'];
-                            $seats = $row['seats'];
-                            $price = $row['price'];
-                            $image_link = $row['image_link'];
-                            $quantity = $row['quantity'];
+                  // echo $total;
+                  ?>
+                  <form id="co-billing-form" action="../api/checkout.php" method="POST">
+                    <fieldset class="group-select">
+                      <ul class="">
+                        <li id="billing-new-address-form">
+                          <fieldset>
+                            <ul>
 
-                            $vehicle_id = $row['vehicle_id'];
-                            $wishlist_id = $row['wishlist_id'];
-                            $make_id = $row['make_id'];
-
-                            $total = $price * $quantity;
-
-                            ?>
-
-                            <tr id="item_32" class="first odd">
-
-                              <td class="wishlist-cell0 customer-wishlist-item-image"><a class="product-image" href="product-detail.html" title="Slim Fit Casual Shirt"> <img src="../vehicleimages/<?php echo $image_link; ?>" width="80" height="80" alt="Vehicle"> </a>
-                              </td>
-
-                              <td class="wishlist-cell1 customer-wishlist-item-info">
-                                <h3 class="product-name"><a href="product-detail.html" title="Vehicle"><?php echo $make; ?> <?php echo $model; ?> <?php echo $year; ?></a></h3>
-                                <div class="description std">
-                                  <div class="inner">
-                                    <?php echo $capacity; ?> leters <br>
-                                    <?php echo $horsepower; ?> Hp <br>
-                                    <?php echo $condition; ?> <br>
-                                    <?php echo $colour; ?> <br>
-                                    <?php echo $seats; ?> seats <br>
+                              <li class="fields">
+                                <div class="customer-name">
+                                  <div class="input-box name-firstname">
+                                    <label for="billing:firstname">First Name<span class="required">*</span></label>
+                                    <div class="input-box1">
+                                      <input type="text" id="billing:firstname" name="firstname" value="<?php echo $firstname; ?>" title="First Name" required maxlength="255" class="input-text required-entry">
+                                    </div>
+                                  </div>
+                                  <div class="input-box name-lastname">
+                                    <label for="billing:lastname">Last Name<span class="required">*</span></label>
+                                    <div class="input-box1">
+                                      <input type="text" required id="billing:lastname" name="lastname" value="<?php echo $lastname; ?>" title="Last Name" maxlength="255" class="input-text required-entry">
+                                    </div>
                                   </div>
                                 </div>
-                              </td>
+                              </li>
 
+                              <li class="fields">
+                                <div class="input-box">
+                                  <label for="billing:email">Email</label>
 
-
-                              <td class="wishlist-cell2 customer-wishlist-item-quantity" data-rwd-label="Quantity">
-                                <div class="cart-cell">
-                                  <div class="add-to-cart-alt">
-                                    <input type="text" pattern="\d*" readonly class="input-text qty validate-not-negative-number" name="qty[32]" value="<?php echo $quantity; ?>">
-                                  </div>
+                                  <input type="text" id="billing:email" name="email" value="<?php echo $email; ?>" title="Company" required class="input-text ">
                                 </div>
-                              </td>
+                                <div class="input-box">
+                                  <label for="billing:contact">Contact</label>
 
-                              <td class="wishlist-cell3 customer-wishlist-item-price" data-rwd-label="Price">
-                                <div class="cart-cell">
-                                  <div class="price-box"> <span class="regular-price" id="product-price-2"> <span class="price">LKR <?php echo $total; ?></span> </span> </div>
+                                  <input type="text" id="billing:contact name=" contact" value="<?php echo $contact; ?>" title="Company" required class="input-text ">
                                 </div>
-                              </td>
+                              </li>
 
-                              <td class="wishlist-cell4 customer-wishlist-item-cart">
-                                <div class="cart-cell">
-                                  <form action="../api/addToCart.php" method="POST">
-                                    <input type="hidden" name="userId" value="<?php echo $user_id; ?>">
-                                    <input type="hidden" name="vehicleId" value="<?php echo $vehicle_id; ?>">
-                                    <input type="hidden" name="makeId" value="<?php echo $make_id; ?>">
-                                    <input type="hidden" name="quantity" value="<?php echo $quantity; ?>">
-                                    <input type="hidden" name="total" value="<?php echo $total; ?>">
-                                    <input type="submit" name="btnAddToCart" class="button" value="Add to cart">
-                                  </form>
-                                </div>
-                              </td>
+                            </ul>
+                          </fieldset>
+                        </li>
+                      </ul>
 
-                              <td class="wishlist-cell5 customer-wishlist-item-remove last">
-                                <form action="../api/deleteFromWishlist.php" method="post">
-                                  <input type="hidden" name="formId" value="dealershipWishlist">
-                                  <input type="hidden" name="wishlistId" value="<?php echo $wishlist_id; ?>">
-                                  <input type="submit" name="deleteFromWishlist" class="button" value="Delete">
-                                </form>
-                              </td>
+                      <div class="buttons-set" id="billing-buttons-container">
+                        <p class="required">* Required Fields</p>
+                        <input type="submit" value="Continue" title="Continue" class="button continue">
+                      </div>
 
-                            </tr>
-
-                        <?php
-                          }
-                        }
-                        ?>
-
-                      </tbody>
-                    </table>
-                  </div>
-                </fieldset>
-              </div>
-            </div>
+                    </fieldset>
+                  </form>
+                </div>
+              </li>
+            </ol>
+            <br>
           </section>
 
-          <!--col-main col-sm-9 wow bounceInUp animated-->
-          <aside class="col-right sidebar col-sm-3 col-xs-12 wow bounceInUp animated animated" style="visibility: visible;">
-            <div class="block block-account">
-              <div class="block-title"> My Account </div>
-              <div class="block-content">
-                <ul>
-                  <li><a href="../user/index.php"><span> Account Dashboard</span></a></li>
-                  <li><a href="../user/myorders.php"><span> My Orders</span></a></li>
-                  <li class="current"><a>My Wishlist</a></li>
-                </ul>
-              </div>
-              <!--block-content-->
-            </div>
-            <!--block block-account-->
-
-
-          </aside>
-          <!--col-right sidebar col-sm-3 wow bounceInUp animated-->
         </div>
         <!--row-->
       </div>
-      <!--main container-->
-    </section>
+      <!--main-container-inner-->
+    </div>
     <!--main-container col2-left-layout-->
-
-
 
     <footer>
       <!-- BEGIN INFORMATIVE FOOTER -->
@@ -473,14 +379,15 @@ session_start();
             </div>
             <div class="col-sm-4 col-xs-12 coppyright"><a target="_blank" href="https://github.com/Harshana-Rathnayaka">2020 Dreeko Corporations &reg; | All Rights Reserved.
                 &copy;</a></div>
-            <div class="payment-accept"> <img src="images/payment-1.png" alt=""> <img src="images/payment-2.png" alt=""> <img src="images/payment-3.png" alt=""> <img src="images/payment-4.png" alt=""> </div>
+            <div class="col-xs-12 col-sm-4">
+              <div class="payment-accept"> <img src="images/payment-1.png" alt=""> <img src="images/payment-2.png" alt=""> <img src="images/payment-3.png" alt=""> <img src="images/payment-4.png" alt=""> </div>
+            </div>
           </div>
         </div>
       </div>
-  </div>
-  <!-- BEGIN SIMPLE FOOTER -->
-  </footer>
-  <!-- End For version 1,2,3,4,6 -->
+      <!-- BEGIN SIMPLE FOOTER -->
+    </footer>
+    <!-- End For version 1,2,3,4,6 -->
 
   </div>
   <!--page-->
@@ -554,7 +461,7 @@ session_start();
     </ul>
   </div>
   <!-- JavaScript -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/parallax.js"></script>
   <script type="text/javascript" src="js/revslider.js"></script>

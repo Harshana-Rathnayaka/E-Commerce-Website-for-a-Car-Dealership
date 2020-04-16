@@ -469,8 +469,8 @@ session_start();
               </ul>
             </div>
           </div>
-          <div class="col-sm-4 col-xs-12 coppyright"><a target="_blank" href="https://github.com/Harshana-Rathnayaka">2020 Dreeko Corporations. All Rights Reserved. &copy;
-              &reg;</a></div>
+          <div class="col-sm-4 col-xs-12 coppyright"><a target="_blank" href="https://github.com/Harshana-Rathnayaka">2020 Dreeko Corporations &reg; | All Rights Reserved.
+              &copy;</a></div>
           <div class="col-xs-12 col-sm-4">
             <div class="payment-accept"> <img src="images/payment-1.png" alt=""> <img src="images/payment-2.png" alt="">
               <img src="images/payment-3.png" alt=""> <img src="images/payment-4.png" alt=""> </div>

@@ -138,7 +138,7 @@ if (!isset($_SESSION['User'])) {
                         <div class="col-lg-12">
                             <div class="block">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-hover">
+                                    <table id="ordersTable" class="table table-striped table-hover">
                                         <thead>
                                             <tr>
                                                 <th class="text-info">#</th>
@@ -153,31 +153,35 @@ if (!isset($_SESSION['User'])) {
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
                                                 <td>Larry</td>
                                                 <td>the Bird</td>
-                                                <td>@twitter </td>
+                                                <td>twitter </td>
                                                 <td>Mark</td>
                                                 <td>Otto</td>
-                                                <td>@mdo</td>
+                                                <td>mdo</td>
+                                                <td>mdo</td>
+                                                <td>do</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Larry</td>
+                                                <td>the Bird</td>
+                                                <td>twitter </td>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>mdo</td>
+                                                <td>mdo</td>
+                                                <td>do</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Larry</td>
+                                                <td>the Bird</td>
+                                                <td>twitter </td>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>mdo</td>
+                                                <td>mdo</td>
+                                                <td>do</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -207,6 +211,17 @@ if (!isset($_SESSION['User'])) {
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
     <script src="js/front.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#ordersTable').DataTable({
+                "lengthMenu": [3, 5, 10],
+            });
+        });
+    </script>
 </body>
 
 </html>

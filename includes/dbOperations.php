@@ -358,6 +358,21 @@ class DbOperations
 		}
 	}
 
+	// delete cart item
+	public function deleteCartItem($cart_id)
+	{
+		$stmt = $this->con->prepare("DELETE FROM `cart` WHERE `cart_id` = ?");
+		$stmt->bind_param("i", $cart_id);
+
+		if ($stmt->execute()) {
+			// item deleted
+			return 1;
+		} else {
+			// some error
+			return 2;
+		}
+	}
+
 	// delete vehicle
 	public function deleteVehicle($vehicle_id)
 	{

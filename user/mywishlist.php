@@ -184,7 +184,7 @@ if (!isset($_SESSION['User'])) {
                         <div class="col-lg-12">
                             <div class="block">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-hover">
+                                    <table id="wishlistTable" class="table table-striped table-hover">
                                         <thead>
                                             <tr>
                                                 <th class="text-info">#</th>
@@ -257,6 +257,17 @@ if (!isset($_SESSION['User'])) {
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
     <script src="js/front.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#wishlistTable').DataTable({
+                "lengthMenu": [3, 5, 10],
+            });
+        });
+    </script>
 </body>
 
 </html>
