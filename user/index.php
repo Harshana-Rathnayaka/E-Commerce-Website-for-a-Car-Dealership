@@ -90,7 +90,7 @@ if (!isset($_SESSION['User'])) {
             <span class="heading">Main</span>
             <ul class="list-unstyled">
                 <li class="active">
-                    <a href="index.php" title="Home"> <i class="icon-home"></i>Home </a>
+                    <a href="../dealership/index.php" title="Home"> <i class="icon-home"></i>Home </a>
                 </li>
                 <li>
                     <a href="myorders.php" title="Orders"> <i class="icon-bill"></i>My Orders </a>
@@ -225,7 +225,7 @@ if (!isset($_SESSION['User'])) {
             <footer class="footer">
                 <div class="footer__block block no-margin-bottom">
                     <div class="container-fluid text-center">
-                        <p class="no-margin-bottom">2020 &copy; Dreeko Corporations. All Rights Reserved. <a title="www.github.com/Harshana-Rathnayaka" target="_blank" href="https://github.com/Harshana-Rathnayaka" class="icon-repo-forked"> Repository &rightarrowtail;</a></p>
+                        <p class="no-margin-bottom">2020 &copy; Dreeko Corporations | All Rights Reserved. <a title="www.github.com/Harshana-Rathnayaka" target="_blank" href="https://github.com/Harshana-Rathnayaka" class="icon-repo-forked"> Repository &rightarrowtail;</a></p>
                     </div>
                 </div>
             </footer>

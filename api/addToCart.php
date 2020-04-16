@@ -4,35 +4,50 @@ require_once '../includes/dbOperations.php';
 
 $response = array();
 
-if ((!isset($_POST['vehicle_id']) && !isset($_POST['make_id']) && !isset($_POST['quantity']) && !isset($_POST['wishlist_id'])) && 
-(!empty($_POST['vehicle_id']) && !empty($_POST['make_id']) && !empty($_POST['quantity']) && !empty($_POST['wishlist_id']))) {
+if (isset($_POST['btnAddToCart'])) {
 
-    // some fields are missing
-    $response['error'] = true;
-    $response['message'] = "Please fill all the details";
-    header("location:../dealership/details.php?Invalid= Some values are missing.");
-} else {
-
-    $vehicle_id = $_POST['vehicle_id'];
-    $make_id = $_POST['make_id'];
+    $user_id = $_POST['userId'];
+    $wishlist_id = $_POST['wishlistId'];
+    $vehicle_id = $_POST['vehicleId'];
+    $make_id = $_POST['makeId'];
+    $colour_id = $_POST['colourId'];
     $quantity = $_POST['quantity'];
-    $wishlist_id = $_POST['wishlist_id'];
+    $total = $_POST['total'];
 
-    // db object
-    $db = new DbOperations();
+    if (
+        !empty($user_id) && !empty($wishlist_id) && !empty($vehicle_id) && !empty($make_id) && !empty($colour_id)
+        && !empty($quantity) && !empty($total)
+    ) {
 
-    $result = $db->addToCart(1, $vehicle_id, $make_id, $quantity, $wishlist_id);
+        $db = new DbOperations();
 
-    if ($result == 1) {
-        // successfully added to the wishlist
-        $response['error'] = false;
-        $response['message'] = 'Successfully added to the cart';
-        header("location:../dealership/shopping-cart.html?Valid= Successfully added to the cart");
-    } elseif ($result == 2) {
-        // some error occured
+        $result = $db->addToCart($user_id, $wishlist_id, $vehicle_id, $make_id, $colour_id, $quantity, $total);
+
+        if ($result == 1) {
+
+            // success
+            $_SESSION['success'] = "Successfully added to Cart.";
+            header('location:../user/mycart.php');
+
+            $response['error'] = false;
+            $response['message'] = 'Successfully added to Cart';
+        } elseif ($result == 2) {
+
+            // error
+            $_SESSION['error'] = "Something went wrong, Couldn't add to the Cart.";
+            header('location:wishlist.php');
+
+            $response['error'] = true;
+            $response['message'] = "Something went wrong, Couldn't add to the Cart.";
+        }
+    } else {
+
+        // some fields are missing
+        $_SESSION['error'] = "Some fields are missing.";
+        header('location:wishlist.php');
+
         $response['error'] = true;
-        $response['message'] = 'some error occured';
-        header("location:../dealership/wishlist.php?Invalid= Something went wrong. Couldn't add to the cart.");
+        $response['message'] = "Some fields are missing.";
     }
 }
 

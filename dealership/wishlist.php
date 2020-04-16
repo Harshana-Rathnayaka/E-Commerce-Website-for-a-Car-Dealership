@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿<?php
+
+session_start();
+
+?>
+
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -59,59 +66,13 @@
                       <div class="fl-nav-links">
                         <h3>My Acount</h3>
                         <ul class="links">
-                          <li><a href="login.html" title="My Account">Login</a></li>
-                          <li><a href="login.html" title="Wishlist">Register</a></li>
+                          <li><a href="../login/login-page.php" title="Login">Login</a></li>
+                          <li><a href="../register/index.php" title="Register">Register</a></li>
                         </ul>
                       </div>
                     </div>
                   </div>
-                  <div class="fl-cart-contain">
-                    <div class="mini-cart">
-                      <div class="basket"> <a href="shopping-cart.html"><span> 2 </span></a> </div>
-                      <div class="fl-mini-cart-content" style="display: none;">
-                        <div class="block-subtitle">
-                          <div class="top-subtotal">2 items, <span class="price">$259.99</span> </div>
-                          <!--top-subtotal-->
-                          <!--pull-right-->
-                        </div>
-                        <!--block-subtitle-->
-                        <ul class="mini-products-list" id="cart-sidebar">
-                          <li class="item first">
-                            <div class="item-inner">
-                              <a class="product-image" title="timi &amp; leslie Sophia Diaper Bag, Lemon Yellow/Shadow White" href="#l"><img alt="timi &amp; leslie Sophia Diaper Bag, Lemon Yellow/Shadow White" src="products-images/p4.jpg"></a>
-                              <div class="product-details">
-                                <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a>
-                                  <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                                <!--access-->
-                                <strong>1</strong> x <span class="price">$179.99</span>
-                                <p class="product-name"><a href="accessories-detail.html">timi &amp; leslie Sophia
-                                    Diaper Bag...</a></p>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="item last">
-                            <div class="item-inner">
-                              <a class="product-image" title="JP Lizzy Satchel Designer Diaper Bag - Slate Citron" href="#"><img alt="JP Lizzy Satchel Designer Diaper Bag - Slate Citron" src="products-images/p3.jpg"></a>
-                              <div class="product-details">
-                                <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a>
-                                  <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                                <!--access-->
-                                <strong>1</strong> x <span class="price">$80.00</span>
-                                <p class="product-name"><a href="accessories-detail.html">JP Lizzy Satchel Designer
-                                    Diaper Ba...</a></p>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                        <div class="actions">
-                          <button class="btn-checkout" title="Checkout" type="button" onClick="window.location=checkout.html"><span>Checkout</span></button>
-                        </div>
-                        <!--actions-->
-                      </div>
-                      <!--fl-mini-cart-content-->
-                    </div>
-                  </div>
-                  <!--mini-cart-->
+
                   <div class="collapse navbar-collapse">
                     <form class="navbar-form" role="search">
                       <div class="input-group">
@@ -194,7 +155,7 @@
             <div class="my-account">
 
               <div class="my-wishlist">
-                <form id="wishlist-view-form" action="#" method="post">
+                <form id="wishlist-view-form" action="../api/addToCart.php" method="post">
                   <fieldset>
                     <input name="form_key" type="hidden" value="EPYwQxF6xoWcjLUr">
                     <div class="table-responsive">
@@ -211,13 +172,18 @@
                         </thead>
                         <tbody>
 
+
+
                           <?php
-                          include '../api/getWishlist.php';
+                          $user_id = $_SESSION['Id'];
+                          echo $user_id;
+                          require_once '../includes/dbOperations.php';
+                          $db = new DbOperations();
+                          $result = $db->getWishlistByUserId($user_id);
                           if ($result) {
                             while ($row = mysqli_fetch_array($result)) {
 
                               $username = $row['username'];
-                              $vehicle_id = $row['vehicle_id'];
                               $make = $row['name'];
                               $model = $row['model'];
                               $year = $row['year'];
@@ -225,13 +191,16 @@
                               $horsepower = $row['horsepower'];
                               $condition = $row['vehicle_condition'];
                               $colour = $row['colour'];
-                              $convertible = $row['convertible'];
                               $seats = $row['seats'];
                               $price = $row['price'];
                               $image_link = $row['image_link'];
                               $quantity = $row['quantity'];
+
+                              $vehicle_id = $row['vehicle_id'];
                               $wishlist_id = $row['wishlist_id'];
                               $make_id = $row['make_id'];
+                              $colour_id = $row['colour_id'];
+
 
                               $total = $price * $quantity;
 
@@ -241,6 +210,7 @@
 
                                 <td class="wishlist-cell0 customer-wishlist-item-image"><a class="product-image" href="product-detail.html" title="Slim Fit Casual Shirt"> <img src="../vehicleimages/<?php echo $image_link; ?>" width="80" height="80" alt="Vehicle"> </a>
                                 </td>
+
                                 <td class="wishlist-cell1 customer-wishlist-item-info">
                                   <h3 class="product-name"><a href="product-detail.html" title="Vehicle"><?php echo $make; ?> <?php echo $model; ?> <?php echo $year; ?></a></h3>
                                   <div class="description std">
@@ -248,11 +218,20 @@
                                       <?php echo $capacity; ?> leters <br>
                                       <?php echo $horsepower; ?> Hp <br>
                                       <?php echo $condition; ?> <br>
+                                      <?php echo $colour; ?> <br>
                                       <?php echo $seats; ?> seats <br>
                                     </div>
                                   </div>
-
                                 </td>
+
+                                <input type="hidden" name="userId" value="<?php echo $user_id; ?>">
+                                <input type="hidden" name="wishlistId" value="<?php echo $wishlist_id; ?>">
+                                <input type="hidden" name="vehicleId" value="<?php echo $vehicle_id; ?>">
+                                <input type="hidden" name="makeId" value="<?php echo $make_id; ?>">
+                                <input type="hidden" name="colourId" value="<?php echo $colour_id; ?>">
+                                <input type="hidden" name="quantity" value="<?php echo $quantity; ?>">
+                                <input type="hidden" name="total" value="<?php echo $total; ?>">
+
                                 <td class="wishlist-cell2 customer-wishlist-item-quantity" data-rwd-label="Quantity">
                                   <div class="cart-cell">
                                     <div class="add-to-cart-alt">
@@ -260,23 +239,25 @@
                                     </div>
                                   </div>
                                 </td>
+
                                 <td class="wishlist-cell3 customer-wishlist-item-price" data-rwd-label="Price">
                                   <div class="cart-cell">
                                     <div class="price-box"> <span class="regular-price" id="product-price-2"> <span class="price">LKR <?php echo $total; ?></span> </span> </div>
                                   </div>
                                 </td>
+
                                 <td class="wishlist-cell4 customer-wishlist-item-cart">
                                   <div class="cart-cell">
-                                    <form action="../api/addToCart.php?wishlist_id=<?php echo $wishlist_id; ?>&&make_id=<?php echo $make_id; ?>&&vehicle_id=<?php echo $vehicle_id; ?>&&quantity=<?php echo $quantity; ?>" method="post">
-                                      <input type="submit" class="button" value="Add to cart">
-                                    </form>
+                                    <input type="submit" name="btnAddToCart" class="button" value="Add to cart">
                                   </div>
                                 </td>
+
                                 <td class="wishlist-cell5 customer-wishlist-item-remove last">
                                   <form action="../api/deleteFromWishlist.php?wishlist_id=<?php echo $wishlist_id; ?>" method="post">
                                     <input type="submit" class="button" value="Delete">
                                   </form>
                                 </td>
+
                               </tr>
 
                           <?php
@@ -287,26 +268,12 @@
                         </tbody>
                       </table>
                     </div>
-
-                    <div class="buttons-set buttons-set2">
-
-                      <button type="button" title="Add All to Cart" onClick="addAllWItemsToCart()" class="button btn-add"><span>Add All to Cart</span></button>
-
-                    </div>
                   </fieldset>
                 </form>
-                <form id="wishlist-allcart-form" action="#" method="post">
-                  <input name="form_key" type="hidden" value="EPYwQxF6xoWcjLUr">
-                  <div class="no-display">
-                    <input type="hidden" name="wishlist_id" id="wishlist_id" value="1">
-                    <input type="hidden" name="qty" id="qty" value="">
-                  </div>
-                </form>
-
               </div>
-
             </div>
           </section>
+
           <!--col-main col-sm-9 wow bounceInUp animated-->
           <aside class="col-right sidebar col-sm-3 col-xs-12 wow bounceInUp animated animated" style="visibility: visible;">
             <div class="block block-account">

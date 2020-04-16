@@ -1,9 +1,24 @@
+<?php
+session_start();
+// if (!isset($_SESSION['User'])) {
+    // $_SESSION['error'] = "Session timed out. Please login to continue.";
+    // header('location:../login/login-page.php');
+// } elseif (isset($_SESSION['UserType'])) {
+    // $usertype = $_SESSION['UserType'];
+
+    // if ($usertype == 0) {
+        // header('location:../admin/index.php');
+    // }
+// }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title> Home Page</title>
+    <title> Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Default Description">
     <meta name="keywords" content="fashion, store, E-commerce">
@@ -58,54 +73,13 @@
                                             <div class="fl-nav-links">
                                                 <h3>My Acount</h3>
                                                 <ul class="links">
-                                                    <li><a href="login.html" title="My Account">Login</a></li>
-                                                    <li><a href="login.html" title="Wishlist">Register</a></li>
+                                                    <li><a href="../login/login-page.php" title="Login">Login</a></li>
+                                                    <li><a href="../register/index.php" title="Register">Register</a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="fl-cart-contain">
-                                        <div class="mini-cart">
-                                            <div class="basket"> <a href="shopping-cart.html"><span> 2 </span></a> </div>
-                                            <div class="fl-mini-cart-content" style="display: none;">
-                                                <div class="block-subtitle">
-                                                    <div class="top-subtotal">2 items, <span class="price">$259.99</span> </div>
-                                                    <!--top-subtotal-->
-                                                    <!--pull-right-->
-                                                </div>
-                                                <!--block-subtitle-->
-                                                <ul class="mini-products-list" id="cart-sidebar">
-                                                    <li class="item first">
-                                                        <div class="item-inner">
-                                                            <a class="product-image" title="timi &amp; leslie Sophia Diaper Bag, Lemon Yellow/Shadow White" href="#l"><img alt="timi &amp; leslie Sophia Diaper Bag, Lemon Yellow/Shadow White" src="products-images/p4.jpg"></a>
-                                                            <div class="product-details">
-                                                                <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                                                                <!--access-->
-                                                                <strong>1</strong> x <span class="price">$179.99</span>
-                                                                <p class="product-name"><a href="accessories-detail.html">timi &amp; leslie Sophia Diaper Bag...</a></p>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="item last">
-                                                        <div class="item-inner">
-                                                            <a class="product-image" title="JP Lizzy Satchel Designer Diaper Bag - Slate Citron" href="#"><img alt="JP Lizzy Satchel Designer Diaper Bag - Slate Citron" src="products-images/p3.jpg"></a>
-                                                            <div class="product-details">
-                                                                <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                                                                <!--access-->
-                                                                <strong>1</strong> x <span class="price">$80.00</span>
-                                                                <p class="product-name"><a href="accessories-detail.html">JP Lizzy Satchel Designer Diaper Ba...</a></p>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <div class="actions">
-                                                    <button class="btn-checkout" title="Checkout" type="button" onClick="window.location=checkout.html"><span>Checkout</span></button>
-                                                </div>
-                                                <!--actions-->
-                                            </div>
-                                            <!--fl-mini-cart-content-->
-                                        </div>
-                                    </div>
+
                                     <!--mini-cart-->
                                     <div class="collapse navbar-collapse">
                                         <form class="navbar-form" role="search">
@@ -120,6 +94,7 @@
                                     </div>
                                     <!--links-->
                                 </div>
+
                                 <div class="fl-nav-menu">
                                     <nav>
                                         <div class="mm-toggle-wrap">
@@ -242,8 +217,8 @@
                         <div class="btn-group bootstrap-select">
                             <select class="selectpicker" data-width="100%" tabindex="-98">
                                 <option>Select Car Status</option>
-                                <option>Brand New</option>
-                                <option>Recondition</option>
+                                <option value="Brand New">Brand New</option>
+                                <option value="Recondition">Recondition</option>
                             </select>
                         </div>
                         <div class="btn-group bootstrap-select">
@@ -318,7 +293,7 @@
 
                                             <div class="item-img">
                                                 <div class="item-img-info">
-                                                    <a href="details.php?vehicle_id=<?php echo $row['vehicle_id']; ?>" title="See more" class="product-image"><img src="../vehicleimages/<?php echo $row['image_link']; ?>" alt="Retis lapen casen"></a>
+                                                    <a href="details.php?vehicle_id=<?php echo $row['vehicle_id']; ?>" title="See details" class="product-image"><img src="../vehicleimages/<?php echo $row['image_link']; ?>" alt="Retis lapen casen"></a>
                                                     <?php $condition = $row['vehicle_condition'];
                                                             if ($condition == "Brand New") {
                                                                 ?>
@@ -347,7 +322,7 @@
                                             <div class="item-info">
                                                 <div class="info-inner">
                                                     <div class="item-title">
-                                                        <a href="details.php?vehicle_id=<?php echo $row['vehicle_id']; ?>" title="Retis lapen casen"><?php echo $row['name']; ?> <?php echo $row['model']; ?></a>
+                                                        <a href="details.php?vehicle_id=<?php echo $row['vehicle_id']; ?>" title="See details"><?php echo $row['name']; ?> <?php echo $row['model']; ?></a>
                                                     </div>
 
                                                     <div class="item-content">
@@ -385,6 +360,8 @@
                     </div>
                     <div id="best-seller" class="product-flexslider hidden-buttons">
                         <div class="slider-items slider-width-col4 products-grid">
+
+                            <!-- Item -->
                             <div class="item">
                                 <div class="item-inner">
                                     <div class="item-img">
@@ -431,241 +408,8 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Item -->
-                            <div class="item">
-                                <div class="item-inner">
-                                    <div class="item-img">
-                                        <div class="item-img-info">
-                                            <a href="accessories-detail.html" title="Retis lapen casen" class="product-image"><img src="products-images/p14.jpg" alt="Retis lapen casen"></a>
-                                            <div class="item-box-hover">
-                                                <div class="box-inner">
-                                                    <div class="add_cart">
-                                                        <button class="button btn-cart" type="button"></button>
-                                                    </div>
-                                                    <div class="product-detail-bnt"><a class="button detail-bnt"><span>Quick View</span></a></div>
-                                                    <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item-info">
-                                        <div class="info-inner">
-                                            <div class="item-title"><a href="accessories-detail.html" title="Retis lapen casen">Gorgeous Mercedes-Benz E-Class All-Terrain Luxury</a> </div>
-                                            <div class="item-content">
-                                                <div class="rating">
-                                                    <div class="ratings">
-                                                        <div class="rating-box">
-                                                            <div class="rating" style="width:80%"></div>
-                                                        </div>
-                                                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                                    </div>
-                                                </div>
-                                                <div class="item-price">
-                                                    <div class="price-box"><span class="regular-price"><span class="price">$39000.00</span> </span>
-                                                    </div>
-                                                </div>
-                                                <div class="other-info">
-                                                    <div class="col-km"><i class="fa fa-tachometer"></i> 847km</div>
-                                                    <div class="col-engine"><i class="fa fa-gear"></i> Manual</div>
-                                                    <div class="col-date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <!-- End Item -->
 
-                            <!-- Item -->
-                            <div class="item">
-                                <div class="item-inner">
-                                    <div class="item-img">
-                                        <div class="item-img-info">
-                                            <a href="accessories-detail.html" title="Retis lapen casen" class="product-image"><img src="products-images/p15.jpg" alt="Retis lapen casen"></a>
-                                            <div class="item-box-hover">
-                                                <div class="box-inner">
-                                                    <div class="add_cart">
-                                                        <button class="button btn-cart" type="button"></button>
-                                                    </div>
-                                                    <div class="product-detail-bnt"><a class="button detail-bnt"><span>Quick View</span></a></div>
-                                                    <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item-info">
-                                        <div class="info-inner">
-                                            <div class="item-title"><a href="accessories-detail.html" title="Retis lapen casen">Gorgeous Mercedes-Benz E-Class All-Terrain Luxury</a> </div>
-                                            <div class="item-content">
-                                                <div class="rating">
-                                                    <div class="ratings">
-                                                        <div class="rating-box">
-                                                            <div class="rating" style="width:80%"></div>
-                                                        </div>
-                                                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                                    </div>
-                                                </div>
-                                                <div class="item-price">
-                                                    <div class="price-box"><span class="regular-price"><span class="price">$99000.00</span> </span>
-                                                    </div>
-                                                </div>
-                                                <div class="other-info">
-                                                    <div class="col-km"><i class="fa fa-tachometer"></i>687km</div>
-                                                    <div class="col-engine"><i class="fa fa-gear"></i> Manual</div>
-                                                    <div class="col-date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Item -->
-
-                            <div class="item">
-                                <div class="item-inner">
-                                    <div class="item-img">
-                                        <div class="item-img-info">
-                                            <a href="accessories-detail.html" title="Retis lapen casen" class="product-image"><img src="products-images/p16.jpg" alt="Retis lapen casen"></a>
-                                            <div class="item-box-hover">
-                                                <div class="box-inner">
-                                                    <div class="add_cart">
-                                                        <button class="button btn-cart" type="button"></button>
-                                                    </div>
-                                                    <div class="product-detail-bnt"><a class="button detail-bnt"><span>Quick View</span></a></div>
-                                                    <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item-info">
-                                        <div class="info-inner">
-                                            <div class="item-title"><a href="accessories-detail.html" title="Retis lapen casen">Gorgeous Mercedes-Benz E-Class All-Terrain Luxury</a> </div>
-                                            <div class="item-content">
-                                                <div class="rating">
-                                                    <div class="ratings">
-                                                        <div class="rating-box">
-                                                            <div class="rating" style="width:80%"></div>
-                                                        </div>
-                                                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                                    </div>
-                                                </div>
-                                                <div class="item-price">
-                                                    <div class="price-box"><span class="regular-price"><span class="price">$59000.00</span> </span>
-                                                    </div>
-                                                </div>
-                                                <div class="other-info">
-                                                    <div class="col-km"><i class="fa fa-tachometer"></i> 10587km</div>
-                                                    <div class="col-engine"><i class="fa fa-gear"></i> Manual</div>
-                                                    <div class="col-date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Item -->
-                            <div class="item">
-                                <div class="item-inner">
-                                    <div class="item-img">
-                                        <div class="item-img-info">
-                                            <a href="accessories-detail.html" title="Retis lapen casen" class="product-image"><img src="products-images/p17.jpg" alt="Retis lapen casen"></a>
-                                            <div class="new-label new-top-left">New</div>
-                                            <div class="item-box-hover">
-                                                <div class="box-inner">
-                                                    <div class="add_cart">
-                                                        <button class="button btn-cart" type="button"></button>
-                                                    </div>
-                                                    <div class="product-detail-bnt"><a class="button detail-bnt"><span>Quick View</span></a></div>
-                                                    <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item-info">
-                                        <div class="info-inner">
-                                            <div class="item-title"><a href="accessories-detail.html" title="Retis lapen casen">Gorgeous Mercedes-Benz E-Class All-Terrain Luxury</a> </div>
-                                            <div class="item-content">
-                                                <div class="rating">
-                                                    <div class="ratings">
-                                                        <div class="rating-box">
-                                                            <div class="rating" style="width:80%"></div>
-                                                        </div>
-                                                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                                    </div>
-                                                </div>
-                                                <div class="item-price">
-                                                    <div class="price-box"><span class="regular-price"><span class="price">$47000.00</span> </span>
-                                                    </div>
-                                                </div>
-                                                <div class="other-info">
-                                                    <div class="col-km"><i class="fa fa-tachometer"></i> 0km</div>
-                                                    <div class="col-engine"><i class="fa fa-gear"></i> Manual</div>
-                                                    <div class="col-date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Item -->
-
-                            <!-- Item -->
-                            <div class="item">
-                                <div class="item-inner">
-                                    <div class="item-img">
-                                        <div class="item-img-info">
-                                            <a href="accessories-detail.html" title="Retis lapen casen" class="product-image"><img src="products-images/p18.jpg" alt="Retis lapen casen"></a>
-                                            <div class="new-label new-top-left">New</div>
-                                            <div class="item-box-hover">
-                                                <div class="box-inner">
-                                                    <div class="add_cart">
-                                                        <button class="button btn-cart" type="button"></button>
-                                                    </div>
-                                                    <div class="product-detail-bnt"><a class="button detail-bnt"><span>Quick View</span></a></div>
-                                                    <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item-info">
-                                        <div class="info-inner">
-                                            <div class="item-title"><a href="accessories-detail.html" title="Retis lapen casen">Gorgeous Mercedes-Benz E-Class All-Terrain Luxury</a> </div>
-                                            <div class="item-content">
-                                                <div class="rating">
-                                                    <div class="ratings">
-                                                        <div class="rating-box">
-                                                            <div class="rating" style="width:80%"></div>
-                                                        </div>
-                                                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                                    </div>
-                                                </div>
-                                                <div class="item-price">
-                                                    <div class="price-box"><span class="regular-price"><span class="price">$67000.00</span> </span>
-                                                    </div>
-                                                </div>
-                                                <div class="other-info">
-                                                    <div class="col-km"><i class="fa fa-tachometer"></i> 847km</div>
-                                                    <div class="col-engine"><i class="fa fa-gear"></i> Semi</div>
-                                                    <div class="col-date"><i class="fa fa-calendar" aria-hidden="true"></i> 2016</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Item -->
                         </div>
                     </div>
                 </div>

@@ -15,11 +15,12 @@ if (!isset($_POST['vehicle_id']) && !isset($_POST['make_id']) && !isset($_POST['
     $vehicle_id = $_POST['vehicle_id'];
     $make_id = $_POST['make_id'];
     $quantity = $_POST['quantity'];
+    $user_id = $_POST['user_id'];
 
     // db object
     $db = new DbOperations();
 
-    $result = $db->addToWishlist(1, $vehicle_id, $make_id, $quantity);
+    $result = $db->addToWishlist($user_id, $vehicle_id, $make_id, $quantity);
 
     if ($result == 1) {
         // successfully added to the wishlist

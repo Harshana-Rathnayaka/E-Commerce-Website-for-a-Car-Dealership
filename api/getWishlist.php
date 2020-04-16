@@ -7,10 +7,19 @@ $response = array();
 // check if the session is started
 // if (isset($_SESSION['User'])) {
 
+if (isset($_POST['userid'])) {
+    $userid = $_POST['userid'];
     // db object
     $db = new DbOperations();
 
-    $result = $db->getWishlist();
+    $result = $db->getWishlistByUserId($userid);
+
+    echo $result;
+} else {
+    echo "error";
+}
+
+
 // } else {
 //     // session not started
 //     $response['error'] = true;
@@ -19,4 +28,3 @@ $response = array();
 // }
 
 // echo json_encode($response);
-

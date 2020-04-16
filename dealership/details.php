@@ -1,10 +1,25 @@
+<?php
+session_start();
+// if (!isset($_SESSION['User'])) {
+// $_SESSION['error'] = "Session timed out. Please login to continue.";
+// header('location:../login/login-page.php');
+// } elseif (isset($_SESSION['UserType'])) {
+// $usertype = $_SESSION['UserType'];
+
+// if ($usertype == 0) {
+// header('location:../admin/index.php');
+// }
+// }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Harrier Accessories Detail Page</title>
+  <title> Vehicle Details </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Default Description">
   <meta name="keywords" content="fashion, store, E-commerce">
@@ -36,7 +51,7 @@
           <div id="header">
             <div class="header-container">
               <div class="header-logo">
-                <a href="index-2.html" title="Car HTML" class="logo">
+                <a href="index.php" title="Car HTML" class="logo">
                   <div><img src="images/logo.png" alt="Car Store"></div>
                 </a>
               </div>
@@ -60,59 +75,13 @@
                       <div class="fl-nav-links">
                         <h3>My Acount</h3>
                         <ul class="links">
-                          <li><a href="login.html" title="My Account">Login</a></li>
-                          <li><a href="login.html" title="Wishlist">Register</a></li>
+                          <li><a href="../login/login-page.php" title="Login">Login</a></li>
+                          <li><a href="../register/index.php" title="Register">Register</a></li>
                         </ul>
                       </div>
                     </div>
                   </div>
-                  <div class="fl-cart-contain">
-                    <div class="mini-cart">
-                      <div class="basket"> <a href="shopping-cart.html"><span> 2 </span></a> </div>
-                      <div class="fl-mini-cart-content" style="display: none;">
-                        <div class="block-subtitle">
-                          <div class="top-subtotal">2 items, <span class="price">$259.99</span> </div>
-                          <!--top-subtotal-->
-                          <!--pull-right-->
-                        </div>
-                        <!--block-subtitle-->
-                        <ul class="mini-products-list" id="cart-sidebar">
-                          <li class="item first">
-                            <div class="item-inner">
-                              <a class="product-image" title="timi &amp; leslie Sophia Diaper Bag, Lemon Yellow/Shadow White" href="#l"><img alt="timi &amp; leslie Sophia Diaper Bag, Lemon Yellow/Shadow White" src="products-images/p4.jpg"></a>
-                              <div class="product-details">
-                                <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a>
-                                  <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                                <!--access-->
-                                <strong>1</strong> x <span class="price">$179.99</span>
-                                <p class="product-name"><a href="accessories-detail.html">timi &amp; leslie Sophia
-                                    Diaper Bag...</a></p>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="item last">
-                            <div class="item-inner">
-                              <a class="product-image" title="JP Lizzy Satchel Designer Diaper Bag - Slate Citron" href="#"><img alt="JP Lizzy Satchel Designer Diaper Bag - Slate Citron" src="products-images/p3.jpg"></a>
-                              <div class="product-details">
-                                <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a>
-                                  <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                                <!--access-->
-                                <strong>1</strong> x <span class="price">$80.00</span>
-                                <p class="product-name"><a href="accessories-detail.html">JP Lizzy Satchel Designer
-                                    Diaper Ba...</a></p>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                        <div class="actions">
-                          <button class="btn-checkout" title="Checkout" type="button" onClick="window.location=checkout.html"><span>Checkout</span></button>
-                        </div>
-                        <!--actions-->
-                      </div>
-                      <!--fl-mini-cart-content-->
-                    </div>
-                  </div>
-                  <!--mini-cart-->
+
                   <div class="collapse navbar-collapse">
                     <form class="navbar-form" role="search">
                       <div class="input-group">
@@ -134,7 +103,7 @@
                     <div class="nav-inner">
                       <!-- BEGIN NAV -->
                       <ul id="nav" class="hidden-xs">
-                        <li class="active"> <a class="level-top" href="index.html"><span>Home</span></a></li>
+                        <li class="active"> <a class="level-top" href="index.php"><span>Home</span></a></li>
 
                         <li class="level0 parent drop-menu"> <a class="level-top" href="#"><span>Listing‎</span></a>
                           <ul class="level1">
@@ -181,7 +150,7 @@
             <div class="col-xs-12">
               <ul>
                 <li class="home"> <a href="index.php" title="Go to Home Page">Home</a> <span>&rsaquo; </span> </li>
-                <li class="category1601"> <strong>Sedans</strong> </li>
+                <li class="category1601"> <strong>Details</strong> </li>
               </ul>
             </div>
             <!--col-xs-12-->
@@ -194,6 +163,7 @@
         <h2>DETAILS</h2>
       </div>
     </div>
+
     <!-- BEGIN Main Container -->
     <div class="main-container col1-layout wow bounceInUp animated">
       <div class="main">
@@ -229,7 +199,7 @@
                 $image_link = $result['image_link'];
 
                 ?>
-                <form action="#" method="post" id="product_addtocart_form">
+                <form action="#" method="POST" id="product_addtocart_form">
                   <div class="product-img-box col-lg-5 col-sm-5 col-xs-12">
                     <div class="product-image">
                       <div class="product-full"> <img id="product-zoom" src="../vehicleimages/<?php echo $image_link; ?>" data-zoom-image="../vehicleimages/<?php echo $image_link; ?>" alt="product-image" />
@@ -256,6 +226,19 @@
 
                     <input type="hidden" id="vehicleId" value="<?php echo $vehicle_id; ?>">
                     <input type="hidden" id="makeId" value="<?php echo $make_id; ?>">
+                    <input type="hidden" id="userId" value="<?php echo $_SESSION['Id']; ?>">
+                    <?php
+                    if (isset($_SESSION['User'])) {
+                      ?>
+                      <input type="hidden" id="userSession" value="<?php echo $_SESSION['User']; ?>">
+                    <?php
+                    } else {
+                      ?>
+                      <input type="hidden" id="userSession" value="noSession">
+
+                    <?php
+                    }
+                    ?>
 
 
                     <div class="price-block">
@@ -300,7 +283,15 @@
                     </div>
                     <div class="email-addto-box">
                       <ul class="add-to-links">
-                        <li> <a id="btnWishlist" class="link-wishlist" href="#"><span>Add to Wishlist</span></a></li>
+                        <li>
+                          <!-- <form action="../api/addToWishlist.php" method="POST"> -->
+                          <!-- <button class="btnWishlist" type="submit"> -->
+                          <a id="btnWishlist" class="link-wishlist" href="#">
+                            <span>Add to Wishlist</span>
+                          </a>
+                          <!-- </button> -->
+                          <!-- </form> -->
+                        </li>
                         <li><a class="link-compare" href="compare.html"><span>Add to Compare</span></a></li>
                       </ul>
                       <p class="email-friend"><a href="#" class=""><span>Email to a Friend</span></a></p>
@@ -587,15 +578,25 @@
         var vehicle_id = $('#vehicleId').val();
         var make_id = $('#makeId').val();
         var quantity = $('#qty').val();
+        var user_id = $('#userId').val();
+        var userSession = $('#userSession').val();
 
-        $.post('../api/addToWishlist.php', {
-          vehicle_id: vehicle_id,
-          make_id: make_id,
-          quantity: quantity,
-        }, function(data) {
-          console.log('added to wishlist');
-          window.location.replace('wishlist.php');
-        });
+        if (userSession == 'noSession') {
+          console.log('Session not started');
+          window.location.replace('../login/login-page.php');
+        } else {
+
+          $.post('../api/addToWishlist.php', {
+            vehicle_id: vehicle_id,
+            make_id: make_id,
+            quantity: quantity,
+            user_id: user_id,
+          }, function(data) {
+            console.log('added to wishlist');
+            window.location.replace('wishlist.php');
+          });
+
+        }
       });
     });
   </script>

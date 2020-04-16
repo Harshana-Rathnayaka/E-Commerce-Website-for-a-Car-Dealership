@@ -209,10 +209,14 @@ class DbOperations
 		return $stmt->get_result();
 	}
 
-	// retrieving vehicles table 
-	public function getWishlist()
+	// retrieving wishlist table 
+	public function getWishlistByUserId($user_id)
 	{
-		$stmt = $this->con->prepare("SELECT * FROM `wishlist` INNER JOIN `users` ON users.id = wishlist.user_id INNER JOIN `vehicles` ON vehicles.vehicle_id = wishlist.wishlist_id INNER JOIN `manufacturers` ON manufacturers.make_id = wishlist.make_id ORDER BY `wishlist_id`");
+		$stmt = $this->con->prepare("SELECT * FROM `wishlist` INNER JOIN `users` ON users.id = wishlist.user_id INNER JOIN
+		vehicles ON vehicles.vehicle_id = wishlist.vehicle_id INNER JOIN `manufacturers` ON manufacturers.make_id = wishlist.make_id
+		INNER JOIN `colours` ON colours.id = wishlist.colour_id WHERE user_id = ? ORDER BY `wishlist_id`
+		");
+		$stmt->bind_param("i", $user_id);
 		$stmt->execute();
 		return $stmt->get_result();
 	}
