@@ -175,7 +175,7 @@ session_start();
                   $firstname = $_SESSION['firstname'];
                   $lastname = $_SESSION['lastname'];
                   $email = $_SESSION['email'];
-                  $contact = $_SESSION['firstname'];
+                  $contact = $_SESSION['contact'];
                   $cartid = $_SESSION['cartid'];
                   $make = $_SESSION['make'];
                   $model = $_SESSION['model'];
@@ -185,7 +185,7 @@ session_start();
 
                   // echo $total;
                   ?>
-                  <form id="co-billing-form" action="../api/checkout.php" method="POST">
+                  <form id="co-billing-form">
                     <fieldset class="group-select">
                       <ul class="">
                         <li id="billing-new-address-form">
@@ -213,12 +213,38 @@ session_start();
                                 <div class="input-box">
                                   <label for="billing:email">Email</label>
 
-                                  <input type="text" id="billing:email" name="email" value="<?php echo $email; ?>" title="Company" required class="input-text ">
+                                  <input type="text" id="billing:email" name="email" value="<?php echo $email; ?>" title="Title" required class="input-text ">
                                 </div>
                                 <div class="input-box">
                                   <label for="billing:contact">Contact</label>
 
-                                  <input type="text" id="billing:contact name=" contact" value="<?php echo $contact; ?>" title="Company" required class="input-text ">
+                                  <input type="text" id="billing:contact" name="contact" value="<?php echo $contact; ?>" title="Contact" required class="input-text ">
+                                </div>
+                              </li>
+
+                              <li class="fields">
+                                <div class="input-box">
+                                  <label for="billing:make">Make</label>
+
+                                  <input type="text" id="billing:make" readonly name="make" value="<?php echo $make; ?>" title="Make" required class="input-text ">
+                                </div>
+                                <div class="input-box">
+                                  <label for="billing:model">Model</label>
+
+                                  <input type="text" id="billing:model" readonly name=" model" value="<?php echo $model; ?>" title="Model" required class="input-text ">
+                                </div>
+                              </li>
+
+                              <li class="fields">
+                                <div class="input-box">
+                                  <label for="billing:make">Quantity</label>
+
+                                  <input type="text" id="billing:quantity" readonly name="quantity" value="<?php echo $quantity; ?>" title="Quantity" required class="input-text ">
+                                </div>
+                                <div class="input-box">
+                                  <label for="billing:total">Total Price</label>
+
+                                  <input type="text" id="billing:total" readonly name=" total" value="<?php echo $total; ?>" title="Total" required class="input-text ">
                                 </div>
                               </li>
 
@@ -229,7 +255,7 @@ session_start();
 
                       <div class="buttons-set" id="billing-buttons-container">
                         <p class="required">* Required Fields</p>
-                        <input type="submit" value="Continue" title="Continue" class="button continue">
+                        <input type="submit" value="Continue" id="btnContinue" title="Continue" class="button continue">
                       </div>
 
                     </fieldset>
@@ -470,6 +496,10 @@ session_start();
   <script type="text/javascript" src="js/jquery.flexslider.js"></script>
   <script type="text/javascript" src="js/owl.carousel.min.js"></script>
   <script type="text/javascript" src="js/jquery.mobile-menu.min.js"></script>
+
+  <script src=”https://www.paypal.com/sdk/js?client-id=sb”> </script> <script>
+    paypal.Button.render('#btnContinue');
+  </script>
 
 
 </body>

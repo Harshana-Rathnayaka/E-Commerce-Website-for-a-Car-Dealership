@@ -68,11 +68,11 @@ if (!isset($_SESSION['User'])) {
                     <button class="sidebar-toggle" title="Hide sidebar"><i class="fa fa-long-arrow-left"></i></button>
                 </div>
                 <div class="right-menu list-inline no-margin-bottom">
-                    <div class="list-inline-item"><a href="#" title="Search" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>
+                    <div class="list-inline-item"><a href="#" title="Search" class="search-open nav-link"><i class="fa fa-search"></i></a></div>
                     <!-- Go to website -->
-                    <div class="list-inline-item"> <a id="website" title="Go to website" href="../dealership/index.php" class="nav-link">Buy Cars <i class="icon-website"></i></a></div>
+                    <div class="list-inline-item"> <a id="website" title="Go to website" href="../dealership/index.php" class="nav-link">Buy Cars <i class="fa fa-globe"></i></a></div>
                     <!-- Log out               -->
-                    <div class="list-inline-item logout"> <a id="logout" title="Logout" href="../logout.php?logout" class="nav-link">Logout <i class="icon-logout"></i></a></div>
+                    <div class="list-inline-item logout"> <a id="logout" title="Logout" href="../logout.php?logout" class="nav-link">Logout <i class="fa fa-sign-out"></i></a></div>
                 </div>
             </div>
         </nav>
@@ -92,29 +92,30 @@ if (!isset($_SESSION['User'])) {
             <span class="heading">Main</span>
             <ul class="list-unstyled">
                 <li class="active">
-                    <a href="index.php" title="Home"> <i class="icon-website"></i>Home </a>
+                    <a href="index.php" title="Home"> <i class="fa fa-home"></i>Home </a>
                 </li>
                 <li>
-                    <a href="myorders.php" title="Orders"> <i class="icon-bill"></i>My Orders </a>
+                    <a href="myorders.php" title="Orders"> <i class="fa fa-history"></i>My Orders </a>
                 </li>
                 <li>
-                    <a href="mycart.php" title="Cart"> <i class="icon-list"></i>My Cart </a>
+                    <a href="mycart.php" title="Cart"> <i class="fa fa-shopping-cart"></i>My Cart </a>
                 </li>
                 <li>
-                    <a href="mywishlist.php" title="Wishlist"> <i class="icon-list-1"></i>My Wishlist </a>
+                    <a href="mywishlist.php" title="Wishlist"> <i class="fa fa-shopping-basket"></i>My Wishlist </a>
                 </li>
             </ul><span class="heading" title="More actions">Actions</span>
             <ul class="list-unstyled">
                 <li>
-                    <a href="settings.php" title="Settings"> <i class="icon-settings"></i>Settings </a>
+                    <a href="settings.php" title="Settings"> <i class="fa fa-wrench"></i>Settings </a>
                 </li>
                 <li>
-                    <a href="deleteaccount.php" title="Delete account"> <i class="icon-logout"></i>Delete My Account </a>
+                    <a href="deleteaccount.php" title="Delete account"> <i class="fa fa-minus-circle"></i>Delete My Account </a>
                 </li>
             </ul>
 
         </nav>
         <!-- Sidebar Navigation end-->
+
         <div class="page-content">
             <div class="page-header">
                 <div class="container-fluid">
@@ -142,7 +143,7 @@ if (!isset($_SESSION['User'])) {
                             <div class="statistic-block block" title="Vehicles currently on sale">
                                 <div class="progress-details d-flex align-items-end justify-content-between">
                                     <div class="title">
-                                        <div class="icon"><i class="icon-layers"></i></div><strong>Vehicles On Sale</strong>
+                                        <div class="icon"><i class="fa fa-car"></i></div><strong>Vehicles On Sale</strong>
                                     </div>
                                     <div class="number dashtext-1"><?php echo $vehicle_count; ?></div>
                                 </div>
@@ -155,7 +156,7 @@ if (!isset($_SESSION['User'])) {
                             <div class="statistic-block block" title="My orders">
                                 <div class="progress-details d-flex align-items-end justify-content-between">
                                     <div class="title">
-                                        <div class="icon"><i class="icon-bill"></i></div><strong>My Orders</strong>
+                                        <div class="icon"><i class="fa fa-history"></i></div><strong>My Orders</strong>
                                     </div>
                                     <div class="number dashtext-2">375</div>
                                 </div>
@@ -168,7 +169,7 @@ if (!isset($_SESSION['User'])) {
                             <div class="statistic-block block" title="My cart">
                                 <div class="progress-details d-flex align-items-end justify-content-between">
                                     <div class="title">
-                                        <div class="icon"><i class="icon-list"></i></div><strong>My Cart</strong>
+                                        <div class="icon"><i class="fa fa-shopping-cart"></i></div><strong>My Cart</strong>
                                     </div>
                                     <div class="number dashtext-3"><?php echo $cart_count; ?></div>
                                 </div>
@@ -181,7 +182,7 @@ if (!isset($_SESSION['User'])) {
                             <div class="statistic-block block" title="My wishlist">
                                 <div class="progress-details d-flex align-items-end justify-content-between">
                                     <div class="title">
-                                        <div class="icon"><i class="icon-list-1"></i></div><strong>My Wishlist</strong>
+                                        <div class="icon"><i class="fa fa-shopping-basket"></i></div><strong>My Wishlist</strong>
                                     </div>
                                     <div class="number dashtext-4"><?php echo $wishlist_count; ?></div>
                                 </div>
@@ -203,7 +204,7 @@ if (!isset($_SESSION['User'])) {
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th class="text-info">#</th>
+                                                <th class="text-info"><i class="fa fa-list-ol"></i></th>
                                                 <th class="text-info">First Name</th>
                                                 <th class="text-info">Last Name</th>
                                                 <th class="text-info">Username</th>

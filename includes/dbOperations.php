@@ -285,12 +285,18 @@ class DbOperations
 	/* CRUD  -> U -> UPDATE */
 
 	// deactivate user account  by updating user status
-	public function deactivateAccount($username)
+	public function deleteAccountById($user_id)
 	{
-		$stmt = $this->con->prepare("UPDATE `users` SET `user_status` = 1 WHERE `username` = ?");
-		$stmt->bind_param("s", $username);
-		$stmt->execute();
-		return $stmt->get_result();
+		$stmt = $this->con->prepare("UPDATE `users` SET `user_status` = 0 WHERE `id` = ?");
+		$stmt->bind_param("i", $user_id);
+
+		if ($stmt->execute()) {
+			// user account status updated and account deactivated
+			return 0;
+		} else {
+			// some error 
+			return 1;
+		}
 	}
 
 	// update admin details

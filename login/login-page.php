@@ -94,10 +94,17 @@ if (isset($_SESSION['User'])) {
                             <?php echo $_SESSION['missing']; ?>
                         </div>
                     <?php
-                        unset($_SESSION['missing']);
+                        unset($_SESSION['success']);
+                    } elseif (@$_SESSION['success'] == true) {
+                        ?>
+                        <div class=" text-danger alert text-center py-3">
+                            <?php echo $_SESSION['success']; ?>
+                        </div>
+                    <?php
+                        unset($_SESSION['success']);
                     }
                     ?>
-                    
+
                     <div class="text-center w-full p-t-115">
                         <span class="txt1">
                             Not a member?

@@ -69,11 +69,11 @@ if (!isset($_SESSION['User'])) {
                     <button class="sidebar-toggle" title="Hide sidebar"><i class="fa fa-long-arrow-left"></i></button>
                 </div>
                 <div class="right-menu list-inline no-margin-bottom">
-                    <div class="list-inline-item"><a href="#" title="Search" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>
+                    <div class="list-inline-item"><a href="#" title="Search" class="search-open nav-link"><i class="fa fa-search"></i></a></div>
                     <!-- Go to website -->
-                    <div class="list-inline-item "> <a id="website" title="Go to website" href="../dealership/index.php" class="nav-link">Buy Cars <i class="icon-website"></i></a></div>
+                    <div class="list-inline-item"> <a id="website" title="Go to website" href="../dealership/index.php" class="nav-link">Buy Cars <i class="fa fa-globe"></i></a></div>
                     <!-- Log out               -->
-                    <div class="list-inline-item logout"> <a id="logout" title="Logout" href="../logout.php?logout" class="nav-link">Logout <i class="icon-logout"></i></a></div>
+                    <div class="list-inline-item logout"> <a id="logout" title="Logout" href="../logout.php?logout" class="nav-link">Logout <i class="fa fa-sign-out"></i></a></div>
                 </div>
             </div>
         </nav>
@@ -93,24 +93,24 @@ if (!isset($_SESSION['User'])) {
             <span class="heading">Main</span>
             <ul class="list-unstyled">
                 <li>
-                    <a href="index.php" title="Home"> <i class="icon-home"></i>Home </a>
+                    <a href="index.php" title="Home"> <i class="fa fa-home"></i>Home </a>
                 </li>
                 <li class="active">
-                    <a href="myorders.php" title="Orders"> <i class="icon-bill"></i>My Orders </a>
+                    <a href="myorders.php" title="Orders"> <i class="fa fa-history"></i>My Orders </a>
                 </li>
                 <li>
-                    <a href="mycart.php" title="Cart"> <i class="icon-list"></i>My Cart </a>
+                    <a href="mycart.php" title="Cart"> <i class="fa fa-shopping-cart"></i>My Cart </a>
                 </li>
                 <li>
-                    <a href="mywishlist.php" title="Wishlist"> <i class="icon-list-1"></i>My Wishlist </a>
+                    <a href="mywishlist.php" title="Wishlist"> <i class="fa fa-shopping-basket"></i>My Wishlist </a>
                 </li>
             </ul><span class="heading" title="More actions">Actions</span>
             <ul class="list-unstyled">
                 <li>
-                    <a href="settings.php" title="Settings"> <i class="icon-settings"></i>Settings </a>
+                    <a href="settings.php" title="Settings"> <i class="fa fa-wrench"></i>Settings </a>
                 </li>
                 <li>
-                    <a href="deleteaccount.php" title="Delete account"> <i class="icon-logout"></i>Delete My Account </a>
+                    <a href="deleteaccount.php" title="Delete account"> <i class="fa fa-minus-circle"></i>Delete My Account </a>
                 </li>
             </ul>
 
@@ -141,7 +141,7 @@ if (!isset($_SESSION['User'])) {
                                     <table id="ordersTable" class="table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th class="text-info">#</th>
+                                                <th class="text-info"><i class="fa fa-list-ol"></i></th>
                                                 <th class="text-info">Make</th>
                                                 <th class="text-info">Model</th>
                                                 <th class="text-info">Colour</th>
@@ -195,7 +195,7 @@ if (!isset($_SESSION['User'])) {
             <footer class="footer">
                 <div class="footer__block block no-margin-bottom">
                     <div class="container-fluid text-center">
-                        <p class="no-margin-bottom">2020 &copy; Dreeko Corporations | All Rights Reserved. <a target="_blank" href="https://github.com/Harshana-Rathnayaka" class="icon-repo-forked"> Repository  &rightarrowtail;</a></p>
+                        <p class="no-margin-bottom">2020 &copy; Dreeko Corporations | All Rights Reserved. <a target="_blank" href="https://github.com/Harshana-Rathnayaka" class="icon-repo-forked"> Repository &rightarrowtail;</a></p>
                     </div>
                 </div>
             </footer>

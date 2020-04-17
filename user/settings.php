@@ -70,11 +70,11 @@ if (!isset($_SESSION['User'])) {
                     <button class="sidebar-toggle" title="Hide sidebar"><i class="fa fa-long-arrow-left"></i></button>
                 </div>
                 <div class="right-menu list-inline no-margin-bottom">
-                    <div class="list-inline-item"><a href="#" title="Search" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>
+                    <div class="list-inline-item"><a href="#" title="Search" class="search-open nav-link"><i class="fa fa-search"></i></a></div>
                     <!-- Go to website -->
-                    <div class="list-inline-item"> <a id="website" title="Go to website" href="../dealership/index.php" class="nav-link">Buy Cars <i class="icon-website"></i></a></div>
+                    <div class="list-inline-item"> <a id="website" title="Go to website" href="../dealership/index.php" class="nav-link">Buy Cars <i class="fa fa-globe"></i></a></div>
                     <!-- Log out               -->
-                    <div class="list-inline-item logout"> <a id="logout" title="Logout" href="../logout.php?logout" class="nav-link">Logout <i class="icon-logout"></i></a></div>
+                    <div class="list-inline-item logout"> <a id="logout" title="Logout" href="../logout.php?logout" class="nav-link">Logout <i class="fa fa-sign-out"></i></a></div>
                 </div>
             </div>
         </nav>
@@ -94,29 +94,30 @@ if (!isset($_SESSION['User'])) {
             <span class="heading">Main</span>
             <ul class="list-unstyled">
                 <li>
-                    <a href="index.php" title="Home"> <i class="icon-home"></i>Home </a>
+                    <a href="index.php" title="Home"> <i class="fa fa-home"></i>Home </a>
                 </li>
                 <li>
-                    <a href="myorders.php" title="Orders"> <i class="icon-bill"></i>My Orders </a>
+                    <a href="myorders.php" title="Orders"> <i class="fa fa-history"></i>My Orders </a>
                 </li>
                 <li>
-                    <a href="mycart.php" title="Cart"> <i class="icon-list"></i>My Cart </a>
+                    <a href="mycart.php" title="Cart"> <i class="fa fa-shopping-cart"></i>My Cart </a>
                 </li>
                 <li>
-                    <a href="mywishlist.php" title="Wishlist"> <i class="icon-list-1"></i>My Wishlist </a>
+                    <a href="mywishlist.php" title="Wishlist"> <i class="fa fa-shopping-basket"></i>My Wishlist </a>
                 </li>
             </ul><span class="heading" title="More actions">Actions</span>
             <ul class="list-unstyled">
                 <li class="active">
-                    <a href="settings.php" title="Settings"> <i class="icon-settings"></i>Settings </a>
+                    <a href="settings.php" title="Settings"> <i class="fa fa-wrench"></i>Settings </a>
                 </li>
                 <li>
-                    <a href="deleteaccount.php" title="Delete account"> <i class="icon-logout"></i>Delete My Account </a>
+                    <a href="deleteaccount.php" title="Delete account"> <i class="fa fa-minus-circle"></i>Delete My Account </a>
                 </li>
             </ul>
 
         </nav>
         <!-- Sidebar Navigation end-->
+
         <div class="page-content">
             <!-- Page Header-->
             <div class="page-header">
@@ -153,14 +154,28 @@ if (!isset($_SESSION['User'])) {
                     swal({
                         title: "ERROR!",
                         text: "<?php echo $error; ?>",
-                        icon: "warning",
+                        icon: "error",
                         button: "OK",
                     });
                 </script>
             <?php
                 unset($_SESSION['error']);
+            } elseif (@$_SESSION['missing'] == true) {
+                $missing = $_SESSION['missing'];
+                ?>
+                <script>
+                    swal({
+                        title: "INFO!",
+                        text: "<?php echo $missing; ?>",
+                        icon: "info",
+                        button: "OK",
+                    });
+                </script>
+            <?php
+                unset($_SESSION['missing']);
             }
             ?>
+
             <section class="no-padding-top">
                 <div class="container-fluid">
                     <div class="row">
@@ -267,64 +282,7 @@ if (!isset($_SESSION['User'])) {
                     </div>
                 </div>
             </section>
-            <!-- <section class="no-padding-top no-padding-bottom">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6">
-                            <div class="statistic-block block">
-                                <div class="progress-details d-flex align-items-end justify-content-between">
-                                    <div class="title">
-                                        <div class="icon"><i class="icon-user-1"></i></div><strong>New Clients</strong>
-                                    </div>
-                                    <div class="number dashtext-1">27</div>
-                                </div>
-                                <div class="progress progress-template">
-                                    <div role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-1"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="statistic-block block">
-                                <div class="progress-details d-flex align-items-end justify-content-between">
-                                    <div class="title">
-                                        <div class="icon"><i class="icon-contract"></i></div><strong>New Projects</strong>
-                                    </div>
-                                    <div class="number dashtext-2">375</div>
-                                </div>
-                                <div class="progress progress-template">
-                                    <div role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-2"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="statistic-block block">
-                                <div class="progress-details d-flex align-items-end justify-content-between">
-                                    <div class="title">
-                                        <div class="icon"><i class="icon-paper-and-pencil"></i></div><strong>New Invoices</strong>
-                                    </div>
-                                    <div class="number dashtext-3">140</div>
-                                </div>
-                                <div class="progress progress-template">
-                                    <div role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-3"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="statistic-block block">
-                                <div class="progress-details d-flex align-items-end justify-content-between">
-                                    <div class="title">
-                                        <div class="icon"><i class="icon-writing-whiteboard"></i></div><strong>All Projects</strong>
-                                    </div>
-                                    <div class="number dashtext-4">41</div>
-                                </div>
-                                <div class="progress progress-template">
-                                    <div role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-4"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section> -->
+
 
 
 

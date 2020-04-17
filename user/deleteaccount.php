@@ -69,11 +69,11 @@ if (!isset($_SESSION['User'])) {
                     <button class="sidebar-toggle" title="Hide sidebar"><i class="fa fa-long-arrow-left"></i></button>
                 </div>
                 <div class="right-menu list-inline no-margin-bottom">
-                    <div class="list-inline-item"><a href="#" title="Search" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>
+                    <div class="list-inline-item"><a href="#" title="Search" class="search-open nav-link"><i class="fa fa-search"></i></a></div>
                     <!-- Go to website -->
-                    <div class="list-inline-item"> <a id="website" title="Go to website" href="../dealership/index.php" class="nav-link">Buy Cars <i class="icon-website"></i></a></div>
+                    <div class="list-inline-item"> <a id="website" title="Go to website" href="../dealership/index.php" class="nav-link">Buy Cars <i class="fa fa-globe"></i></a></div>
                     <!-- Log out               -->
-                    <div class="list-inline-item logout"> <a id="logout" title="Logout" href="../logout.php?logout" class="nav-link">Logout <i class="icon-logout"></i></a></div>
+                    <div class="list-inline-item logout"> <a id="logout" title="Logout" href="../logout.php?logout" class="nav-link">Logout <i class="fa fa-sign-out"></i></a></div>
                 </div>
             </div>
         </nav>
@@ -93,24 +93,24 @@ if (!isset($_SESSION['User'])) {
             <span class="heading">Main</span>
             <ul class="list-unstyled">
                 <li>
-                    <a href="index.php" title="Home"> <i class="icon-home"></i>Home </a>
+                    <a href="index.php" title="Home"> <i class="fa fa-home"></i>Home </a>
                 </li>
                 <li>
-                    <a href="myorders.php" title="Orders"> <i class="icon-bill"></i>My Orders </a>
+                    <a href="myorders.php" title="Orders"> <i class="fa fa-history"></i>My Orders </a>
                 </li>
                 <li>
-                    <a href="mycart.php" title="Cart"> <i class="icon-list"></i>My Cart </a>
+                    <a href="mycart.php" title="Cart"> <i class="fa fa-shopping-cart"></i>My Cart </a>
                 </li>
                 <li>
-                    <a href="mywishlist.php" title="Wishlist"> <i class="icon-list-1"></i>My Wishlist </a>
+                    <a href="mywishlist.php" title="Wishlist"> <i class="fa fa-shopping-basket"></i>My Wishlist </a>
                 </li>
             </ul><span class="heading" title="More actions">Actions</span>
             <ul class="list-unstyled">
                 <li>
-                    <a href="settings.php" title="Settings"> <i class="icon-settings"></i>Settings </a>
+                    <a href="settings.php" title="Settings"> <i class="fa fa-wrench"></i>Settings </a>
                 </li>
                 <li class="active">
-                    <a href="deleteaccount.php" title="Delete account"> <i class="icon-logout"></i>Delete My Account </a>
+                    <a href="deleteaccount.php" title="Delete account"> <i class="fa fa-minus-circle"></i>Delete My Account </a>
                 </li>
             </ul>
 
@@ -131,3 +131,107 @@ if (!isset($_SESSION['User'])) {
                     <li class="breadcrumb-item active">Delete My Account </li>
                 </ul>
             </div>
+
+            <?php
+            if (@$_SESSION['success'] == true) {
+                $success = $_SESSION['success'];
+                ?>
+                <script>
+                    swal({
+                        title: "SUCCESS!",
+                        text: "<?php echo $success; ?>",
+                        icon: "success",
+                        button: "OK",
+                    });
+                </script>
+            <?php
+                unset($_SESSION['success']);
+            } elseif (@$_SESSION['error'] == true) {
+                $error = $_SESSION['error'];
+                ?>
+                <script>
+                    swal({
+                        title: "ERROR!",
+                        text: "<?php echo $error; ?>",
+                        icon: "error",
+                        button: "OK",
+                    });
+                </script>
+            <?php
+                unset($_SESSION['error']);
+            } elseif (@$_SESSION['missing'] == true) {
+                $missing = $_SESSION['missing'];
+                ?>
+                <script>
+                    swal({
+                        title: "INFO!",
+                        text: "<?php echo $missing; ?>",
+                        icon: "info",
+                        button: "OK",
+                    });
+                </script>
+            <?php
+                unset($_SESSION['missing']);
+            }
+            ?>
+
+            <section class="no-padding-top">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-11">
+
+                            <form action="../api/deleteMyAccount.php" class="form-horizontal" method="POST">
+
+                                <input type="hidden" name="userid" value="<?php echo $_SESSION['Id']; ?>">
+
+                                <div class="line"></div>
+                                <div class="form-group">
+                                    <p class="col-sm-12 form-control-label">
+                                        This action is irreversible.
+                                        You will lose access to all your data in the site as well as access to your account.
+                                        Are you sure you want to delete your account?</p>
+
+                                    <div class="col-sm-12">
+                                        <input type="checkbox" value="0" required name="confirm" class="checkbox-template">
+                                        <label class="col-sm-11">I understand. Delete my account.</label>
+                                    </div>
+                                </div>
+
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 ml-auto">
+                                        <a href="index.php" class="btn btn-outline-secondary">Cancel</a>
+                                        <input type="submit" value="Confirm" name="btnConfirm" class="btn btn-outline-success">
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="footer">
+                <div class="footer__block block no-margin-bottom">
+                    <div class="container-fluid text-center">
+                        <p class="no-margin-bottom">2020 &copy; Dreeko Corporations | All Rights Reserved. <a target="_blank" href="https://github.com/Harshana-Rathnayaka" class="icon-repo-forked">
+                                Repository &rightarrowtail;</a></p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- JavaScript files-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper.js/umd/popper.min.js">
+    </script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/jquery.cookie/jquery.cookie.js">
+    </script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="js/charts-home.js"></script>
+    <script src="js/front.js"></script>
+</body>
+
+</html>
