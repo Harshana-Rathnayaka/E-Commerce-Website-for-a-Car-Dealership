@@ -1,0 +1,3 @@
+# Error Page
+
+ErrorDocument 404 http://localhost/ds/admin/404.html
