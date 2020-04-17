@@ -10,7 +10,7 @@ session_start();
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>My Wishlist</title>
+  <title>Vehicle List </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Default Description">
   <meta name="keywords" content="fashion, store, E-commerce">
@@ -35,8 +35,6 @@ session_start();
 
   <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
 
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 </head>
 
 <body>
@@ -47,7 +45,7 @@ session_start();
           <div id="header">
             <div class="header-container">
               <div class="header-logo">
-                <a href="index-2.html" title="Car HTML" class="logo">
+                <a href="index.php" title="Car HTML" class="logo">
                   <div><img src="images/logo.png" alt="Car Store"></div>
                 </a>
               </div>
@@ -69,7 +67,7 @@ session_start();
                     <div class="no-js">
                       <a title="" class="clicker"></a>
                       <div class="fl-nav-links">
-                        <h3><a href="../user/index.php">My Acount</a></h3>
+                        <h3>My Acount</h3>
                         <ul class="links">
                           <?php
                           if (isset($_SESSION['User'], $_SESSION['Email'])) {
@@ -91,6 +89,7 @@ session_start();
                     </div>
                   </div>
 
+                  <!--mini-cart-->
                   <div class="collapse navbar-collapse">
                     <form class="navbar-form" role="search">
                       <div class="input-group">
@@ -104,6 +103,7 @@ session_start();
                   </div>
                   <!--links-->
                 </div>
+
                 <div class="fl-nav-menu">
                   <nav>
                     <div class="mm-toggle-wrap">
@@ -114,7 +114,7 @@ session_start();
                       <!-- BEGIN NAV -->
                       <ul id="nav" class="hidden-xs">
                         <li class="active"> <a class="level-top" href="index.php"><span>Home</span></a></li>
-                        <li class="level0 parent drop-menu"> <a class="level-top" href="vehicle-list.php"><span>Listing‎</span></a> </li>
+                        <li class="level0 parent drop-menu"> <a class="level-top" href="#"><span>Listing‎</span></a> </li>
                         <li class="mega-menu hidden-sm"> <a class="level-top" href="contact-us.php"><span>Contact‎</span></a> </li>
                         <li class="mega-menu hidden-sm"> <a class="level-top" href="about-us.php"><span>About us‎</span></a> </li>
                         <?php
@@ -123,7 +123,7 @@ session_start();
                           $usertype = $_SESSION['UserType'];
                           if ($usertype == 1) {
                             ?>
-                            <li class="mega-menu hidden-sm"> <a class="level-top" href="../user/mywishlist.php"><span>Wishlist</span></a> </li>
+                            <li class="mega-menu hidden-sm"> <a class="level-top" href="wishlist.php"><span>Wishlist</span></a> </li>
                             <li class="mega-menu hidden-sm"> <a class="level-top" href="../user/index.php"><span>Dashboard‎</span></a> </li>
                             <li class="mega-menu hidden-sm"> <a class="level-top" href="../user/mycart.php" title="View my cart"><span class="fa fa-shopping-cart"></span></a> </li>
                             <li class="mega-menu hidden-sm"> <a class="level-top" href="../logout.php?logout"><span>Logout</span></a> </li>
@@ -161,8 +161,8 @@ session_start();
           <div class="row">
             <div class="col-xs-12">
               <ul>
-                <li class="home"> <a href="index.php" title="Go to Home Page">Home</a> <span>&rsaquo; </span> </li>
-                <li class="category1601"> <strong>My Wishlist</strong> </li>
+                <li class="home"> <a href="index-2.html" title="Go to Home Page">Home</a> <span>&rsaquo; </span> </li>
+                <li class="category1601"> <strong>Vehicles</strong> </li>
               </ul>
             </div>
             <!--col-xs-12-->
@@ -172,200 +172,168 @@ session_start();
         <!--container-->
       </div>
       <div class="page-title">
-        <h2>MY WISHLIST</h2>
+        <h2>VEHICLE LISTING</h2>
       </div>
     </div>
+    <!--breadcrumbs-->
 
-    <!-- BEGIN Main Container col2-right -->
-    <section class="main-container col2-right-layout">
-      <div class="main container">
+    <!-- BEGIN Main Container col2-left -->
+    <section class="main-container col2-left-layout bounceInUp animated">
+      <div class="container">
         <div class="row">
-          <section class="col-main col-sm-9 col-xs-12 wow bounceInUp animated animated" style="visibility: visible;">
-            <div class="my-account">
-
-              <?php
-              if (@$_SESSION['success'] == true) {
-                $success = $_SESSION['success'];
-                ?>
-                <script>
-                  swal({
-                    title: "SUCCESS!",
-                    text: "<?php echo $success; ?>",
-                    icon: "success",
-                    button: "OK",
-                  });
-                </script>
-              <?php
-                unset($_SESSION['success']);
-              } elseif (@$_SESSION['error'] == true) {
-                $error = $_SESSION['error'];
-                ?>
-                <script>
-                  swal({
-                    title: "ERROR!",
-                    text: "<?php echo $error; ?>",
-                    icon: "warning",
-                    button: "OK",
-                  });
-                </script>
-              <?php
-                unset($_SESSION['error']);
-              } elseif (@$_SESSION['missing'] == true) {
-                $missing = $_SESSION['missing'];
-                ?>
-                <script>
-                  swal({
-                    title: "INFO!",
-                    text: "<?php echo $missing; ?>",
-                    icon: "info",
-                    button: "OK",
-                  });
-                </script>
-              <?php
-                unset($_SESSION['missing']);
-              }
-              ?>
-
-              <div class="my-wishlist">
-                <fieldset>
-                  <input name="form_key" type="hidden" value="EPYwQxF6xoWcjLUr">
-                  <div class="table-responsive">
-                    <table class="clean-table linearize-table data-table table-striped" id="wishlist-table">
-                      <thead>
-                        <tr class="first last">
-                          <th class="customer-wishlist-item-image"></th>
-                          <th class="customer-wishlist-item-info"></th>
-                          <th class="customer-wishlist-item-quantity">Quantity</th>
-                          <th class="customer-wishlist-item-price">Price</th>
-                          <th class="customer-wishlist-item-cart"></th>
-                          <th class="customer-wishlist-item-remove"></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-
-                        <?php
-                        $user_id = $_SESSION['Id'];
-                        include '../api/getWishlist.php';
-                        if ($result) {
-                          while ($row = mysqli_fetch_array($result)) {
-
-                            $username = $row['username'];
-                            $make = $row['name'];
-                            $model = $row['model'];
-                            $year = $row['year'];
-                            $capacity = $row['engine_capacity'];
-                            $horsepower = $row['horsepower'];
-                            $condition = $row['vehicle_condition'];
-                            $colour = $row['colour'];
-                            $seats = $row['seats'];
-                            $price = $row['price'];
-                            $image_link = $row['image_link'];
-                            $quantity = $row['quantity'];
-
-                            $vehicle_id = $row['vehicle_id'];
-                            $wishlist_id = $row['wishlist_id'];
-                            $make_id = $row['make_id'];
-
-                            $total = $price * $quantity;
-
-                            ?>
-
-                            <tr id="item_32" class="first odd">
-
-                              <td class="wishlist-cell0 customer-wishlist-item-image"><a class="product-image" href="product-detail.html" title="Slim Fit Casual Shirt"> <img src="../vehicleimages/<?php echo $image_link; ?>" width="80" height="80" alt="Vehicle"> </a>
-                              </td>
-
-                              <td class="wishlist-cell1 customer-wishlist-item-info">
-                                <h3 class="product-name"><a href="product-detail.html" title="Vehicle"><?php echo $make; ?> <?php echo $model; ?> <?php echo $year; ?></a></h3>
-                                <div class="description std">
-                                  <div class="inner">
-                                    <?php echo $capacity; ?> leters <br>
-                                    <?php echo $horsepower; ?> Hp <br>
-                                    <?php echo $condition; ?> <br>
-                                    <?php echo $colour; ?> <br>
-                                    <?php echo $seats; ?> seats <br>
-                                  </div>
-                                </div>
-                              </td>
-
-
-
-                              <td class="wishlist-cell2 customer-wishlist-item-quantity" data-rwd-label="Quantity">
-                                <div class="cart-cell">
-                                  <div class="add-to-cart-alt">
-                                    <input type="text" pattern="\d*" readonly class="input-text qty validate-not-negative-number" name="qty[32]" value="<?php echo $quantity; ?>">
-                                  </div>
-                                </div>
-                              </td>
-
-                              <td class="wishlist-cell3 customer-wishlist-item-price" data-rwd-label="Price">
-                                <div class="cart-cell">
-                                  <div class="price-box"> <span class="regular-price" id="product-price-2"> <span class="price">LKR <?php echo $total; ?></span> </span> </div>
-                                </div>
-                              </td>
-
-                              <td class="wishlist-cell4 customer-wishlist-item-cart">
-                                <div class="cart-cell">
-                                  <form action="../api/addToCart.php" method="POST">
-                                    <input type="hidden" name="userId" value="<?php echo $user_id; ?>">
-                                    <input type="hidden" name="vehicleId" value="<?php echo $vehicle_id; ?>">
-                                    <input type="hidden" name="makeId" value="<?php echo $make_id; ?>">
-                                    <input type="hidden" name="quantity" value="<?php echo $quantity; ?>">
-                                    <input type="hidden" name="total" value="<?php echo $total; ?>">
-                                    <input type="submit" name="btnAddToCart" class="button" value="Add to cart">
-                                  </form>
-                                </div>
-                              </td>
-
-                              <td class="wishlist-cell5 customer-wishlist-item-remove last">
-                                <form action="../api/deleteFromWishlist.php" method="post">
-                                  <input type="hidden" name="formId" value="dealershipWishlist">
-                                  <input type="hidden" name="wishlistId" value="<?php echo $wishlist_id; ?>">
-                                  <input type="submit" name="deleteFromWishlist" class="button" value="Delete">
-                                </form>
-                              </td>
-
-                            </tr>
-
-                        <?php
-                          }
-                        }
-                        ?>
-
-                      </tbody>
-                    </table>
+          <div class="col-main col-sm-9 col-sm-push-3 product-grid">
+            <div class="pro-coloumn">
+              <article class="col-main">
+                <div class="toolbar">
+                  <div class="sorter">
+                    <div class="view-mode"><a href="grid.html" title="List" class="button-grid">&nbsp;</a> <span title="list" class="button button-active button-list">&nbsp;</span> </div>
                   </div>
-                </fieldset>
-              </div>
+                  <div id="sort-by">
+                    <label class="left">Sort By: </label>
+                    <ul>
+                      <li><a href="#">Position<span class="right-arrow"></span></a>
+                        <ul>
+                          <li><a href="#">Name</a></li>
+                          <li><a href="#">Price</a></li>
+                          <li><a href="#">Position</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <a class="button-asc left" href="#" title="Set Descending Direction"><span class="top_arrow"></span></a>
+                  </div>
+                  <div class="pager">
+                    <div id="limiter">
+                      <label>View: </label>
+                      <ul>
+                        <li><a href="#">15<span class="right-arrow"></span></a>
+                          <ul>
+                            <li><a href="#">20</a></li>
+                            <li><a href="#">30</a></li>
+                            <li><a href="#">35</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="pages">
+                      <label>Page:</label>
+                      <ul class="pagination">
+                        <li><a href="#">&laquo;</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <?php
+                include '../api/getVehicles.php';
+                if ($result) {
+                  while ($row = mysqli_fetch_array($result)) {
+                    ?>
+
+                    <div class="category-products">
+                      <ol class="products-list" id="products-list">
+                        <li class="item first">
+                          <div class="product-image">
+                            <a href="details.php?vehicle_id=<?php echo $row['vehicle_id']; ?>" title="See details">
+                              <img class="small-image" src="../vehicleimages/<?php echo $row['image_link']; ?>" alt="Vehicle image">
+                            </a>
+                          </div>
+                          <div class="product-shop">
+                            <h2 class="product-name"><a href="details.php?vehicle_id=<?php echo $row['vehicle_id']; ?>" title="See details"><?php echo $row['name']; ?> <?php echo $row['model']; ?></a></h2>
+
+                            <div class="desc std">
+                              <b> Engine Capacity: </b> <?php echo $row['engine_capacity']; ?> leters <br>
+                              <b> Transmission: </b> <?php echo $row['transmission_type']; ?> transmission <br>
+                              <b> Horsepower: </b> <?php echo $row['horsepower']; ?>Hp <br>
+                              <a class="link-learn" title="" href="details.php?vehicle_id=<?php echo $row['vehicle_id']; ?>">Learn More....</a>
+                              </p>
+                            </div>
+                            <div class="price-box">
+                              <p class="special-price"> <span class="price-label"></span> <span id="product-price-212" class="price"> LKR <?php echo $row['price']; ?> </span> </p>
+                            </div>
+                            <div class="actions">
+                              <button class="button btn-cart ajx-cart" title="Add to Cart" type="button"><span>Add to
+                                  Cart</span></button>
+                              <span class="add-to-links">
+                                <a title="Add to Wishlist" class="button link-wishlist" href="#">
+                                  <span>Add to Wishlist</span>
+                                </a>
+                              </span>
+                            </div>
+                          </div>
+                        </li>
+
+
+
+
+                      </ol>
+                    </div>
+
+                <?php
+                  }
+                }
+                ?>
+
+
+                <div class="toolbar bottom">
+                  <div id="sort-by">
+                    <label class="left">Sort By: </label>
+                    <ul>
+                      <li><a href="#">Position<span class="right-arrow"></span></a>
+                        <ul>
+                          <li><a href="#">Name</a></li>
+                          <li><a href="#">Price</a></li>
+                          <li><a href="#">Position</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <a class="button-asc left" href="#" title="Set Descending Direction"><span class="top_arrow"></span></a>
+                  </div>
+                  <div class="pager">
+                    <div id="limiter">
+                      <label>View: </label>
+                      <ul>
+                        <li><a href="#">15<span class="right-arrow"></span></a>
+                          <ul>
+                            <li><a href="#">20</a></li>
+                            <li><a href="#">30</a></li>
+                            <li><a href="#">35</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="pages">
+                      <label>Page:</label>
+                      <ul class="pagination">
+                        <li><a href="#">&laquo;</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              </article>
             </div>
-          </section>
+            <!--	///*///======    End article  ========= //*/// -->
+          </div>
 
-          <!--col-main col-sm-9 wow bounceInUp animated-->
-          <aside class="col-right sidebar col-sm-3 col-xs-12 wow bounceInUp animated animated" style="visibility: visible;">
-            <div class="block block-account">
-              <div class="block-title"> My Account </div>
-              <div class="block-content">
-                <ul>
-                  <li><a href="../user/index.php"><span> Account Dashboard</span></a></li>
-                  <li><a href="../user/myorders.php"><span> My Orders</span></a></li>
-                  <li class="current"><a>My Wishlist</a></li>
-                </ul>
-              </div>
-              <!--block-content-->
-            </div>
-            <!--block block-account-->
-
-
-          </aside>
-          <!--col-right sidebar col-sm-3 wow bounceInUp animated-->
+          <!--col-right sidebar-->
         </div>
         <!--row-->
       </div>
-      <!--main container-->
+      <!--container-->
     </section>
     <!--main-container col2-left-layout-->
-
-
 
     <footer>
       <!-- BEGIN INFORMATIVE FOOTER -->
@@ -499,14 +467,15 @@ session_start();
             </div>
             <div class="col-sm-4 col-xs-12 coppyright"><a target="_blank" href="https://github.com/Harshana-Rathnayaka">2020 Dreeko Corporations &reg; | All Rights Reserved.
                 &copy;</a></div>
-            <div class="payment-accept"> <img src="images/payment-1.png" alt=""> <img src="images/payment-2.png" alt=""> <img src="images/payment-3.png" alt=""> <img src="images/payment-4.png" alt=""> </div>
+            <div class="col-xs-12 col-sm-4">
+              <div class="payment-accept"> <img src="images/payment-1.png" alt=""> <img src="images/payment-2.png" alt=""> <img src="images/payment-3.png" alt=""> <img src="images/payment-4.png" alt=""> </div>
+            </div>
           </div>
         </div>
       </div>
-  </div>
-  <!-- BEGIN SIMPLE FOOTER -->
-  </footer>
-  <!-- End For version 1,2,3,4,6 -->
+      <!-- BEGIN SIMPLE FOOTER -->
+    </footer>
+    <!-- End For version 1,2,3,4,6 -->
 
   </div>
   <!--page-->
@@ -579,17 +548,98 @@ session_start();
       </li>
     </ul>
   </div>
+
+
   <!-- JavaScript -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap-slider.min.js"></script>
+  <script src="js/bootstrap-select.min.js"></script>
   <script type="text/javascript" src="js/parallax.js"></script>
   <script type="text/javascript" src="js/revslider.js"></script>
   <script type="text/javascript" src="js/common.js"></script>
   <script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
-  <script type="text/javascript" src="js/jquery.flexslider.js"></script>
   <script type="text/javascript" src="js/owl.carousel.min.js"></script>
   <script type="text/javascript" src="js/jquery.mobile-menu.min.js"></script>
+  <script src="js/countdown.js"></script>
+  <script>
+    jQuery(document).ready(function() {
+      jQuery('#rev_slider_4').show().revolution({
+        dottedOverlay: 'none',
+        delay: 5000,
+        startwidth: 1170,
+        startheight: 650,
 
+        hideThumbs: 200,
+        thumbWidth: 200,
+        thumbHeight: 50,
+        thumbAmount: 2,
+
+        navigationType: 'thumb',
+        navigationArrows: 'solo',
+        navigationStyle: 'round',
+
+        touchenabled: 'on',
+        onHoverStop: 'on',
+
+        swipe_velocity: 0.7,
+        swipe_min_touches: 1,
+        swipe_max_touches: 1,
+        drag_block_vertical: false,
+
+        spinner: 'spinner0',
+        keyboardNavigation: 'off',
+
+        navigationHAlign: 'center',
+        navigationVAlign: 'bottom',
+        navigationHOffset: 0,
+        navigationVOffset: 20,
+
+        soloArrowLeftHalign: 'left',
+        soloArrowLeftValign: 'center',
+        soloArrowLeftHOffset: 20,
+        soloArrowLeftVOffset: 0,
+
+        soloArrowRightHalign: 'right',
+        soloArrowRightValign: 'center',
+        soloArrowRightHOffset: 20,
+        soloArrowRightVOffset: 0,
+
+        shadow: 0,
+        fullWidth: 'on',
+        fullScreen: 'off',
+
+        stopLoop: 'off',
+        stopAfterLoops: -1,
+        stopAtSlide: -1,
+
+        shuffle: 'off',
+
+        autoHeight: 'off',
+        forceFullWidth: 'on',
+        fullScreenAlignForce: 'off',
+        minFullScreenHeight: 0,
+        hideNavDelayOnMobile: 1500,
+
+        hideThumbsOnMobile: 'off',
+        hideBulletsOnMobile: 'off',
+        hideArrowsOnMobile: 'off',
+        hideThumbsUnderResolution: 0,
+
+        hideSliderAtLimit: 0,
+        hideCaptionAtLimit: 0,
+        hideAllCaptionAtLilmit: 0,
+        startWithSlide: 0,
+        fullScreenOffsetContainer: ''
+      });
+    });
+  </script>
+  <script type="text/javascript">
+    function HideMe() {
+      jQuery('.popup1').hide();
+      jQuery('#fade').hide();
+    }
+  </script>
 
 </body>
 

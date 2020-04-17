@@ -2,6 +2,12 @@
 
 session_start();
 
+$userType = $_SESSION['UserType'];
+
+if ($userType == 0 || empty($_SESSION['Id']) || empty($_SESSION['total'])) {
+  header('location:404error.php');
+} 
+
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +37,9 @@ session_start();
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+
 </head>
 
 <body>
@@ -65,8 +74,21 @@ session_start();
                       <div class="fl-nav-links">
                         <h3>My Acount</h3>
                         <ul class="links">
-                          <li><a href="../login/login-page.php" title="Login">Login</a></li>
-                          <li><a href="../register/index.php" title="Register">Register</a></li>
+                          <?php
+                          if (isset($_SESSION['User'], $_SESSION['Email'])) {
+                            ?>
+                            <li><?php echo $_SESSION['FirstName']; ?> <?php echo $_SESSION['LastName']; ?></li>
+                            <li><?php echo $_SESSION['Email']; ?></li>
+                            <br>
+                            <li><a href="../logout.php?logout" title="Log out">Log out</a></li>
+                          <?php
+                          } else {
+                            ?>
+                            <li><a href="../login/login-page.php" title="Login">Login</a></li>
+                            <li><a href="../register/index.php" title="Register">Register</a></li>
+                          <?php
+                          }
+                          ?>
                         </ul>
                       </div>
                     </div>
@@ -92,37 +114,39 @@ session_start();
                     <div class="mm-toggle-wrap">
                       <div class="mm-toggle"><i class="fa fa-bars"></i><span class="mm-label">Menu</span> </div>
                     </div>
+
                     <div class="nav-inner">
                       <!-- BEGIN NAV -->
                       <ul id="nav" class="hidden-xs">
                         <li class="active"> <a class="level-top" href="index.php"><span>Home</span></a></li>
+                        <li class="level0 parent drop-menu"> <a class="level-top" href="vehicle-list.php"><span>Listing‎</span></a> </li>
+                        <li class="mega-menu hidden-sm"> <a class="level-top" href="contact-us.php"><span>Contact‎</span></a> </li>
+                        <li class="mega-menu hidden-sm"> <a class="level-top" href="about-us.php"><span>About us‎</span></a> </li>
+                        <?php
+                        if (isset($_SESSION['Id']) && isset($_SESSION['UserType'])) {
 
-                        <li class="level0 parent drop-menu"> <a class="level-top" href="#"><span>Listing‎</span></a>
-                          <ul class="level1">
-                            <li class="level1 first"><a href="grid.html"><span>Car Grid</span></a></li>
-                            <li class="level1 nav-10-2">
-                              <a href="list.html"> <span>Car List</span> </a>
-                            </li>
-                            <li class="level1 nav-10-3">
-                              <a href="grid1.html"> <span>Accessories Grid</span> </a>
-                            </li>
-                            <li class="level1 nav-10-4">
-                              <a href="list1.html"> <span>Accessories List</span> </a>
-                            </li>
-                            <li class="level1 first parent"><a href="car-detail.html"><span>Car Detail</span></a> </li>
-                            <li class="level1 first parent"><a href="accessories-detail.html"><span>Accessories
-                                  Detail</span></a> </li>
-                          </ul>
-                        </li>
-
-                        <li class="mega-menu hidden-sm"> <a class="level-top" href="compare.html"><span>Compare
-                              Cars‎</span></a> </li>
-                        <li class="mega-menu hidden-sm"> <a class="level-top" href="contact-us.html"><span>Contact‎</span></a> </li>
-                        <li class="mega-menu hidden-sm"> <a class="level-top" href="about-us.html"><span>About
-                              us‎</span></a> </li>
-
+                          $usertype = $_SESSION['UserType'];
+                          if ($usertype == 1) {
+                            ?>
+                            <li class="mega-menu hidden-sm"> <a class="level-top" href="wishlist.php"><span>Wishlist</span></a> </li>
+                            <li class="mega-menu hidden-sm"> <a class="level-top" href="../user/index.php"><span>Dashboard‎</span></a> </li>
+                            <li class="mega-menu hidden-sm"> <a class="level-top" href="../user/mycart.php" title="View my cart"><span class="fa fa-shopping-cart"></span></a> </li>
+                            <li class="mega-menu hidden-sm"> <a class="level-top" href="../logout.php?logout"><span>Logout</span></a> </li>
+                          <?php
+                            } elseif ($usertype == 0) {
+                              ?>
+                            <li class="mega-menu hidden-sm"> <a class="level-top" href="../logout.php?logout"><span>Logout</span></a> </li>
+                          <?php
+                            }
+                          } else {
+                            ?>
+                          <li class="mega-menu hidden-sm"> <a class="level-top" href="../login/login-page.php"><span>Login</span></a> </li>
+                        <?php
+                        }
+                        ?>
                       </ul>
                       <!--nav-->
+
                     </div>
                   </nav>
                 </div>

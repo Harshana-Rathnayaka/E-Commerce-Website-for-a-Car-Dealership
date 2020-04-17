@@ -40,6 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     // session and reroute
                     $_SESSION['User'] = $_POST['username'];
+                    $_SESSION['FirstName'] = $user['first_name'];
+                    $_SESSION['LastName'] = $user['last_name'];
+                    $_SESSION['Email'] = $user['email'];
                     $_SESSION['Id'] = $user['id'];
                     $_SESSION['UserType'] = $user['user_type'];
 

@@ -1,10 +1,17 @@
+<?php
+
+session_start();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title> About Us </title>
+    <title>Harrier Contact Us Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Default Description">
     <meta name="keywords" content="fashion, store, E-commerce">
@@ -26,6 +33,9 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+
 </head>
 
 <body>
@@ -36,7 +46,7 @@
                     <div id="header">
                         <div class="header-container">
                             <div class="header-logo">
-                                <a href="index-2.html" title="Car HTML" class="logo">
+                                <a href="index.php" title="Car HTML" class="logo">
                                     <div><img src="images/logo.png" alt="Car Store"></div>
                                 </a>
                             </div>
@@ -59,101 +69,79 @@
                                             <div class="fl-nav-links">
                                                 <h3>My Acount</h3>
                                                 <ul class="links">
-                                                    <li><a href="login.html" title="My Account">Login</a></li>
-                                                    <li><a href="login.html" title="Wishlist">Register</a></li>
+                                                    <?php
+                                                    if (isset($_SESSION['User'], $_SESSION['Email'])) {
+                                                        ?>
+                                                        <li><?php echo $_SESSION['FirstName']; ?> <?php echo $_SESSION['LastName']; ?></li>
+                                                        <li><?php echo $_SESSION['Email']; ?></li>
+                                                        <br>
+                                                        <li><a href="../logout.php?logout" title="Log out">Log out</a></li>
+                                                    <?php
+                                                    } else {
+                                                        ?>
+                                                        <li><a href="../login/login-page.php" title="Login">Login</a></li>
+                                                        <li><a href="../register/index.php" title="Register">Register</a></li>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="fl-cart-contain">
-                                        <div class="mini-cart">
-                                            <div class="basket"> <a href="shopping-cart.html"><span> 2 </span></a> </div>
-                                            <div class="fl-mini-cart-content" style="display: none;">
-                                                <div class="block-subtitle">
-                                                    <div class="top-subtotal">2 items, <span class="price">$259.99</span> </div>
-                                                    <!--top-subtotal-->
-                                                    <!--pull-right-->
-                                                </div>
-                                                <!--block-subtitle-->
-                                                <ul class="mini-products-list" id="cart-sidebar">
-                                                    <li class="item first">
-                                                        <div class="item-inner">
-                                                            <a class="product-image" title="timi &amp; leslie Sophia Diaper Bag, Lemon Yellow/Shadow White" href="#l"><img alt="timi &amp; leslie Sophia Diaper Bag, Lemon Yellow/Shadow White" src="products-images/p4.jpg"></a>
-                                                            <div class="product-details">
-                                                                <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                                                                <!--access-->
-                                                                <strong>1</strong> x <span class="price">$179.99</span>
-                                                                <p class="product-name"><a href="accessories-detail.html">timi &amp; leslie Sophia Diaper Bag...</a></p>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="item last">
-                                                        <div class="item-inner">
-                                                            <a class="product-image" title="JP Lizzy Satchel Designer Diaper Bag - Slate Citron" href="#"><img alt="JP Lizzy Satchel Designer Diaper Bag - Slate Citron" src="products-images/p3.jpg"></a>
-                                                            <div class="product-details">
-                                                                <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                                                                <!--access-->
-                                                                <strong>1</strong> x <span class="price">$80.00</span>
-                                                                <p class="product-name"><a href="accessories-detail.html">JP Lizzy Satchel Designer Diaper Ba...</a></p>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <div class="actions">
-                                                    <button class="btn-checkout" title="Checkout" type="button" onClick="window.location=checkout.html"><span>Checkout</span></button>
-                                                </div>
-                                                <!--actions-->
-                                            </div>
-                                            <!--fl-mini-cart-content-->
-                                        </div>
-                                    </div>
+
                                     <!--mini-cart-->
                                     <div class="collapse navbar-collapse">
                                         <form class="navbar-form" role="search">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" placeholder="Search">
                                                 <span class="input-group-btn">
-                    <button type="submit" class="search-btn"> <span class="glyphicon glyphicon-search"> <span class="sr-only">Search</span> </span>
-                                                </button>
+                                                    <button type="submit" class="search-btn"> <span class="glyphicon glyphicon-search"> <span class="sr-only">Search</span> </span>
+                                                    </button>
                                                 </span>
                                             </div>
                                         </form>
                                     </div>
                                     <!--links-->
                                 </div>
+
                                 <div class="fl-nav-menu">
                                     <nav>
                                         <div class="mm-toggle-wrap">
                                             <div class="mm-toggle"><i class="fa fa-bars"></i><span class="mm-label">Menu</span> </div>
                                         </div>
+
                                         <div class="nav-inner">
                                             <!-- BEGIN NAV -->
                                             <ul id="nav" class="hidden-xs">
-                                                <li class="active"> <a class="level-top" href="index.html"><span>Home</span></a></li>
+                                                <li class="active"> <a class="level-top" href="index.php"><span>Home</span></a></li>
+                                                <li class="level0 parent drop-menu"> <a class="level-top" href="vehicle-list.php"><span>Listing‎</span></a> </li>
+                                                <li class="mega-menu hidden-sm"> <a class="level-top" href="contact-us.php"><span>Contact‎</span></a> </li>
+                                                <li class="mega-menu hidden-sm"> <a class="level-top" href="about-us.php"><span>About us‎</span></a> </li>
+                                                <?php
+                                                if (isset($_SESSION['Id']) && isset($_SESSION['UserType'])) {
 
-                                                <li class="level0 parent drop-menu"> <a class="level-top" href="#"><span>Listing‎</span></a>
-                                                    <ul class="level1">
-                                                        <li class="level1 first"><a href="grid.html"><span>Car Grid</span></a></li>
-                                                        <li class="level1 nav-10-2">
-                                                            <a href="list.html"> <span>Car List</span> </a>
-                                                        </li>
-                                                        <li class="level1 nav-10-3">
-                                                            <a href="grid1.html"> <span>Accessories Grid</span> </a>
-                                                        </li>
-                                                        <li class="level1 nav-10-4">
-                                                            <a href="list1.html"> <span>Accessories List</span> </a>
-                                                        </li>
-                                                        <li class="level1 first parent"><a href="car-detail.html"><span>Car Detail</span></a> </li>
-                                                        <li class="level1 first parent"><a href="accessories-detail.html"><span>Accessories Detail</span></a> </li>
-                                                    </ul>
-                                                </li>
-
-                                                <li class="mega-menu hidden-sm"> <a class="level-top" href="compare.html"><span>Compare Cars‎</span></a> </li>
-                                                <li class="mega-menu hidden-sm"> <a class="level-top" href="contact-us.html"><span>Contact‎</span></a> </li>
-                                                <li class="mega-menu hidden-sm"> <a class="level-top" href="about-us.html"><span>About us‎</span></a> </li>
-
+                                                    $usertype = $_SESSION['UserType'];
+                                                    if ($usertype == 1) {
+                                                        ?>
+                                                        <li class="mega-menu hidden-sm"> <a class="level-top" href="wishlist.php"><span>Wishlist</span></a> </li>
+                                                        <li class="mega-menu hidden-sm"> <a class="level-top" href="../user/index.php"><span>Dashboard‎</span></a> </li>
+                                                        <li class="mega-menu hidden-sm"> <a class="level-top" href="../user/mycart.php" title="View my cart"><span class="fa fa-shopping-cart"></span></a> </li>
+                                                        <li class="mega-menu hidden-sm"> <a class="level-top" href="../logout.php?logout"><span>Logout</span></a> </li>
+                                                    <?php
+                                                        } elseif ($usertype == 0) {
+                                                            ?>
+                                                        <li class="mega-menu hidden-sm"> <a class="level-top" href="../logout.php?logout"><span>Logout</span></a> </li>
+                                                    <?php
+                                                        }
+                                                    } else {
+                                                        ?>
+                                                    <li class="mega-menu hidden-sm"> <a class="level-top" href="../login/login-page.php"><span>Login</span></a> </li>
+                                                <?php
+                                                }
+                                                ?>
                                             </ul>
                                             <!--nav-->
+
                                         </div>
                                     </nav>
                                 </div>
@@ -166,200 +154,247 @@
                 </div>
             </div>
         </header>
-        <!--container-->
+
 
         <div class="page-heading">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="page-title">
-                            <h2>About Us</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- BEGIN Main Container -->
-
-        <div class="main-container col1-layout wow bounceInUp animated animated" style="visibility: visible;">
-
-            <div class="main container">
-                <div class="row">
-                    <div class="std">
-                        <div class="wrapper_bl" style="margin-top: 1px;">
-                            <div class="form_background">
-
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                    containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also
-                                    the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-                                    like Aldus PageMaker including versions of Lorem Ipsum</p>
-                                <br>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                    containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem IpsumLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also
-                                    the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-                                    like Aldus PageMaker including versions of Lorem Ipsum</p>
-                                <br>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                    containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--main-container-->
-
-        </div>
-        <!--col1-layout-->
-
-
-
-
-        <!-- For version 1,2,3,4,6 -->
-
-        <footer>
-            <!-- BEGIN INFORMATIVE FOOTER -->
-            <div class="footer-inner">
-                <div class="our-features-box wow bounceInUp animated animated">
-                    <div class="container">
-                        <ul>
-                            <li>
-                                <div class="feature-box">
-                                    <div class="icon-truck"><img src="images/world-icon.png" alt="Image"></div>
-                                    <div class="content">
-                                        <h6>World's #1</h6>
-                                        <p>Largest Auto portal</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="feature-box">
-                                    <div class="icon-support"><img src="images/car-sold-icon.png" alt="Image"></div>
-                                    <div class="content">
-                                        <h6>Car Sold</h6>
-                                        <p>Every 4 minute</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="feature-box">
-                                    <div class="icon-money"><img src="images/tag-icon.png" alt="Image"></div>
-                                    <div class="content">
-                                        <h6>Offers</h6>
-                                        <p>Stay updated pay less</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="last">
-                                <div class="feature-box">
-                                    <div class="icon-return"><img src="images/compare-icon.png" alt="Image"></div>
-                                    <div class="content">
-                                        <h6>Compare</h6>
-                                        <p>Decode the right car</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="breadcrumbs">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-4 col-xs-12 col-lg-4">
-                            <div class="co-info">
-                                <h4>SHOWROOM</h4>
-                                <address>
-        <div><span>NSBM Green University, <br>
-          Mahenwaththa, <br>
-          Pitipana, <br> 
-        Homagama</span></div>
-        <div> <span> 011 2 729 729</span></div>
-        <div> <span><a href="#">harrier@nsbm.com</a></span></div>
-        <div> <span>Mon - Fri : 09am to 06pm</span></div>
-        </address>
-                            </div>
+                        <div class="col-xs-12">
+                            <ul>
+                                <li class="home"> <a href="index-2.html" title="Go to Home Page">Home</a> <span>&rsaquo; </span> </li>
+                                <li class="category1601"> <strong>Contact Us</strong> </li>
+                            </ul>
                         </div>
-                        <div class="col-sm-8 col-xs-12 col-lg-8">
-                            <div class="footer-column">
-                                <h4>Quick Links</h4>
-                                <ul class="links">
-                                    <li><a title="FAQs" href="#">FAQs</a></li>
-                                    <li><a title="Payment" href="#">Payment</a></li>
-                                    <li><a title="Shipment" href="#">Shipment</a></li>
-                                    <li><a title="Where is my order?" href="#">Where is my order?</a></li>
-                                    <li class="last"><a title="Return policy" href="#">Return policy</a></li>
-                                </ul>
-                            </div>
-                            <div class="footer-column">
-                                <h4>Style Advisor</h4>
-                                <ul class="links">
-                                    <li class="first"><a title="Your Account" href="#">Your Account</a></li>
-                                    <li><a title="Information" href="#">Information</a></li>
-                                    <li><a title="Addresses" href="#">Addresses</a></li>
-                                    <li><a title="Orders History" href="#">Orders History</a></li>
-                                    <li class="last"><a title=" Additional Information" href="#"> Additional Information</a></li>
-                                </ul>
-                            </div>
-                            <div class="footer-column">
-                                <h4>Information</h4>
-                                <ul class="links">
-                                    <li class="first"><a title="Site Map" href="#">Site Map</a></li>
-                                    <li><a title="Advanced Search" href="#">Advanced Search</a></li>
-                                    <li><a title="History" href="#">About Us</a></li>
-                                    <li><a title="History" href="#">Contact Us</a></li>
-                                    <li><a title="Suppliers" href="#">Suppliers</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!--col-sm-12 col-xs-12 col-lg-8-->
-                        <!--col-xs-12 col-lg-4-->
+                        <!--col-xs-12-->
                     </div>
                     <!--row-->
-
                 </div>
-
                 <!--container-->
             </div>
-            <!--footer-inner-->
+            <div class="page-title">
+                <h2>CONTACT US</h2>
+            </div>
+        </div>
+        <!--breadcrumbs-->
 
-            <div class="footer-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-4">
-                            <div class="social">
-                                <ul>
-                                    <li class="fb">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="tw">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="googleplus">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="linkedin">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="youtube">
-                                        <a href="#"></a>
-                                    </li>
-                                </ul>
+        <!-- BEGIN Main Container col2-right -->
+        <div class="main-container col2-right-layout">
+            <div class="main container">
+                <div class="row">
+                    <div class="col-main col-sm-9 wow bounceInUp animated animated" style="visibility: visible;">
+                        <div id="messages_product_view"></div>
+                        <form action="#" id="contactForm" method="post">
+                            <div class="static-contain">
+                                <fieldset class="group-select">
+                                    <ul>
+                                        <li id="billing-new-address-form">
+                                            <fieldset class="">
+                                                <ul>
+                                                    <li>
+                                                        <div class="customer-name">
+                                                            <div class="input-box name-firstname">
+                                                                <label for="name"><em class="required">*</em>Name</label>
+                                                                <br>
+                                                                <input name="name" id="name" title="Name" value="john doe" class="input-text required-entry" type="text">
+                                                            </div>
+                                                            <div class="input-box name-firstname">
+                                                                <label for="email"><em class="required">*</em>Email</label>
+                                                                <br>
+                                                                <input name="email" id="email" title="Email" value="john.doe@gmail.com" class="input-text required-entry validate-email" type="text">
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <label for="telephone">Telephone</label>
+                                                        <br>
+                                                        <input name="telephone" id="telephone" title="Telephone" value="" class="input-text" type="text">
+                                                    </li>
+                                                    <li>
+                                                        <label for="comment"><em class="required">*</em>Comment</label>
+                                                        <br>
+                                                        <textarea name="comment" id="comment" title="Comment" class="required-entry input-text" cols="5" rows="3"></textarea>
+                                                    </li>
+                                                </ul>
+                                            </fieldset>
+                                        </li>
+                                        <p class="require"><em class="required">* </em>Required Fields</p>
+                                        <input type="text" name="hideit" id="hideit" value="" style="display:none !important;">
+                                        <div class="buttons-set">
+                                            <button type="submit" title="Submit" class="button submit"><span><span>Submit</span></span></button>
+                                        </div>
+                                    </ul>
+                                </fieldset>
+                            </div>
+                        </form>
+
+                    </div>
+                    <aside class="col-right sidebar col-sm-3 wow bounceInUp animated animated" style="visibility: visible;">
+                        <div class="block block-company">
+                            <div class="block-title">Company</div>
+                            <div class="block-content">
+                                <ol id="recently-viewed-items">
+                                    <li class="item odd"><a href="about-us.html">About Us</a></li>
+                                    <li class="item even"><a href="#">Sitemap</a></li>
+                                    <li class="item  odd"><a href="#">Terms of Service</a></li>
+                                    <li class="item last"><a href="#">Search Terms</a></li>
+                                    <li class="item last"><a href="contact-us.html"><strong>Contact Us</strong></a></li>
+                                </ol>
                             </div>
                         </div>
-                        <div class="col-sm-4 col-xs-12 coppyright"><a target="_blank" href="https://github.com/Harshana-Rathnayaka">2020 Dreeko Corporations. All Rights Reserved. &copy; &reg;</a></div>
-                        <div class="col-xs-12 col-sm-4">
-                            <div class="payment-accept"> <img src="images/payment-1.png" alt=""> <img src="images/payment-2.png" alt=""> <img src="images/payment-3.png" alt=""> <img src="images/payment-4.png" alt=""> </div>
+                    </aside>
+                    <!--col-right sidebar-->
+                </div>
+                <!--row-->
+            </div>
+            <!--main-container-inner-->
+        </div>
+        <!--main-container col2-left-layout-->
+
+
+
+    </div>
+    <!-- For version 1,2,3,4,6 -->
+
+    <footer>
+        <!-- BEGIN INFORMATIVE FOOTER -->
+        <div class="footer-inner">
+            <div class="our-features-box wow bounceInUp animated animated">
+                <div class="container">
+                    <ul>
+                        <li>
+                            <div class="feature-box">
+                                <div class="icon-truck"><img src="images/world-icon.png" alt="Image"></div>
+                                <div class="content">
+                                    <h6>World's #1</h6>
+                                    <p>Largest Auto portal</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="feature-box">
+                                <div class="icon-support"><img src="images/car-sold-icon.png" alt="Image"></div>
+                                <div class="content">
+                                    <h6>Car Sold</h6>
+                                    <p>Every 4 minute</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="feature-box">
+                                <div class="icon-money"><img src="images/tag-icon.png" alt="Image"></div>
+                                <div class="content">
+                                    <h6>Offers</h6>
+                                    <p>Stay updated pay less</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="last">
+                            <div class="feature-box">
+                                <div class="icon-return"><img src="images/compare-icon.png" alt="Image"></div>
+                                <div class="content">
+                                    <h6>Compare</h6>
+                                    <p>Decode the right car</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-xs-12 col-lg-4">
+                        <div class="co-info">
+                            <h4>SHOWROOM</h4>
+                            <address>
+                                <div><span>NSBM Green University, <br>
+                                        Mahenwaththa, <br>
+                                        Pitipana, <br>
+                                        Homagama</span></div>
+                                <div> <span> 011 2 729 729</span></div>
+                                <div> <span><a href="#">harrier@nsbm.com</a></span></div>
+                                <div> <span>Mon - Fri : 09am to 06pm</span></div>
+                            </address>
                         </div>
+                    </div>
+                    <div class="col-sm-8 col-xs-12 col-lg-8">
+                        <div class="footer-column">
+                            <h4>Quick Links</h4>
+                            <ul class="links">
+                                <li><a title="FAQs" href="#">FAQs</a></li>
+                                <li><a title="Payment" href="#">Payment</a></li>
+                                <li><a title="Shipment" href="#">Shipment</a></li>
+                                <li><a title="Where is my order?" href="#">Where is my order?</a></li>
+                                <li class="last"><a title="Return policy" href="#">Return policy</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Style Advisor</h4>
+                            <ul class="links">
+                                <li class="first"><a title="Your Account" href="#">Your Account</a></li>
+                                <li><a title="Information" href="#">Information</a></li>
+                                <li><a title="Addresses" href="#">Addresses</a></li>
+                                <li><a title="Orders History" href="#">Orders History</a></li>
+                                <li class="last"><a title=" Additional Information" href="#"> Additional Information</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Information</h4>
+                            <ul class="links">
+                                <li class="first"><a title="Site Map" href="#">Site Map</a></li>
+                                <li><a title="Advanced Search" href="#">Advanced Search</a></li>
+                                <li><a title="History" href="#">About Us</a></li>
+                                <li><a title="History" href="#">Contact Us</a></li>
+                                <li><a title="Suppliers" href="#">Suppliers</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!--col-sm-12 col-xs-12 col-lg-8-->
+                    <!--col-xs-12 col-lg-4-->
+                </div>
+                <!--row-->
+
+            </div>
+
+            <!--container-->
+        </div>
+        <!--footer-inner-->
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="social">
+                            <ul>
+                                <li class="fb">
+                                    <a href="#"></a>
+                                </li>
+                                <li class="tw">
+                                    <a href="#"></a>
+                                </li>
+                                <li class="googleplus">
+                                    <a href="#"></a>
+                                </li>
+                                <li class="linkedin">
+                                    <a href="#"></a>
+                                </li>
+                                <li class="youtube">
+                                    <a href="#"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12 coppyright"><a target="_blank" href="https://github.com/Harshana-Rathnayaka">2020 Dreeko Corporations. All Rights Reserved. &copy; &reg;</a></div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="payment-accept"> <img src="images/payment-1.png" alt=""> <img src="images/payment-2.png" alt=""> <img src="images/payment-3.png" alt=""> <img src="images/payment-4.png" alt=""> </div>
                     </div>
                 </div>
             </div>
-            <!-- BEGIN SIMPLE FOOTER -->
-        </footer>
-        <!-- End For version 1,2,3,4,6 -->
+        </div>
+        <!-- BEGIN SIMPLE FOOTER -->
+    </footer>
+    <!-- End For version 1,2,3,4,6 -->
 
     </div>
     <!--page-->

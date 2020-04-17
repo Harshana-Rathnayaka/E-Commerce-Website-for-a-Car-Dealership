@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 session_start();
 
@@ -8,9 +8,10 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title> 404 - Page Not Found</title>
+    <title> About Us </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Default Description">
     <meta name="keywords" content="fashion, store, E-commerce">
@@ -83,7 +84,6 @@ session_start();
                                                     <?php
                                                     }
                                                     ?>
-                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -153,38 +153,70 @@ session_start();
                 </div>
             </div>
         </header>
-        <!-- Main Container -->
+        <!--container-->
 
         <div class="page-heading">
-            <div class="container">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <ul>
+                                <li class="home"> <a href="index-2.html" title="Go to Home Page">Home</a> <span>&rsaquo; </span> </li>
+                                <li class="category1601"> <strong>About Us</strong> </li>
+                            </ul>
+                        </div>
+                        <!--col-xs-12-->
+                    </div>
+                    <!--row-->
+                </div>
+                <!--container-->
+            </div>
+            <div class="page-title">
+                <h2>ABOUT US</h2>
+            </div>
+        </div>
+        <!--breadcrumbs-->
+
+        <!-- BEGIN Main Container -->
+        <div class="main-container col1-layout wow bounceInUp animated animated" style="visibility: visible;">
+
+            <div class="main container">
                 <div class="row">
-                    <div class="col-xs-12">
-                        <div class="page-title">
-                            <h2>404 Page</h2>
+                    <div class="std">
+                        <div class="wrapper_bl" style="margin-top: 1px;">
+                            <div class="form_background">
+
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                                    containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also
+                                    the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                                    like Aldus PageMaker including versions of Lorem Ipsum</p>
+                                <br>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                                    containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem IpsumLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also
+                                    the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                                    like Aldus PageMaker including versions of Lorem Ipsum</p>
+                                <br>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                                    containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+                            </div>
                         </div>
                     </div>
-                    <!--col-xs-12-->
                 </div>
-                <!--row-->
             </div>
-            <!--container-->
+            <!--main-container-->
+
         </div>
+        <!--col1-layout-->
 
-        <section class="content-wrapper" style="background:#ffd83b">
-            <div class="container">
-                <div class="std">
-                    <div class="page-not-found">
-                        <br>
-                        <div><img src="images/404-img.jpg" alt="error image"></div>
-                        <h3>Oops! The Page you requested was not found!</h3>
-                        <div><a href="index.php" class="btn-home"><span>Back To Home</span></a></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Main Container End -->
 
-        <!-- Footer -->
+
+
+        <!-- For version 1,2,3,4,6 -->
 
         <footer>
             <!-- BEGIN INFORMATIVE FOOTER -->
@@ -231,7 +263,6 @@ session_start();
                         </ul>
                     </div>
                 </div>
-
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-4 col-xs-12 col-lg-4">
@@ -316,8 +347,7 @@ session_start();
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-sm-4 col-xs-12 coppyright"><a target="_blank" href="https://github.com/Harshana-Rathnayaka">2020 Dreeko Corporations &reg; | All Rights Reserved.
-                                &copy;</a></div>
+                        <div class="col-sm-4 col-xs-12 coppyright"><a target="_blank" href="https://github.com/Harshana-Rathnayaka">2020 Dreeko Corporations. All Rights Reserved. &copy; &reg;</a></div>
                         <div class="col-xs-12 col-sm-4">
                             <div class="payment-accept"> <img src="images/payment-1.png" alt=""> <img src="images/payment-2.png" alt=""> <img src="images/payment-3.png" alt=""> <img src="images/payment-4.png" alt=""> </div>
                         </div>
@@ -346,7 +376,119 @@ session_start();
                 </div>
             </li>
             <li class="active"> <a class="level-top" href="#"><span>Home</span></a></li>
-
+            <li><a href="grid1.html">Accessories</a>
+                <!--mega menu-->
+                <ul class="level0">
+                    <li class="level3 nav-6-1 parent item"> <a href="grid.html"><span>Audio</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Amplifiers</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Installation Parts</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Speakers</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Stereos</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Subwoofers</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"> <a href="grid.html"><span>Body Parts</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Bumpers</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Doors</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Fenders</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Grilles</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Hoods</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"> <a href="grid.html"><span>Exterior</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Bed Accessories</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Body Kits</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Custom Grilles</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Car Covers</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Off-Road Bumpers</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"> <a href="grid.html"><span>Interior</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Custom Gauges</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Dash Kits</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Seat Covers</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Steering Wheels</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Sun Shades</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"> <a href="grid.html"><span>Lighting</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Fog Lights</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Headlights</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>LED Lights</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Off-Road Lights</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Signal Lights</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"> <a href="grid.html"><span>Performance</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Air Intake Systems</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Brakes</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Exhaust Systems</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Power Adders</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Racing Gear</span></a> </li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                </ul>
+                <!--level0-->
             </li>
             <li><a href="#">Listing‎</a>
                 <ul class="level1">
@@ -364,8 +506,16 @@ session_start();
                     <li class="level1 first parent"><a href="accessories-detail.html"><span>Accessories Detail</span></a> </li>
                 </ul>
             </li>
-
-            <li><a href="#">Other</a>
+            <li><a href="grid.html">Blog</a>
+                <ul class="level1">
+                    <li class="level1 first"><a href="blog.html"><span>Blog List</span></a></li>
+                    <li class="level1 nav-10-2">
+                        <a href="blog-detail.html"> <span>Blog Detail</span> </a>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="compare.html">Sandwiches‎</a></li>
+            <li><a href="#">Pages</a>
                 <ul class="level1">
                     <li class="level1">
                         <a href="about-us.html"> <span>About us</span> </a>
@@ -397,15 +547,17 @@ session_start();
                     <li class="level1"><a href="newsletter.html"><span>Newsletter</span></a> </li>
                 </ul>
             </li>
+            <li><a href="#">Custom</a></li>
         </ul>
     </div>
-
-    <!-- End Footer -->
-
     <!-- JavaScript -->
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/parallax.js"></script>
+    <script type="text/javascript" src="js/revslider.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider.js"></script>
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-menu.min.js"></script>
 
