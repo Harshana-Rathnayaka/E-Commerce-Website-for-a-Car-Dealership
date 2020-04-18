@@ -18,7 +18,7 @@ if (!isset($_SESSION['User'])) {
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Vehicles</title>
+  <title>Colours</title>
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -64,7 +64,7 @@ if (!isset($_SESSION['User'])) {
           <ul class="nav flex-column">
 
             <li class="nav-item">
-              <a class="nav-link active" href="index.php">
+              <a class="nav-link " href="index.php">
                 <span data-feather="list"></span>
                 Vehicles <span class="sr-only">(current)</span>
               </a>
@@ -99,7 +99,7 @@ if (!isset($_SESSION['User'])) {
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="colours.php">
+              <a class="nav-link active" href="colours.php">
                 <span data-feather="droplet"></span>
                 Colours
               </a>
@@ -123,109 +123,114 @@ if (!isset($_SESSION['User'])) {
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Vehicles</li>
+              <li class="breadcrumb-item active" aria-current="page">Colours</li>
             </ol>
           </nav>
         </div>
 
 
         <?php
-        if (@$_GET['Valid'] == true) {
-          $valid = $_GET['Valid'];
+        if (@$_SESSION['success'] == true) {
+          $success = $_SESSION['success'];
           ?>
           <script>
             swal({
               title: "SUCCESS!",
-              text: "<?php echo $valid; ?>",
+              text: "<?php echo $success; ?>",
               icon: "success",
               button: "OK",
             });
           </script>
         <?php
-        } elseif (@$_GET['Invalid'] == true) {
-          $invalid = $_GET['Invalid'];
+          unset($_SESSION['success']);
+        } elseif (@$_SESSION['error'] == true) {
+          $error = $_SESSION['error'];
           ?>
           <script>
             swal({
               title: "ERROR!",
-              text: "<?php echo $invalid; ?>",
+              text: "<?php echo $error; ?>",
               icon: "warning",
               button: "OK",
             });
           </script>
         <?php
-        } elseif (@$_GET['Missing'] == true) {
-          $warning = $_GET['Missing'];
+          unset($_SESSION['error']);
+        } elseif (@$_SESSION['missing'] == true) {
+          $missing = $_SESSION['missing'];
           ?>
           <script>
             swal({
-              title: "WARNING!",
-              text: "<?php echo $warning; ?>",
-              icon: "warning",
+              title: "INFO!",
+              text: "<?php echo $missing; ?>",
+              icon: "info",
               button: "OK",
             });
           </script>
         <?php
+          unset($_SESSION['missing']);
         }
         ?>
 
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="addColourModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addColourModal">Add New Colour</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <form action="../api/addNewColour.php" method="POST">
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="colourText">Colour</label>
+                    <input type="text" class="form-control" id="colourText" required name="colourText" placeholder="Enter a colour">
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" name="btnAddColour" class="btn btn-success">Save</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addColourModal">
+          Add New Colour
+        </button>
+        <hr>
 
         <div class="table-responsive">
           <table id="vehiclesTable" class="table table-striped table-hover table-dark text-center">
             <thead>
               <tr>
-                <th width="3%">#</th>
-                <th width="3%">Make</th>
-                <th width="3%">Model</th>
-                <th width="3%">Transmission</th>
-                <th width="3%">Condition</th>
-                <th width="3%">Colour</th>
-                <th>Convertible</th>
-                <th>In Stock</th>
-                <th>Price</th>
+                <th>#</th>
+                <th>Colour</th>
                 <th>Action</th>
 
               </tr>
             </thead>
             <tbody>
               <?php
-              include '../api/getVehicles.php';
+              include '../api/getColours.php';
               if ($result) {
                 while ($row = mysqli_fetch_array($result)) {
                   ?>
                   <tr>
-                    <td><?php echo $vehicle_id = $row['vehicle_id']; ?></td>
-                    <td><?php echo $row['name']; ?></td>
-                    <td><?php echo $row['model']; ?></td>
-                    <td><?php echo $row['transmission_type']; ?></td>
-                    <td><?php echo $row['vehicle_condition']; ?></td>
+                    <td><?php echo $colour_id = $row['id']; ?></td>
                     <td><?php echo $row['colour']; ?></td>
-                    <td><?php $convertible = $row['convertible'];
-                            if ($convertible == "0") {
-                              ?>
-                        <span class="text-danger">&times;</span>
-                      <?php
-                          } elseif ($convertible == "1") {
-                            ?>
-                        <span class="text-success">&radic;</span>
-                      <?php
-                          }
-                          ?></td>
-                    <td><?php $in_stock = $row['in_stock'];
-                            if ($in_stock == "0") {
-                              ?>
-                        <span class="text-danger">&times;</span>
-                      <?php
-                          } elseif ($in_stock == "1") {
-                            ?>
-                        <span class="text-success">&radic;</span>
-                      <?php
-                          }
-                          ?></td>
-                    <td><?php echo $row['price']; ?></td>
+
                     <td>
                       <form action="viewvehicle.php?vehicle_id=<?php echo $vehicle_id; ?>" method="POST">
-                        <button type="submit" name="view" class="btn btn-success btn-sm">View</button>
+                        <button type="submit" name="view" class="btn btn-info btn-sm">Edit</button>
                       </form>
                     </td>
                   </tr>

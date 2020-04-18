@@ -85,6 +85,20 @@ class DbOperations
 		}
 	}
 
+	public function addNewColour($colour)
+	{
+		$stmt = $this->con->prepare("INSERT INTO `colours` (`colour`) VALUES (?);");
+		$stmt->bind_param("s", $colour);
+
+		if ($stmt->execute()) {
+			// new colour created
+			return 1;
+		} else {
+			// some error 
+			return 2;
+		}
+	}
+
 	// adding to wishlist
 	public function addToWishlist($user_id, $vehicle_id, $make_id, $quantity)
 	{

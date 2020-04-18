@@ -20,7 +20,7 @@ if (!isset($_SESSION['User'])) {
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Add a Vehicle</title>
+  <title>Add Vehicle</title>
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -96,6 +96,13 @@ if (!isset($_SESSION['User'])) {
               <a class="nav-link" href="addmanufacturer.php">
                 <span data-feather="plus-circle"></span>
                 Add manufacturer
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="colours.php">
+                <span data-feather="droplet"></span>
+                Colours
               </a>
             </li>
 
