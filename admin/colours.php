@@ -174,7 +174,7 @@ if (!isset($_SESSION['User'])) {
 
 
 
-        <!-- Modal -->
+        <!-- Add data modal -->
         <div class="modal fade" id="addColourModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -191,7 +191,6 @@ if (!isset($_SESSION['User'])) {
                     <label for="colourText">Colour</label>
                     <input type="text" class="form-control" id="colourText" required name="colourText" placeholder="Enter a colour">
                   </div>
-
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -203,13 +202,49 @@ if (!isset($_SESSION['User'])) {
           </div>
         </div>
 
+
+
+        <!-- ################################################################################################################## -->
+
+        <!-- Edit data modal -->
+        <div class="modal fade" id="editColourModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editColourModal">Edit Colour</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="../api/updateColour.php" method="POST">
+                <div class="modal-body">
+                  <div class="form-group">
+
+                    <input type="hidden" name="coloudid" id="colourId">
+
+                    <label for="colourText">Colour</label>
+                    <input type="text" class="form-control" id="updateColourText" required name="colourText" placeholder="Enter a colour">
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" name="btnEditColour" class="btn btn-success">Update</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+
+
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addColourModal">
           Add New Colour
         </button>
         <hr>
 
         <div class="table-responsive">
-          <table id="vehiclesTable" class="table table-striped table-hover table-dark text-center">
+          <table id="coloursTable" class="table table-striped table-hover table-dark text-center">
             <thead>
               <tr>
                 <th>#</th>
@@ -219,6 +254,7 @@ if (!isset($_SESSION['User'])) {
               </tr>
             </thead>
             <tbody>
+
               <?php
               include '../api/getColours.php';
               if ($result) {
@@ -227,10 +263,9 @@ if (!isset($_SESSION['User'])) {
                   <tr>
                     <td><?php echo $colour_id = $row['id']; ?></td>
                     <td><?php echo $row['colour']; ?></td>
-
                     <td>
                       <form action="viewvehicle.php?vehicle_id=<?php echo $vehicle_id; ?>" method="POST">
-                        <button type="submit" name="view" class="btn btn-info btn-sm">Edit</button>
+                        <button type="submit" name="view" class="btn btn-info btn-sm btnEdit">Edit</button>
                       </form>
                     </td>
                   </tr>
@@ -252,8 +287,28 @@ if (!isset($_SESSION['User'])) {
 
   <script>
     $(document).ready(function() {
-      $('#vehiclesTable').DataTable({
+      $('#coloursTable').DataTable({
         "lengthMenu": [5, 10],
+      });
+    });
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      $('.btnEdit').on('click', function() {
+
+        $('#editColourModal').modal('show');
+
+        $tr = $(this).closest('tr');
+
+        var data = $tr.children('td').map(function() {
+          return $(this).text();
+        }).get();
+
+        console.log(data);
+
+        $('#colourId').val(data[0]);
+        $('#updateColourText').val(data[1]);
       });
     });
   </script>

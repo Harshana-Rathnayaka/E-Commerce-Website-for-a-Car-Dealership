@@ -26,7 +26,10 @@ if (!isset($_SESSION['User'])) {
 
   <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
 
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" />
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 
@@ -122,6 +125,8 @@ if (!isset($_SESSION['User'])) {
             </div>
           </nav>
 
+
+
           <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
               <nav aria-label="breadcrumb">
@@ -131,14 +136,62 @@ if (!isset($_SESSION['User'])) {
                 </ol>
               </nav>
             </div>
+
+            <?php
+            if (@$_SESSION['success'] == true) {
+              $success = $_SESSION['success'];
+              ?>
+              <script>
+                swal({
+                  title: "SUCCESS!",
+                  text: "<?php echo $success; ?>",
+                  icon: "success",
+                  button: "OK",
+                });
+              </script>
+            <?php
+              unset($_SESSION['success']);
+            } elseif (@$_SESSION['error'] == true) {
+              $error = $_SESSION['error'];
+              ?>
+              <script>
+                swal({
+                  title: "ERROR!",
+                  text: "<?php echo $error; ?>",
+                  icon: "warning",
+                  button: "OK",
+                });
+              </script>
+            <?php
+              unset($_SESSION['error']);
+            } elseif (@$_SESSION['missing'] == true) {
+              $missing = $_SESSION['missing'];
+              ?>
+              <script>
+                swal({
+                  title: "INFO!",
+                  text: "<?php echo $missing; ?>",
+                  icon: "info",
+                  button: "OK",
+                });
+              </script>
+            <?php
+              unset($_SESSION['missing']);
+            }
+            ?>
+
+
             <div class="table-responsive">
-              <table class="table table-striped table-hover table-dark">
+              <table id="usersTable" class="table table-striped table-hover table-dark">
                 <thead>
                   <tr>
-                    <th width="5%">#</th>
-                    <th width="15%">Name</th>
-                    <th width="15%">Username</th>
-                    <th width="25%">Email</th>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Status</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -152,6 +205,35 @@ if (!isset($_SESSION['User'])) {
                         <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['username']; ?></td>
                         <td><?php echo $row['email']; ?></td>
+                        <td><?php echo $row['contact']; ?></td>
+                        <?php
+                            $user_status = $row['user_status'];
+                            if ($user_status == 1) {
+                              ?>
+                          <td class="text-success"><strong>Online</strong></td>
+                        <?php
+                            } else {
+                              ?>
+                          <td class="text-danger"><strong>Offline</strong></td>
+
+                        <?php
+                            }
+                            ?>
+                        <td>
+                          <form action="../api/updateUserStatus.php" method="POST">
+                            <input type="hidden" name="userId" value="<?php echo $row['id']; ?>" <div class="form-group">
+                            <div>
+                              <select class="form-control col-10" name="process" required>
+                                <option value="2">Update user status</option>
+                                <option value="1">Activate</option>
+                                <option value="0">Deactivate</option>
+                              </select>
+                            </div>
+                            <br>
+                            <button type="submit" name="btnUpdateUserStatus" class="btn btn-info">Update</button>
+                          </form>
+                        </td>
+
                       </tr>
                   <?php
                     }
@@ -171,6 +253,16 @@ if (!isset($_SESSION['User'])) {
 
       <!--===============================================================================================-->
       <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+      <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+      <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+      <script>
+        $(document).ready(function() {
+          $('#usersTable').DataTable({
+            "lengthMenu": [5, 10],
+          });
+        });
+      </script>
 
 </body>
 

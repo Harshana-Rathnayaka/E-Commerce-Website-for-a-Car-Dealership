@@ -85,6 +85,7 @@ class DbOperations
 		}
 	}
 
+	// add a new colour
 	public function addNewColour($colour)
 	{
 		$stmt = $this->con->prepare("INSERT INTO `colours` (`colour`) VALUES (?);");
@@ -250,7 +251,7 @@ class DbOperations
 	// retrieving users table 
 	public function getUsers()
 	{
-		$stmt = $this->con->prepare("SELECT `id`, CONCAT( `first_name`, ' ', `last_name`) AS 'name', `username`, `email` FROM `users`");
+		$stmt = $this->con->prepare("SELECT `id`, CONCAT( `first_name`, ' ', `last_name`) AS 'name', `username`, `email`, `contact`, `user_status` FROM `users` WHERE `user_type` = 1");
 		$stmt->execute();
 		return $stmt->get_result();
 	}
@@ -313,6 +314,21 @@ class DbOperations
 		}
 	}
 
+	// activate or deactivate user account by updating user status from admin side
+	public function updateUserStatus($user_id, $status)
+	{
+		$stmt = $this->con->prepare("UPDATE `users` SET `user_status` = ? WHERE `id` = ?");
+		$stmt->bind_param("ii", $status, $user_id);
+
+		if ($stmt->execute()) {
+			// user account status updated by admin
+			return 0;
+		} else {
+			// some error 
+			return 1;
+		}
+	}
+
 	// update admin details
 	public function updateAdminAccountDetails($userid, $firstname, $lastname, $username, $email)
 	{
@@ -351,6 +367,21 @@ class DbOperations
 
 		if ($stmt->execute()) {
 			// vehicle updated
+			return 0;
+		} else {
+			// some error 
+			return 1;
+		}
+	}
+
+	// update colours
+	public function updateColour($colour_id, $colour)
+	{
+		$stmt = $this->con->prepare("UPDATE `colours` SET `colour` = ? WHERE `id` = ?");
+		$stmt->bind_param("si", $colour, $colour_id);
+
+		if ($stmt->execute()) {
+			// colour updated
 			return 0;
 		} else {
 			// some error 
