@@ -6,24 +6,27 @@ require_once '../includes/dbOperations.php';
 
 $response = array();
 
-if (!isset($_POST['btnEditColour'])) {
+if (!isset($_POST['btnEditManufacturer'])) {
 
     // some fields are missing
     $_SESSION['missing'] = "Please fill in all the details";
 
     $response['error'] = true;
     $response['message'] = "Please fill in all the details";
-    header("location:../admin/colours.php");
+    header("location:../admin/allmanufacturers.php");
 } else {
 
     // getting the values
-    $colour_id = $_POST['colourid'];
-    $colour = $_POST['colourText'];
+    $manufacturer_id = $_POST['manufacturerid'];
+    $name = $_POST['name'];
+    $address = $_POST['address'];
+    $email = $_POST['email'];
+    $contact = $_POST['contact'];
 
     // db object
     $db = new DbOperations();
 
-    $result = $db->updateColour($colour_id, $colour);
+    $result = $db->updateManufacturer($manufacturer_id, $name, $address, $email, $contact);
 
     if ($result == 1) {
         // some error
@@ -31,13 +34,13 @@ if (!isset($_POST['btnEditColour'])) {
 
         $response['error'] = true;
         $response['message'] = "Something went wrong, please try again.";
-        header("location:../admin/colours.php");
+        header("location:../admin/allmanufacturers.php");
     } elseif ($result == 0) {
         // success
         $_SESSION['success'] = "Colour updated successfully!";
         $response['error'] = false;
         $response['message'] = "Vehicle details updated successfully";
-        header("location:../admin/colours.php");
+        header("location:../admin/allmanufacturers.php");
     }
 }
 

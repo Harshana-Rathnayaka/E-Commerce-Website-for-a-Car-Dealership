@@ -227,7 +227,7 @@ if (!isset($_SESSION['User'])) {
                 <div class="modal-body">
                   <div class="form-group">
 
-                    <input type="hidden" name="coloudid" id="colourId">
+                    <input type="hidden" name="colourid" id="colourId">
 
                     <label for="colourText">Colour</label>
                     <input type="text" class="form-control" id="updateColourText" required name="colourText" placeholder="Enter a colour">
@@ -257,7 +257,6 @@ if (!isset($_SESSION['User'])) {
                 <th>#</th>
                 <th>Colour</th>
                 <th>Action</th>
-
               </tr>
             </thead>
             <tbody>
@@ -271,9 +270,7 @@ if (!isset($_SESSION['User'])) {
                     <td><?php echo $colour_id = $row['id']; ?></td>
                     <td><?php echo $row['colour']; ?></td>
                     <td>
-                      <form action="viewvehicle.php?vehicle_id=<?php echo $vehicle_id; ?>" method="POST">
-                        <button type="submit" name="view" class="btn btn-info btn-sm btnEdit">Edit</button>
-                      </form>
+                      <button type="submit" name="view" class="btn btn-primary btn-sm btnEdit">Edit</button>
                     </td>
                   </tr>
               <?php
@@ -312,22 +309,20 @@ if (!isset($_SESSION['User'])) {
   </script>
 
   <script>
-    $(document).ready(function() {
-      $('.btnEdit').on('click', function() {
+    $('.btnEdit').on('click', function() {
 
-        $('#editColourModal').modal('show');
+      $('#editColourModal').modal('show');
 
-        $tr = $(this).closest('tr');
+      $tr = $(this).closest('tr');
 
-        var data = $tr.children('td').map(function() {
-          return $(this).text();
-        }).get();
+      var data = $tr.children('td').map(function() {
+        return $(this).text();
+      }).get();
 
-        console.log(data);
+      console.log(data);
 
-        $('#colourId').val(data[0]);
-        $('#updateColourText').val(data[1]);
-      });
+      $('#colourId').val(data[0]);
+      $('#updateColourText').val(data[1]);
     });
   </script>
 
