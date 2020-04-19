@@ -23,7 +23,7 @@ if (!isset($_POST['deleteFromCart']) && !isset($_POST['cartId'])) {
 
     if ($result == 1) {
 
-        // successfully deleted from the wishlist
+        // successfully deleted from the cart
         $_SESSION['success'] = "Successfully deleted from the cart!";
 
         $response['error'] = false;

@@ -209,7 +209,7 @@ if ($userType == 0 || empty($_SESSION['Id']) || empty($_SESSION['total'])) {
 
                   // echo $total;
                   ?>
-                  <form id="co-billing-form">
+                  <form id="co-billing-form" action="checkout.php" method="POST">
                     <fieldset class="group-select">
                       <ul class="">
                         <li id="billing-new-address-form">
@@ -279,7 +279,7 @@ if ($userType == 0 || empty($_SESSION['Id']) || empty($_SESSION['total'])) {
 
                       <div class="buttons-set" id="billing-buttons-container">
                         <p class="required">* Required Fields</p>
-                        <input type="submit" value="Continue" id="btnContinue" title="Continue" class="button continue">
+                        <input type="submit" value="Continue" id="btnContinue" name="btnContinueToCheckout" title="Continue" class="button continue">
                       </div>
 
                     </fieldset>

@@ -201,34 +201,54 @@ if (!isset($_SESSION['User'])) {
                         <div class="col-lg-12">
                             <div class="block">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-hover">
+                                    <table id="pendingOrderTable" class="table table-striped table-hover">
                                         <thead>
                                             <tr>
                                                 <th class="text-info"><i class="fa fa-list-ol"></i></th>
-                                                <th class="text-info">First Name</th>
-                                                <th class="text-info">Last Name</th>
-                                                <th class="text-info">Username</th>
+                                                <th class="text-info">Make</th>
+                                                <th class="text-info">Model</th>
+                                                <th class="text-info">Quantity</th>
+                                                <th class="text-info">Paid</th>
+                                                <th class="text-info">Timestamp</th>
+                                                <th class="text-info">Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@twitter </td>
-                                            </tr>
+                                            <?php
+                                            include '../api/getPendingOrdersById.php';
+                                            if ($result) {
+                                                while ($row = mysqli_fetch_array($result)) {
+
+                                                    $order_id = $row['order_id'];
+                                                    $make = $row['make'];
+                                                    $model = $row['model'];
+                                                    $quantity = $row['quantity'];
+                                                    $total = $row['paid_amount'];
+                                                    $timestamp = $row['timestamp'];
+                                                    $order_status = $row['order_status'];
+
+                                                    ?>
+
+                                                    <tr>
+                                                        <td><?php echo $order_id ?></td>
+                                                        <td><?php echo $make ?></td>
+                                                        <td><?php echo $model ?></td>
+                                                        <td><?php echo $quantity ?></td>
+                                                        <td><?php echo $total ?></td>
+                                                        <td><?php echo $timestamp ?></td>
+
+                                                        <?php
+                                                                if ($order_status == 0) {
+                                                                    ?>
+                                                            <td class="text-warning">Pending </td>
+                                                        <?php
+                                                                }
+                                                                ?>
+                                                    </tr>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -259,6 +279,17 @@ if (!isset($_SESSION['User'])) {
     <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
     <script src="js/charts-home.js"></script>
     <script src="js/front.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#pendingOrderTable').DataTable({
+                "lengthMenu": [3, 5, 10],
+            });
+        });
+    </script>
 </body>
 
 </html>

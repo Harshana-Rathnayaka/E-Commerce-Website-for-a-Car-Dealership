@@ -87,6 +87,13 @@ if (!isset($_SESSION['User'])) {
                 </li>
 
                 <li class="nav-item">
+                  <a class="nav-link" href="pendingorders.php">
+                    <span data-feather="shopping-bag"></span>
+                    Pending Orders
+                  </a>
+                </li>
+
+                <li class="nav-item">
                   <a class="nav-link active" href="allusers.php">
                     <span data-feather="users"></span>
                     Users
@@ -243,6 +250,17 @@ if (!isset($_SESSION['User'])) {
               </table>
             </div>
           </main>
+
+          <div class="ml-auto mr-auto text-center py-5 mt-5">
+        <footer class="footer">
+          <div class="footer__block block no-margin-bottom">
+            <div class="container-fluid text-center">
+              <p class="no-margin-bottom">2020 &copy; Dreeko Corporations | All Rights Reserved. <a title="www.github.com/Harshana-Rathnayaka" target="_blank" href="https://github.com/Harshana-Rathnayaka" class="icon-repo-forked"> Repository &rightarrowtail;</a></p>
+            </div>
+          </div>
+        </footer>
+      </div>
+      
         </div>
       </div>
       <script src="js/jquery-3.3.1.slim.min.js"></script>

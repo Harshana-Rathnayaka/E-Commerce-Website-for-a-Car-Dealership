@@ -130,6 +130,21 @@ class DbOperations
 		}
 	}
 
+	// adding to orders
+	public function addToOrders($user_id, $make, $model, $quantity, $total)
+	{
+		$stmt = $this->con->prepare("INSERT INTO `orders`(`user_id`, `make`, `model`, `quantity`, `paid_amount`) VALUES (?, ?, ?, ?, ?); ");
+		$stmt->bind_param("issii", $user_id, $make, $model, $quantity, $total);
+
+		if ($stmt->execute()) {
+			// added to orders table
+			return 1;
+		} else {
+			// some error
+			return 2;
+		}
+	}
+
 
 	/* CRUD  -> r -> RETRIEVE */
 
@@ -248,6 +263,35 @@ class DbOperations
 		return $stmt->get_result();
 	}
 
+	// retrieving orders table by user id
+	public function getOrdersByUserId($user_id)
+	{
+		$stmt = $this->con->prepare("SELECT * FROM `orders` INNER JOIN `users` ON users.id = orders.user_id
+		WHERE `user_id` = ? ORDER BY `order_id`");
+		$stmt->bind_param("i", $user_id);
+		$stmt->execute();
+		return $stmt->get_result();
+	}
+
+	// retrieving pending orders to user
+	public function getPendingOrdersById($user_id)
+	{
+		$stmt = $this->con->prepare("SELECT * FROM `orders` INNER JOIN `users` ON users.id = orders.user_id
+		WHERE `user_id` = ? AND `order_status` = 0 ORDER BY `order_id`");
+		$stmt->bind_param("i", $user_id);
+		$stmt->execute();
+		return $stmt->get_result();
+	}
+
+	// retrieving pending orders to admin
+	public function getAllPendingOrders()
+	{
+		$stmt = $this->con->prepare("SELECT * FROM `orders` INNER JOIN `users` ON users.id = orders.user_id
+		WHERE `order_status` = 0 ORDER BY `timestamp`");
+		$stmt->execute();
+		return $stmt->get_result();
+	}
+
 	// retrieving users table 
 	public function getUsers()
 	{
@@ -319,6 +363,21 @@ class DbOperations
 	{
 		$stmt = $this->con->prepare("UPDATE `users` SET `user_status` = ? WHERE `id` = ?");
 		$stmt->bind_param("ii", $status, $user_id);
+
+		if ($stmt->execute()) {
+			// user account status updated by admin
+			return 0;
+		} else {
+			// some error 
+			return 1;
+		}
+	}
+
+	// confirm or refund order by updating order status from admin side
+	public function updateOrderStatus($order_id, $status)
+	{
+		$stmt = $this->con->prepare("UPDATE `orders` SET `order_status` = ? WHERE `order_id` = ?");
+		$stmt->bind_param("ii", $status, $order_id);
 
 		if ($stmt->execute()) {
 			// user account status updated by admin

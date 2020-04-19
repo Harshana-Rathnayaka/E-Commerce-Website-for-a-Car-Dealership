@@ -144,45 +144,40 @@ if (!isset($_SESSION['User'])) {
                                                 <th class="text-info"><i class="fa fa-list-ol"></i></th>
                                                 <th class="text-info">Make</th>
                                                 <th class="text-info">Model</th>
-                                                <th class="text-info">Colour</th>
                                                 <th class="text-info">Quantity</th>
-                                                <th class="text-info">Total</th>
-                                                <th class="text-info">Date</th>
-                                                <th class="text-info">PaymentID</th>
+                                                <th class="text-info">Paid</th>
+                                                <th class="text-info">Timestamp</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>twitter </td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>mdo</td>
-                                                <td>mdo</td>
-                                                <td>do</td>
 
-                                            </tr>
-                                            <tr>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>twitter </td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>mdo</td>
-                                                <td>mdo</td>
-                                                <td>do</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>twitter </td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>mdo</td>
-                                                <td>mdo</td>
-                                                <td>do</td>
-                                            </tr>
+                                            <?php
+                                            include '../api/getOrdersById.php';
+                                            if ($result) {
+                                                while ($row = mysqli_fetch_array($result)) {
+
+                                                    $order_id = $row['order_id'];
+                                                    $make = $row['make'];
+                                                    $model = $row['model'];
+                                                    $quantity = $row['quantity'];
+                                                    $total = $row['paid_amount'];
+                                                    $timestamp = $row['timestamp'];
+
+                                                    ?>
+
+                                                    <tr>
+                                                        <td><?php echo $order_id ?></td>
+                                                        <td><?php echo $make ?></td>
+                                                        <td><?php echo $model ?></td>
+                                                        <td><?php echo $quantity ?></td>
+                                                        <td><?php echo $total ?></td>
+                                                        <td><?php echo $timestamp ?></td>
+                                                    </tr>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+
                                         </tbody>
                                     </table>
                                 </div>
