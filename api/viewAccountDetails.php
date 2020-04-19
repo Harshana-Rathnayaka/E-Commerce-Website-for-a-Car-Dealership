@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require_once '../includes/dbOperations.php';
 
 $response = array();
@@ -15,9 +16,10 @@ if (isset($_SESSION['Id'])) {
     $result = $db->getUserById($userid);
 } else {
     // session not started
+    $_SESSION['error'] = "Session Expired. Please login to continue";
     $response['error'] = true;
     $response['message'] = "Session not started";
-    header("location:../login/login-page.php?Invalid= Session Expired. Please login to continue");
+    header("location:../login/login-page.php");
 }
 
 // echo json_encode($response);
