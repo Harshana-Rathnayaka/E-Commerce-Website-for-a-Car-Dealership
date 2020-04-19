@@ -73,7 +73,7 @@ if (!isset($_SESSION['User'])) {
             <li class="nav-item">
               <a class="nav-link" href="addvehicle.php">
                 <span data-feather="plus-circle"></span>
-                Add vehicle
+                Add Vehicle
               </a>
             </li>
 
@@ -83,6 +83,15 @@ if (!isset($_SESSION['User'])) {
                 Pending Orders
               </a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="allorders.php">
+                <span data-feather="rotate-ccw"></span>
+                All Orders
+              </a>
+            </li>
+
+            <div class="dropdown-divider"></div>
 
             <li class="nav-item">
               <a class="nav-link" href="allusers.php">
@@ -101,7 +110,7 @@ if (!isset($_SESSION['User'])) {
             <li class="nav-item">
               <a class="nav-link" href="addmanufacturer.php">
                 <span data-feather="plus-circle"></span>
-                Add manufacturer
+                Add Manufacturer
               </a>
             </li>
 
@@ -137,42 +146,45 @@ if (!isset($_SESSION['User'])) {
 
 
         <?php
-        if (@$_GET['Valid'] == true) {
-          $valid = $_GET['Valid'];
+        if (@$_SESSION['success'] == true) {
+          $success = $_SESSION['success'];
           ?>
           <script>
             swal({
               title: "SUCCESS!",
-              text: "<?php echo $valid; ?>",
+              text: "<?php echo $success; ?>",
               icon: "success",
               button: "OK",
             });
           </script>
         <?php
-        } elseif (@$_GET['Invalid'] == true) {
-          $invalid = $_GET['Invalid'];
+          unset($_SESSION['success']);
+        } elseif (@$_SESSION['error'] == true) {
+          $error = $_SESSION['error'];
           ?>
           <script>
             swal({
               title: "ERROR!",
-              text: "<?php echo $invalid; ?>",
+              text: "<?php echo $error; ?>",
               icon: "warning",
               button: "OK",
             });
           </script>
         <?php
-        } elseif (@$_GET['Missing'] == true) {
-          $warning = $_GET['Missing'];
+          unset($_SESSION['error']);
+        } elseif (@$_SESSION['missing'] == true) {
+          $missing = $_SESSION['missing'];
           ?>
           <script>
             swal({
-              title: "WARNING!",
-              text: "<?php echo $warning; ?>",
-              icon: "warning",
+              title: "INFO!",
+              text: "<?php echo $missing; ?>",
+              icon: "info",
               button: "OK",
             });
           </script>
         <?php
+          unset($_SESSION['missing']);
         }
         ?>
 

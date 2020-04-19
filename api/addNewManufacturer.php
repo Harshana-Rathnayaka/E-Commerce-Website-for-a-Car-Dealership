@@ -11,9 +11,6 @@ if (isset($_SESSION['User'])) {
     // checking the method 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-
-        // echo $username = $_REQUEST['User'];
-
         // getting the values from the form
         $name = $_POST['name'];
         $address = $_POST['address'];
@@ -30,25 +27,29 @@ if (isset($_SESSION['User'])) {
 
             if ($result == 1) {
                 // successfully uploaded to the db
+                $_SESSION['success'] = "Manufacturer added successfully!";
                 $response['error'] = false;
                 $response['message'] = "Successfully uploaded to the DB";
-                header("location:../admin/allmanufacturers.php?Valid= Manufacturer added successfully!");
+                header("location:../admin/allmanufacturers.php");
             } elseif ($result == 2) {
                 // could't upload to the db
+                $_SESSION['error'] = "Something went wrong. Couldn't upload to the DB.";
                 $response['error'] = true;
                 $response['message'] = "Something went wrong. Couldn't upload to the DB";
-                header("location:../admin/addmanufacturer.php?Invalid= Something went wrong. Couldn't upload to the DB");
+                header("location:../admin/addmanufacturer.php");
             } elseif ($result == 0) {
                 // manufacturer exists in the db
+                $_SESSION['error'] = " It seems this manufacturer already exists. Please choose a different name.";
                 $response['error'] = true;
                 $response['message'] = "It seems this manufacturer already exists. Please choose a different name.";
-                header("location:../admin/addmanufacturer.php?Invalid= It seems this manufacturer already exists. Please choose a different name.");
+                header("location:../admin/addmanufacturer.php");
             }
         } else {
             // some fields are missing
+            $_SESSION['missing'] = "Please fill all the details";
             $response['error'] = true;
             $response['message'] = "Please fill in all the details";
-            header("location:../admin/addmanufacturer.php?Invalid= Please fill all the details");
+            header("location:../admin/addmanufacturer.php");
         }
     } else {
         // wrong method
@@ -57,9 +58,10 @@ if (isset($_SESSION['User'])) {
     }
 } else {
     // session not started
+    $_SESSION['error'] = "Session Expired. Please login to continue";
     $response['error'] = true;
     $response['message'] = "Session Expired. Please login to continue";
-    header("location:../login/login-page.php?Invalid= Session Expired. Please login to continue");
+    header("location:../login/login-page.php");
 }
 
 echo json_encode($response);

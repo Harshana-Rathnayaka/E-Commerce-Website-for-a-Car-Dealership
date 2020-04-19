@@ -1,14 +1,16 @@
 <?php
 
+session_start();
 require_once '../includes/dbOperations.php';
 
 $response = array();
 
 if (!isset($_POST['updateVehicleButton'])) {
     // some fields are missing
+    $_SESSION['missing'] = "Some fields are missing.";
     $response['error'] = true;
     $response['message'] = "Please fill in all the details";
-    header("location:../admin/index.php?Missing= Some fields are missing!");
+    header("location:../admin/index.php");
 } else {
 
     // getting the values
@@ -29,14 +31,16 @@ if (!isset($_POST['updateVehicleButton'])) {
 
     if ($result == 1) {
         // some error
+        $_SESSION['error'] = "Something went wrong, please try again.";
         $response['error'] = true;
         $response['message'] = "Some error occured, please try again.";
-        header("location:../admin/index.php?Invalid=Something went wrong, please try again.");
+        header("location:../admin/index.php");
     } elseif ($result == 0) {
         // success
+        $_SESSION['success'] = "Vehicle details updated successfully!";
         $response['error'] = false;
         $response['message'] = "Vehicle details updated successfully";
-        header("location:../admin/index.php?Valid= Vehicle details updated successfully!");
+        header("location:../admin/index.php");
     }
 }
 

@@ -274,7 +274,6 @@ session_start();
                             <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus">&nbsp;</i></button>
                           </div>
                         </div>
-                        <button onclick="productAddToCartForm.submit(this)" class="button btn-cart" title="Add to Cart" type="button">Add to Cart</button>
                       </div>
                     </div>
                     <div class="short-description">
@@ -302,15 +301,10 @@ session_start();
                     <div class="email-addto-box col-sm-8">
                       <ul class="add-to-links">
                         <li>
-                          <!-- <form action="../api/addToWishlist.php" method="POST"> -->
-                          <!-- <button class="btnWishlist" type="submit"> -->
                           <a id="btnWishlist" class="link-wishlist" href="#">
                             <span>Add to Wishlist</span>
                           </a>
-                          <!-- </button> -->
-                          <!-- </form> -->
                         </li>
-
                       </ul>
                     </div>
                     <div class="social">
@@ -343,8 +337,6 @@ session_start();
 
                     </ul>
                   </div>
-                  <!--product-shop-->
-                  <!--Detail page static block for version 3-->
                 </form>
               </div>
             </div>

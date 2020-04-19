@@ -28,6 +28,7 @@ if (!isset($_SESSION['User'])) {
   <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 
@@ -74,7 +75,7 @@ if (!isset($_SESSION['User'])) {
             <li class="nav-item">
               <a class="nav-link active" href="addvehicle.php">
                 <span data-feather="plus-circle"></span>
-                Add vehicle
+                Add Vehicle
               </a>
             </li>
 
@@ -84,6 +85,15 @@ if (!isset($_SESSION['User'])) {
                 Pending Orders
               </a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="allorders.php">
+                <span data-feather="rotate-ccw"></span>
+                All Orders
+              </a>
+            </li>
+
+            <div class="dropdown-divider"></div>
 
             <li class="nav-item">
               <a class="nav-link" href="allusers.php">
@@ -102,7 +112,7 @@ if (!isset($_SESSION['User'])) {
             <li class="nav-item">
               <a class="nav-link" href="addmanufacturer.php">
                 <span data-feather="plus-circle"></span>
-                Add manufacturer
+                Add Mnufacturer
               </a>
             </li>
 
@@ -134,19 +144,50 @@ if (!isset($_SESSION['User'])) {
           </nav>
         </div>
 
+        <?php
+        if (@$_SESSION['success'] == true) {
+          $success = $_SESSION['success'];
+          ?>
+          <script>
+            swal({
+              title: "SUCCESS!",
+              text: "<?php echo $success; ?>",
+              icon: "success",
+              button: "OK",
+            });
+          </script>
+        <?php
+          unset($_SESSION['success']);
+        } elseif (@$_SESSION['error'] == true) {
+          $error = $_SESSION['error'];
+          ?>
+          <script>
+            swal({
+              title: "ERROR!",
+              text: "<?php echo $error; ?>",
+              icon: "warning",
+              button: "OK",
+            });
+          </script>
+        <?php
+          unset($_SESSION['error']);
+        } elseif (@$_SESSION['missing'] == true) {
+          $missing = $_SESSION['missing'];
+          ?>
+          <script>
+            swal({
+              title: "INFO!",
+              text: "<?php echo $missing; ?>",
+              icon: "info",
+              button: "OK",
+            });
+          </script>
+        <?php
+          unset($_SESSION['missing']);
+        }
+        ?>
 
         <form id="addVehicleForm" action="../api/addNewVehicle.php" method="POST" enctype="multipart/form-data">
-
-          <?php
-          if (@$_GET['Invalid'] == true) {
-            ?>
-            <div class=" alert alert-danger fade show">
-              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-              <h5> <?php echo $_GET['Invalid']; ?> </h5>
-            </div>
-          <?php
-          }
-          ?>
 
           <div class="form-row">
             <div class="form-group col-md-3">

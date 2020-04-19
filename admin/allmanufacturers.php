@@ -72,7 +72,7 @@ if (!isset($_SESSION['User'])) {
             <li class="nav-item">
               <a class="nav-link" href="addvehicle.php">
                 <span data-feather="plus-circle"></span>
-                Add vehicle
+                Add Vehicle
               </a>
             </li>
 
@@ -82,6 +82,15 @@ if (!isset($_SESSION['User'])) {
                 Pending Orders
               </a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="allorders.php">
+                <span data-feather="rotate-ccw"></span>
+                All Orders
+              </a>
+            </li>
+
+            <div class="dropdown-divider"></div>
 
             <li class="nav-item">
               <a class="nav-link" href="allusers.php">
@@ -100,7 +109,7 @@ if (!isset($_SESSION['User'])) {
             <li class="nav-item">
               <a class="nav-link" href="addmanufacturer.php">
                 <span data-feather="plus-circle"></span>
-                Add manufacturer
+                Add Manufacturer
               </a>
             </li>
 

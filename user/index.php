@@ -133,7 +133,7 @@ if (!isset($_SESSION['User'])) {
             $vehicle_count = $db->getVehicleCount();
             $cart_count = $db->getCartCountByUserId($user_id);
             $wishlist_count = $db->getWishlistCountByUserId($user_id);
-
+            $orders_count = $db->getOrdersCountByUserId($user_id);
 
             ?>
             <section class="no-padding-top no-padding-bottom">
@@ -158,10 +158,10 @@ if (!isset($_SESSION['User'])) {
                                     <div class="title">
                                         <div class="icon"><i class="fa fa-history"></i></div><strong>My Orders</strong>
                                     </div>
-                                    <div class="number dashtext-2">375</div>
+                                    <div class="number dashtext-2"><?php echo $orders_count; ?></div>
                                 </div>
                                 <div class="progress progress-template">
-                                    <div role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-1"></div>
+                                    <div role="progressbar" style="width: <?php echo $orders_count; ?>%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-1"></div>
                                 </div>
                             </div>
                         </div>

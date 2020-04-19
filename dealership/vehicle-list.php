@@ -250,13 +250,13 @@ session_start();
                               <b> Engine Capacity: </b> <?php echo $row['engine_capacity']; ?> leters <br>
                               <b> Transmission: </b> <?php echo $row['transmission_type']; ?> transmission <br>
                               <b> Horsepower: </b> <?php echo $row['horsepower']; ?>Hp <br>
-                              <a class="link-learn" title="" href="details.php?vehicle_id=<?php echo $row['vehicle_id']; ?>">Learn More....</a>
+                              <a class="link-learn" title="See details" href="details.php?vehicle_id=<?php echo $row['vehicle_id']; ?>">Learn More....</a>
                               </p>
                             </div>
                             <div class="price-box">
                               <p class="special-price"> <span class="price-label"></span> <span id="product-price-212" class="price"> LKR <?php echo $row['price']; ?> </span> </p>
                             </div>
-                            <div class="actions">
+                            <!-- <div class="actions">
                               <button class="button btn-cart ajx-cart" title="Add to Cart" type="button"><span>Add to
                                   Cart</span></button>
                               <span class="add-to-links">
@@ -264,7 +264,7 @@ session_start();
                                   <span>Add to Wishlist</span>
                                 </a>
                               </span>
-                            </div>
+                            </div> -->
                           </div>
                         </li>
 

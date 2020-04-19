@@ -36,7 +36,7 @@ if (!isset($_POST['btnEditColour'])) {
         // success
         $_SESSION['success'] = "Colour updated successfully!";
         $response['error'] = false;
-        $response['message'] = "Vehicle details updated successfully";
+        $response['message'] = "Colour details updated successfully";
         header("location:../admin/colours.php");
     }
 }

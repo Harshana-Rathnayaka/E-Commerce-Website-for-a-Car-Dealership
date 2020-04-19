@@ -37,9 +37,9 @@ if (!isset($_POST['btnEditManufacturer'])) {
         header("location:../admin/allmanufacturers.php");
     } elseif ($result == 0) {
         // success
-        $_SESSION['success'] = "Colour updated successfully!";
+        $_SESSION['success'] = "Manufacturer updated successfully!";
         $response['error'] = false;
-        $response['message'] = "Vehicle details updated successfully";
+        $response['message'] = "Manufacturer details updated successfully";
         header("location:../admin/allmanufacturers.php");
     }
 }

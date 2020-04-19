@@ -292,6 +292,14 @@ class DbOperations
 		return $stmt->get_result();
 	}
 
+	// retrieving all orders to admin
+	public function getAllOrders()
+	{
+		$stmt = $this->con->prepare("SELECT * FROM `orders` INNER JOIN `users` ON users.id = orders.user_id ORDER BY `timestamp`");
+		$stmt->execute();
+		return $stmt->get_result();
+	}
+
 	// retrieving users table 
 	public function getUsers()
 	{
@@ -448,20 +456,20 @@ class DbOperations
 		}
 	}
 
-		// update manufacturers
-		public function updateManufacturer($manufacturer_id, $name, $address, $email, $contact)
-		{
-			$stmt = $this->con->prepare("UPDATE `manufacturers` SET `name` = ?, `address` = ?, `email` = ?, `contact` = ? WHERE `make_id` = ?");
-			$stmt->bind_param("ssssi", $name, $address, $email, $contact, $manufacturer_id);
-	
-			if ($stmt->execute()) {
-				// manufacturer updated
-				return 0;
-			} else {
-				// some error 
-				return 1;
-			}
+	// update manufacturers
+	public function updateManufacturer($manufacturer_id, $name, $address, $email, $contact)
+	{
+		$stmt = $this->con->prepare("UPDATE `manufacturers` SET `name` = ?, `address` = ?, `email` = ?, `contact` = ? WHERE `make_id` = ?");
+		$stmt->bind_param("ssssi", $name, $address, $email, $contact, $manufacturer_id);
+
+		if ($stmt->execute()) {
+			// manufacturer updated
+			return 0;
+		} else {
+			// some error 
+			return 1;
 		}
+	}
 
 
 
