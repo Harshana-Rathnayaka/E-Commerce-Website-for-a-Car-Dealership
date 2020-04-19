@@ -455,7 +455,7 @@ class DbOperations
 			$stmt->bind_param("ssssi", $name, $address, $email, $contact, $manufacturer_id);
 	
 			if ($stmt->execute()) {
-				// colour updated
+				// manufacturer updated
 				return 0;
 			} else {
 				// some error 
