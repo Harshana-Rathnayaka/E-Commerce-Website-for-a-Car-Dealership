@@ -427,10 +427,10 @@ class DbOperations
 	}
 
 	// update a vehicle
-	public function updateVehicleDetails($vehicle_id,  $model, $year, $engine, $transmission, $horsepower, $condition, $seats, $price)
+	public function updateVehicleDetails($vehicle_id,  $model, $year, $engine, $transmission, $horsepower, $condition, $seats, $price, $in_stock)
 	{
-		$stmt = $this->con->prepare("UPDATE `vehicles` SET `model` = ?, `year` = ?, `engine_capacity` = ?, `transmission` = ?, `horsepower` = ?, `vehicle_condition` = ?, `seats` = ?, `price` = ? WHERE `vehicle_id` = ?");
-		$stmt->bind_param("ssssssiss", $model, $year, $engine, $transmission, $horsepower, $condition, $seats, $price, $vehicle_id);
+		$stmt = $this->con->prepare("UPDATE `vehicles` SET `model` = ?, `year` = ?, `engine_capacity` = ?, `transmission` = ?, `horsepower` = ?, `vehicle_condition` = ?, `seats` = ?, `price` = ?, `in_stock` = ? WHERE `vehicle_id` = ?");
+		$stmt->bind_param("ssssssisss", $model, $year, $engine, $transmission, $horsepower, $condition, $seats, $price, $in_stock, $vehicle_id);
 
 		if ($stmt->execute()) {
 			// vehicle updated

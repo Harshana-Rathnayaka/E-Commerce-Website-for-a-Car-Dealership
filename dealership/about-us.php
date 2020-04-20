@@ -186,37 +186,26 @@ session_start();
                         <div class="wrapper_bl" style="margin-top: 1px;">
                             <div class="form_background">
 
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                    containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also
-                                    the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-                                    like Aldus PageMaker including versions of Lorem Ipsum</p>
-                                <br>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                    containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem IpsumLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also
-                                    the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-                                    like Aldus PageMaker including versions of Lorem Ipsum</p>
-                                <br>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                    containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+                                <p> We are a car dealership who provides all types of vehicles. We are recognized as one
+                                    of the top sellers in the world. </p>
+                                <hr>
+                                <p> This web application is made by a group of students enrolled in a software engineering
+                                    degree program at NSBM Green University with Plymouth University, UK </p>
+
+                                <strong> Harshana Rathnayaka <br> </strong>
+                                <strong> Achintha Kahawalage <br> </strong>
+                                <strong> Tharusha Withanawasam <br> </strong>
+                                <strong> Praveeth Silva <br> </strong>
+                                <strong> Lochana Ranasinghe <br> </strong>
+                                <strong> Darshana Arachchi <br> </strong>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!--main-container-->
-
         </div>
-        <!--col1-layout-->
-
-
-
-
-        <!-- For version 1,2,3,4,6 -->
 
         <footer>
             <!-- BEGIN INFORMATIVE FOOTER -->

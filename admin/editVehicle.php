@@ -250,12 +250,29 @@ if (!isset($_SESSION['User'])) {
                                 <input type="text" name="price" value="<?php echo $result['price']; ?>" class="form-control" id="inputPrice" required>
                             </div>
 
-                            <div class="form-group col-md-8">
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="inStock">
-                                    <label class="custom-control-label" for="inStock">Out of Stock</label>
+                            <?php
+                                $in_stock = $result['in_stock'];
+                                if ($in_stock == 1) {
+                                    ?>
+                                <div class="form-group col-md-8">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" value="0" name="inStock" checked class="custom-control-input" id="inStock">
+                                        <label class="custom-control-label" for="inStock">Out of Stock</label>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php
+                                } else {
+                                    ?>
+                                <div class="form-group col-md-8">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" value="1" name="inStock" class="custom-control-input" id="inStock">
+                                        <label class="custom-control-label" for="inStock">Out of Stock</label>
+                                    </div>
+                                </div>
+                            <?php
+                                }
+                                ?>
+
                     </div>
 
                     <button name="updateVehicleButton" type="submit" class="btn btn-success btn-block">Save</button>

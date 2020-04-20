@@ -23,11 +23,12 @@ if (!isset($_POST['updateVehicleButton'])) {
     $transmission = $_POST['transmission'];
     $seats = $_POST['seats'];
     $price = $_POST['price'];
+    $in_stock = $_POST['inStock'];
 
     // db object
     $db = new DbOperations();
 
-    $result = $db->updateVehicleDetails($vehicle_id, $model, $year, $engine, $transmission, $horsepower, $condition, $seats, $price);
+    $result = $db->updateVehicleDetails($vehicle_id, $model, $year, $engine, $transmission, $horsepower, $condition, $seats, $price, $in_stock);
 
     if ($result == 1) {
         // some error
