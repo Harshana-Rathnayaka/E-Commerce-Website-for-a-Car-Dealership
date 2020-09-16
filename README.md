@@ -39,11 +39,11 @@
 
 > 👯 Clone the repository
 
-- Clone this repo to your local machine using `https://github.com/Harshana-Rathnayaka/Covid19-Tracker`
+- Clone this repo to your local machine using `https://github.com/Harshana-Rathnayaka/E-Commerce-Website-for-a-Car-Dealership/`
 
 ```shell
 
-$ git clone https://github.com/Harshana-Rathnayaka/Covid19-Tracker
+$ git clone https://github.com/Harshana-Rathnayaka/E-Commerce-Website-for-a-Car-Dealership/
 
 ```
 
